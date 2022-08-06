@@ -11,10 +11,12 @@ import {get_default_theme} from "@/theme/default_theme";
 import ClassList from "@/layouts/class_list/class_list";
 export default function HomePage() {
     const theme=get_default_theme();
+
   return (
       <CssVarsProvider theme={theme}>
           <GlobalStyles<Theme>
               styles={(theme) => ({
+
                   body: {
                       margin: 0,
                       fontFamily: theme.vars.fontFamily.body,
@@ -33,7 +35,7 @@ export default function HomePage() {
                   {/*<div className={index_styles.sidebar}>*/}
                   {/*</div>*/}
                   <div className={index_styles.sidebar}>
-                    <ClassList></ClassList>
+                    <ClassList/>
                   </div>
                   <div className={index_styles.control_panel}>
                       <ControlPanel></ControlPanel>

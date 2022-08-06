@@ -4,7 +4,8 @@ import cp from './control_panel.less'
 import Button from '@mui/joy/Button';
 import {Box, Typography} from "@mui/joy";
 
-export default function Control_panel() {
+export default function ControlPanel() {
+
     return (
         <div className={reuse.col_flex2side_container + " "
             + cp.cpcont
@@ -15,7 +16,7 @@ export default function Control_panel() {
 
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: 1.5,
+                    gap: 1,
                     // alignItems: 'center',
                     // justifyContent: 'space-between',
                 }}

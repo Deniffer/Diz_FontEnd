@@ -1,12 +1,16 @@
 // import { extendTheme } from '@mui/joy/styles';
 
 import {extendTheme} from "@mui/joy";
-
+import {PaletteRange} from "@mui/joy/styles/types/colorSystem";
+export const colorful={
+    "":""
+}
 export function get_default_theme(){
     return extendTheme({
         colorSchemes: {
             light: {
                 palette: {
+
                     primary:{
                         solidBg: '#44B75E',
                         solidHoverBg: '#53cb6e',
