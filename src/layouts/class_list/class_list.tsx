@@ -15,6 +15,7 @@ export default function ClassList() {
                     justifyContent: 'center',
                     background:'tomato'
                 }}
+                key={i}
                 // sx={{width:10,height:10}}
             >
                 <svg width="33" height="36" viewBox="0 0 33 36" fill="none" xmlns="http://www.w3.org/2000/svg">
