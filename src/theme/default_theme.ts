@@ -2,8 +2,30 @@
 
 import {extendTheme} from "@mui/joy";
 import {PaletteRange} from "@mui/joy/styles/types/colorSystem";
-export const colorful={
-    "":""
+import {GlobalStyles} from "@mui/system";
+export const default_global_style={
+    colors:{
+        //_l light
+        color_1_l:"#FCDD96",
+        colot_2_l:"#B7CBFF",
+        color_3_l:"#D2C8F2",
+        color_4_l:"#FABEAB",
+        color_5_l:"#FBC0D5",
+        color_6_l:"#BEEDF3",
+        //_s solid
+        color_1_s:"#FCDD96",
+        colot_2_s:"#B7CBFF",
+        color_3_s:"#D2C8F2",
+        color_4_s:"#FABEAB",
+        color_5_s:"#FBC0D5",
+        color_6_s:"#BEEDF3",
+    }
+}
+export type MyGlobalStyle = typeof default_global_style
+
+export function bind_style_2_window(){
+    // @ts-ignore
+    window['global_style']=default_global_style
 }
 export function get_default_theme(){
     return extendTheme({
