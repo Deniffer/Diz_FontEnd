@@ -12,8 +12,8 @@ import ClassList from "@/layouts/class_list/class_list";
 import CourseList from "@/layouts/course_list/course_list";
 
 export default function HomePage() {
+    bind_style_2_window();
     const theme = get_default_theme();
-    bind_style_2_window()
     return (
         <CssVarsProvider theme={theme}>
             <GlobalStyles<Theme>
