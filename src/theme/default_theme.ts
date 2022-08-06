@@ -6,19 +6,27 @@ import {GlobalStyles} from "@mui/system";
 export const default_global_style={
     colors:{
         //_l light
-        color_1_l:"#FCDD96",
-        colot_2_l:"#B7CBFF",
-        color_3_l:"#D2C8F2",
-        color_4_l:"#FABEAB",
-        color_5_l:"#FBC0D5",
-        color_6_l:"#BEEDF3",
+        _1_l:"#FCDD96",
+        _2_l:"#B7CBFF",
+        _3_l:"#D2C8F2",
+        _4_l:"#FABEAB",
+        _5_l:"#FBC0D5",
+        _6_l:"#BEEDF3",
+        main_l:"#d9f0de",
         //_s solid
-        color_1_s:"#FCDD96",
-        colot_2_s:"#B7CBFF",
-        color_3_s:"#D2C8F2",
-        color_4_s:"#FABEAB",
-        color_5_s:"#FBC0D5",
-        color_6_s:"#BEEDF3",
+        _1_s:"#ffbe33",
+        _2_s:"#326bff",
+        _3_s:"#5b2dff",
+        _4_s:"#ff6837",
+        _5_s:"#ff2f78",
+        _6_s:"#3ce9ff",
+        main_s:"#44b65e",
+        gray_common:"#f5f5f8",
+    },
+    gap:{
+        common:"8px !important",
+        l:"12px !important",
+        m:"4px !important",
     }
 }
 export type MyGlobalStyle = typeof default_global_style

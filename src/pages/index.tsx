@@ -13,7 +13,7 @@ import CourseList from "@/layouts/course_list/course_list";
 
 export default function HomePage() {
     const theme = get_default_theme();
-
+    bind_style_2_window()
     return (
         <CssVarsProvider theme={theme}>
             <GlobalStyles<Theme>
@@ -34,11 +34,9 @@ export default function HomePage() {
                 </div>
                 <div className={reuse_styles.fillleft_flex + " "
                 + reuse_styles.row_flexcontainer}>
-                    <div className={index_styles.sidebar}>
-                        <ClassList></ClassList>
-                    </div>
-                    <div className={index_styles.sidebar}>
-                    </div>
+                    {/*<div className={index_styles.sidebar}>*/}
+                    {/*    <ClassList></ClassList>*/}
+                    {/*</div>*/}
                     <div className={index_styles.sidebar}>
                         <CourseList/>
                     </div>

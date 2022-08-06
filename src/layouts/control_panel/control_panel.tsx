@@ -3,6 +3,7 @@ import cp from './control_panel.less'
 
 import Button from '@mui/joy/Button';
 import {Box, Typography} from "@mui/joy";
+import {curstyle} from "@/theme/curtheme";
 
 export default function ControlPanel() {
 
@@ -16,27 +17,41 @@ export default function ControlPanel() {
 
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: 1,
+                    gap: curstyle().gap.common,
                     // alignItems: 'center',
                     // justifyContent: 'space-between',
                 }}
             >
-                <Typography className={cp.listitem} level="h5" >
+                <Typography className={cp.listitem} level="h5"
+                            sx={{
+                                marginLeft: curstyle().gap.common,
+                                marginRight: curstyle().gap.common
+                            }}
+                >
                     课题
                 </Typography>
                 <Button
+                    sx={{
+                        marginLeft: curstyle().gap.common,
+                        marginRight: curstyle().gap.common
+                    }}
                     className={cp.listitem}
                     variant="solid" color="primary">
                     新建帖子
                 </Button>
-                <div className={
-                    cp.listitem}>列表
-                </div>
+                <Box className={
+                    cp.listitem}
+                     sx={{
+                         marginLeft: curstyle().gap.common,
+                         marginRight: curstyle().gap.common
+                     }}
+                >列表
+                </Box>
             </Box>
 
             {/*down*/}
             <div>
-                <div >
+                <div>
                     <div className={
                         cp.item_pad}>成员
                     </div>
