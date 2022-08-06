@@ -22,7 +22,7 @@ class CourseList extends Component {
         return (
             <React.Fragment>
                 <div style={{
-                    "margin": "20px",
+                    "margin": "8px",
                 }}/>
                 {this.state.courses.map(course =>
                     <Box key={course.course_id}
@@ -39,9 +39,12 @@ class CourseList extends Component {
                         </svg>
                     </Box>
                 )}
-                <Box sx={{"textAlign": "center"}}>
+                <Box sx={{
+                    "textAlign": "center",
+                    "cursor": "pointer"
+                }}>
                     {/* 创建课程的button */}
-                    <svg width="24" height="26" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="35" height="35" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="60" height="60" rx="8" fill="#F6F6F9"/>
                         <path d="M37 29H31V23H29V29H23V31H29V37H31V31H37V29Z" fill="#96979C"/>
                     </svg>
