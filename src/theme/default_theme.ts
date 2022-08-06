@@ -3,6 +3,7 @@
 import {extendTheme} from "@mui/joy";
 import {PaletteRange} from "@mui/joy/styles/types/colorSystem";
 import {GlobalStyles} from "@mui/system";
+import {curstyle} from "@/theme/curtheme";
 export const default_global_style={
     colors:{
         //_l light
@@ -21,12 +22,14 @@ export const default_global_style={
         _5_s:"#ff2f78",
         _6_s:"#3ce9ff",
         main_s:"#44b65e",
+        main_sx:"#2fa44a",
+        main_sxx:"#20993b",
         gray_common:"#f5f5f8",
     },
     gap:{
-        common:"8px !important",
-        l:"12px !important",
-        m:"4px !important",
+        common:"12px !important",
+        l:"16px !important",
+        m:"8px !important",
     }
 }
 export type MyGlobalStyle = typeof default_global_style
@@ -42,9 +45,9 @@ export function get_default_theme(){
                 palette: {
 
                     primary:{
-                        solidBg: '#44B75E',
-                        solidHoverBg: '#53cb6e',
-                        solidActiveBg: '#53cb6e',
+                        solidBg: curstyle().colors.main_s,
+                        solidHoverBg: curstyle().colors.main_sx,
+                        solidActiveBg: curstyle().colors.main_sxx,
                     },
                     success: {
                         solidBg: '#2DA44E',
