@@ -7,13 +7,13 @@ import {CssVarsProvider} from "@mui/joy";
 import {GlobalStyles} from '@mui/system';
 import type {Theme} from '@mui/joy/styles';
 // import  from "@mui/joy/styles/defaultTheme";
-import {get_default_theme} from "@/theme/default_theme";
+import {get_default_theme,bind_style_2_window} from "@/theme/default_theme";
 import ClassList from "@/layouts/class_list/class_list";
 import CourseList from "@/layouts/course_list/course_list";
 
 export default function HomePage() {
+    bind_style_2_window();
     const theme = get_default_theme();
-
     return (
         <CssVarsProvider theme={theme}>
             <GlobalStyles<Theme>
@@ -35,9 +35,8 @@ export default function HomePage() {
                 <div className={reuse_styles.fillleft_flex + " "
                 + reuse_styles.row_flexcontainer}>
                     {/*<div className={index_styles.sidebar}>*/}
+                    {/*    <ClassList></ClassList>*/}
                     {/*</div>*/}
-                    <div className={index_styles.sidebar}>
-                    </div>
                     <div className={index_styles.sidebar}>
                         <CourseList/>
                     </div>
