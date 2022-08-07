@@ -25,23 +25,28 @@ export const default_global_style={
         main_sx:"#2fa44a",
         main_sxx:"#20993b",
         gray_common:"#f5f5f8",
-        gray_d:"#BDBDBD",
+        gray_d:"#e0e0e0",
+        gray_dd:"#BDBDBD",
+        font_second:"#BDBDBD"
     },
     gap:{
         common:"12px !important",
         l:"16px !important",
+        xxl:"24px !important",
         m:"8px !important",
     },
     radius:{
         common:"5px"
     },
     fontweight:{
-        common:500
+        common:500,
+        bold:550,
     },
     avatorsize:{
         common:"40px",
         little:"32px"
-    }
+    },
+    headlineheight:"68px"
 }
 export type MyGlobalStyle = typeof default_global_style
 

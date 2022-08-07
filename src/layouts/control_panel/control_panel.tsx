@@ -52,6 +52,8 @@ export default function ControlPanel() {
 
                     display: 'flex',
                     flexDirection: 'column',
+
+                    height:"100%"
                     // gap: curstyle().gap.common,
                     // alignItems: 'center',
                     // justifyContent: 'space-between',
@@ -64,7 +66,6 @@ export default function ControlPanel() {
                         marginLeft: curstyle().gap.common,
                         marginRight: curstyle().gap.common,
                         marginBottom:curstyle().gap.common,
-                        color:curstyle().colors.gray_d
                     }}
                 >
                     <Typography className={cp.listitem} level="h6"
@@ -75,7 +76,10 @@ export default function ControlPanel() {
                         课题
                     </Typography>
                     <Typography className={cp.listitem} level="h7"
+                        sx={{
 
+                        color:curstyle().colors.font_second
+                        }}
                     >
                         第一周
                     </Typography>
