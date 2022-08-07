@@ -34,6 +34,13 @@ export const default_global_style={
     },
     radius:{
         common:"5px"
+    },
+    fontweight:{
+        common:500
+    },
+    avatorsize:{
+        common:"40px",
+        little:"32px"
     }
 }
 export type MyGlobalStyle = typeof default_global_style
@@ -80,12 +87,12 @@ export function get_default_theme(){
             JoyButton: {
                 styleOverrides: {
                     root: ({ ownerState }) => ({
-                        borderRadius: '6px',
+                        borderRadius: curstyle().radius.common,
+                        // fontWeight:curstyle().fontweight.common,
                         boxShadow: '0 1px 0 0 rgba(27, 31, 35, 0.04)',
                         transition: '80ms cubic-bezier(0.33, 1, 0.68, 1)',
                         transitionProperty: 'color,background-color,box-shadow,border-color',
                         ...(ownerState.size === 'md' && {
-                            fontWeight: 600,
                             minHeight: '32px',
                             fontSize: '14px',
                             '--Button-paddingInline': '1rem',
