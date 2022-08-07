@@ -9,10 +9,11 @@ import {SetBar} from "@/layouts/control_panel/childs/setbar";
 export default function ControlPanel() {
     const arr=[]
     for(let i=0;i<5;i++){
-        arr.push((<SetBar>
+        arr.push((<SetBar key={i}>
             hello
         </SetBar>))
     }
+    //课题组件区域
     // @ts-ignore
     return (
         <div className={reuse.col_flex2side_container + " "
@@ -24,29 +25,43 @@ export default function ControlPanel() {
 
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: curstyle().gap.common,
+                    // gap: curstyle().gap.common,
                     // alignItems: 'center',
                     // justifyContent: 'space-between',
                 }}
             >
-                <Typography className={cp.listitem} level="h6"
-                            sx={{
-                                padding:curstyle().gap.common,
-                                // paddingRight:curstyle().gap.common,
-                                marginLeft: curstyle().gap.common,
-                                marginRight: curstyle().gap.common
-                            }}
+                <Box
+                    sx={{
+                        padding:curstyle().gap.common,
+                        // paddingRight:curstyle().gap.common,
+                        marginLeft: curstyle().gap.common,
+                        marginRight: curstyle().gap.common,
+                        marginBottom:curstyle().gap.common,
+                        color:curstyle().colors.gray_d
+                    }}
                 >
-                    课题
-                </Typography>
+                    <Typography className={cp.listitem} level="h6"
+                                sx={{
+                                    marginBottom:curstyle().gap.m
+                                }}
+                    >
+                        课题
+                    </Typography>
+                    <Typography className={cp.listitem} level="h7"
+
+                    >
+                        第一周
+                    </Typography>
+                </Box>
                 <Button
                     sx={{
                         marginLeft: curstyle().gap.common,
-                        marginRight: curstyle().gap.common
+                        marginRight: curstyle().gap.common,
+                        marginBottom:curstyle().gap.common,
                     }}
                     className={cp.listitem}
                     variant="solid" color="primary">
-                    新建帖子
+                    + 新建帖子
                 </Button>
                 {arr}
                 {/*<Box className={*/}

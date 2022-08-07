@@ -25,6 +25,7 @@ export const default_global_style={
         main_sx:"#2fa44a",
         main_sxx:"#20993b",
         gray_common:"#f5f5f8",
+        gray_d:"#BDBDBD",
     },
     gap:{
         common:"12px !important",

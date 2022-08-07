@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import {curstyle} from "@/theme/curtheme";
 import reuse from '@/assets/reuseable.less'
+import Icon from 'supercons'
 
 export function SetBar(prop:{children:any}) {
     //background: ${props => props.primary ? "palevioletred" : "white"};
@@ -28,9 +29,11 @@ export function SetBar(prop:{children:any}) {
     `;
     return (
         <Button className={
-            reuse.trans_color_common
+            reuse.trans_color_common+" "
+            +reuse.row_flex2side_container
         }>
             {prop.children}
+            <Icon glyph="more" size={23}/>
         </Button>
     )
 }

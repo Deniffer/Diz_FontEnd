@@ -9,7 +9,7 @@ class CourseList extends Component {
         courses: [
             {
                 "course_id": 0,
-                "name": ""
+                "name": "ssss"
             }
         ],
         baseUrl: "https://www.asueeer.com"
@@ -18,6 +18,7 @@ class CourseList extends Component {
     componentDidMount() {
         axios.post(this.state.baseUrl + "/get_courses?mock_login=123", {}).then(res => {
             const courses = res.data.courses;
+            // console.log("courses get",courses)
             this.setState({courses: courses});
         })
     }
@@ -66,7 +67,8 @@ class CourseList extends Component {
                                             fill={color_s}/>
                                     </svg>
                                 </Box>
-                                <ReactTooltip place="right" type="success" effect="float" backgroundColor="#44B75E"/>
+                                <ReactTooltip place="right" type="success" effect="float"
+                                              backgroundColor="#44B75E"/>
                             </Box>
                         );
                     }
