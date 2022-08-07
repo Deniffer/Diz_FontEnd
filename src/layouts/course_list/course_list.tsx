@@ -4,22 +4,33 @@ import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import {curstyle} from "@/theme/curtheme";
 import {connect} from "react-redux";
+import {baseUrl} from "@/store/course_list";
 
 class CourseList extends Component {
-    state = {
-        baseUrl: "https://www.asueeer.com"
-    }
+    state = {}
 
     componentDidMount() {
-        axios.post(this.state.baseUrl + "/get_courses?mock_login=123", {}).then(res => {
+        axios.post(baseUrl + "/get_courses?mock_login=123", {}).then(res => {
             const course_list = res.data.courses;
             this.props.updateCourseList(course_list);
-            this.props.updateCurCourse(course_list[0]);
+            this.updateCurCourse(course_list[0])
         })
     }
 
     handleCourseClick(course) {
-        this.props.updateCurCourse(course)
+        this.updateCurCourse(course)
+    }
+
+    updateCurCourse(course) {
+        if (!course.course_id) {
+            return
+        }
+        axios.post(baseUrl + "/get_course_detail?mock_login=123", {
+            "course_id": course.course_id
+        }).then(res => {
+            const cur_course = res.data.course
+            this.props.updateCurCourse(cur_course)
+        })
     }
 
     render() {

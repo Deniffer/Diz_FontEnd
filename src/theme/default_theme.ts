@@ -44,7 +44,7 @@ export const default_global_style={
     },
     avatorsize:{
         common:"40px",
-        little:"32px"
+        little:"34px"
     },
     headlineheight:"68px"
 }
