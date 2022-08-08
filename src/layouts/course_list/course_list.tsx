@@ -1,39 +1,26 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {Box} from "@mui/joy";
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import {curstyle} from "@/theme/curtheme";
 import {connect} from "react-redux";
-import {baseUrl} from "@/store/course_list";
+import {baseUrl, Course, CourseListState} from "@/store/course_list";
+import {GlobalStoreState} from "@/store/store";
 
-class CourseList extends Component {
-    state = {}
-
+class CourseList extends Component{
+    state = {
+        rendercnt:0
+    }
+    //life
     componentDidMount() {
         axios.post(baseUrl + "/get_courses?mock_login=123", {}).then(res => {
             const course_list = res.data.courses;
-            this.props.updateCourseList(course_list);
+            this.reduxf_updateCourseList(course_list);
             this.updateCurCourse(course_list[0])
         })
     }
-
-    handleCourseClick(course) {
-        this.updateCurCourse(course)
-    }
-
-    updateCurCourse(course) {
-        if (!course.course_id) {
-            return
-        }
-        axios.post(baseUrl + "/get_course_detail?mock_login=123", {
-            "course_id": course.course_id
-        }).then(res => {
-            const cur_course = res.data.course
-            this.props.updateCurCourse(cur_course)
-        })
-    }
-
     render() {
+        this.state.rendercnt++;
         const colors = [
             '_1',
             '_2',
@@ -46,10 +33,11 @@ class CourseList extends Component {
         let color_index = 0
         return (
             <React.Fragment>
+                {this.state.rendercnt}
                 <div style={{
                     "marginTop": curstyle().gap.common
                 }}/>
-                {this.props.course_list.map((course) => {
+                {this.reduxv_course_list().map((course:Course) => {
                         const ci = color_index
                         // @ts-ignore
                         const color_l = curstyle().colors[colors[ci] + "_l"];
@@ -100,28 +88,64 @@ class CourseList extends Component {
             </React.Fragment>
         );
     }
-}
 
-const mapStateToProps = (state, props) => {
-    return {
-        cur_course: state.course.cur_course,
-        course_list: state.course.course_list
+
+    handleCourseClick(course:Course) {
+        this.updateCurCourse(course)
+    }
+    updateCurCourse(course:Course) {
+        if (!course.course_id) {
+            return
+        }
+        axios.post(baseUrl + "/get_course_detail?mock_login=123", {
+            "course_id": course.course_id
+        }).then(res => {
+            const cur_course = res.data.course
+            this.reduxf_updateCurCourse(cur_course)
+        })
+    }
+
+
+    reduxv_cur_course():Course{
+        // @ts-ignore
+        return this.props.cur_course;
+    }
+    reduxv_course_list():Course[]{
+        // @ts-ignore
+        return this.props.course_list;
+    }
+    reduxf_updateCurCourse(to:Course){
+        // @ts-ignore
+        this.props.updateCurCourse(to)
+    }
+    reduxf_updateCourseList(course_list: Course[]){
+        // @ts-ignore
+        this.props.updateCourseList(course_list);
+    }
+}
+namespace ReduxBind{
+    //输出值通过connect绑定到CourseList组件上
+    export const mapStateToProps = (state: GlobalStoreState,
+                             props: any) => {
+        return {
+            cur_course: state.course.cur_course,
+            course_list: state.course.course_list
+        }
+    }
+    export const mapDispatchToProps = {
+        updateCourseList: (course_list: Course[]) => {
+            return {
+                type: "updateCourseList",
+                course_list: course_list
+            }
+        },
+        updateCurCourse: (course: Course) => {
+            return {
+                type: "updateCurCourse",
+                cur_course: course
+            }
+        }
     }
 }
 
-const mapDispatchToProps = {
-    updateCourseList: (course_list) => {
-        return {
-            type: "updateCourseList",
-            course_list: course_list
-        }
-    },
-    updateCurCourse: (course) => {
-        return {
-            type: "updateCurCourse",
-            cur_course: course
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CourseList);
+export default connect(ReduxBind.mapStateToProps,ReduxBind.mapDispatchToProps)(CourseList);

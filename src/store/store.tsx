@@ -1,8 +1,14 @@
-import {configureStore} from '@reduxjs/toolkit'
-import {course} from "@/store/course_list";
+import {combineReducers, configureStore} from '@reduxjs/toolkit'
+import {CourseListState, courseReducer} from "@/store/course_list";
 
+
+export type GlobalStoreState={
+    course:CourseListState
+}
 export const store = configureStore({
-    reducer: {
-        course: course
-    },
+    reducer: combineReducers(
+        {
+            course: courseReducer
+        }
+    )
 })
