@@ -16,6 +16,10 @@ import { Provider } from 'react-redux'
 import React, {Component} from 'react';
 
 class Index extends Component {
+    // shouldComponentUpdate(nextProps: any, nextState: Readonly<{}>, nextContext: any): boolean {
+    //     return true;
+    // }
+
     render() {
         bind_style_2_window();
         const theme = get_default_theme();

@@ -6,11 +6,29 @@ import {curstyle} from "@/theme/curtheme";
 import {connect} from "react-redux";
 import {baseUrl, Course, CourseListState} from "@/store/course_list";
 import {GlobalStoreState} from "@/store/store";
+import {attch_prop2fakecomp} from "@/utills/computils";
 
 class CourseList extends Component{
     state = {
         rendercnt:0
     }
+    shouldComponentUpdate(nextProps: Readonly<{}>, nextState: Readonly<{}>, nextContext: any): boolean {
+        const newc=new CourseList(nextProps);
+        const oldlist=this.reduxv_course_list();
+        const newlist=newc.reduxv_course_list();
+        if(newc.reduxv_course_list().length!=oldlist.length){
+            return true;
+        }
+        for(let i=0;i<oldlist.length;i++){
+            if(oldlist[i].course_id!=newlist[i].course_id||
+                oldlist[i].name!=newlist[i].name
+            ){
+                return true;
+            }
+        }
+        return false;
+    }
+
     //life
     componentDidMount() {
         axios.post(baseUrl + "/get_courses?mock_login=123", {}).then(res => {
@@ -33,7 +51,7 @@ class CourseList extends Component{
         let color_index = 0
         return (
             <React.Fragment>
-                {this.state.rendercnt}
+                {/*{this.state.rendercnt}*/}
                 <div style={{
                     "marginTop": curstyle().gap.common
                 }}/>
