@@ -3,11 +3,7 @@ import styled from "styled-components";
 import {curstyle} from "@/theme/curtheme";
 // import reuse from '@/assets/reuseable.less'
 // import Icon from 'supercons'
-
-export function Tag(prop:{children:any}) {
-    //background: ${props => props.primary ? "palevioletred" : "white"};
-    //color: ${props => props.primary ? "white" : "palevioletred"};
-    const Tag = styled.div`
+const _Tag = styled.div`
       cursor: pointer;
       /* Adapt the colors based on primary prop */
       // &:hover {
@@ -25,9 +21,13 @@ export function Tag(prop:{children:any}) {
       border-radius: ${curstyle().radius.common};
       background: ${curstyle().colors.main_s};
     `;
+export function Tag(prop:{children:any}) {
+    //background: ${props => props.primary ? "palevioletred" : "white"};
+    //color: ${props => props.primary ? "white" : "palevioletred"};
+
     return (
-        <Tag>
+        <_Tag>
             {prop.children}
-        </Tag>
+        </_Tag>
     )
 }

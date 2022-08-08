@@ -3,11 +3,7 @@ import styled from "styled-components";
 import {curstyle} from "@/theme/curtheme";
 import reuse from '@/assets/reuseable.less'
 import Icon from 'supercons'
-
-export function SetBar(prop:{children:any}) {
-    //background: ${props => props.primary ? "palevioletred" : "white"};
-    //color: ${props => props.primary ? "white" : "palevioletred"};
-    const Button = styled.div`
+const Button = styled.div`
       cursor: pointer;
       /* Adapt the colors based on primary prop */
       &:hover {
@@ -27,6 +23,10 @@ export function SetBar(prop:{children:any}) {
       border: 0px solid palevioletred;
       border-radius: ${curstyle().radius.common};
     `;
+export function SetBar(prop:{children:any}) {
+    //background: ${props => props.primary ? "palevioletred" : "white"};
+    //color: ${props => props.primary ? "white" : "palevioletred"};
+
     return (
         <Button className={
             reuse.trans_color_common+" "
