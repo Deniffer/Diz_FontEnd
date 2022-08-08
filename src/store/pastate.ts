@@ -8,10 +8,12 @@ export class PaStateProxy{
         return this.state.cnt
     }
     set cnt(cnt){}
+    private coursep;
     courseProxy(){
-        return new CourceStoreProxy(this.state)
+        return this.coursep
     }
     constructor(private state:PaState) {
+        this.coursep=new CourceStoreProxy(this.state)
     }
 }
 export class PaState{

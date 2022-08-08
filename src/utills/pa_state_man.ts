@@ -23,8 +23,9 @@ class _PaStateMan{
     unregist_comp(comp:any){
         delete this._comps[comp.___id___]
     }
+    private statep=new PaStateProxy(this._state);
     getstate():PaStateProxy{
-        return new PaStateProxy(this._state);
+        return this.statep
     }
     private _val_ope(key:string,oldval:any,val:any){
         if(key in this._valkey2compids){

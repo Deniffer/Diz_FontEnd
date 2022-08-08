@@ -1,6 +1,7 @@
-import {PaState} from "@/utills/pa_state_man";
+
 import axios from "axios";
 import {compare_one_layer} from "@/utills/tsutils";
+import {PaState} from "@/store/pastate";
 
 export class Course {
     constructor(
