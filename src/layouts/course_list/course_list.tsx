@@ -3,23 +3,33 @@ import {Box} from "@mui/joy";
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import {curstyle} from "@/theme/curtheme";
+import {connect} from "react-redux";
+import {baseUrl} from "@/store/course_list";
 
 class CourseList extends Component {
-    state = {
-        courses: [
-            {
-                "course_id": 0,
-                "name": "ssss"
-            }
-        ],
-        baseUrl: "https://www.asueeer.com"
-    }
+    state = {}
 
     componentDidMount() {
-        axios.post(this.state.baseUrl + "/get_courses?mock_login=123", {}).then(res => {
-            const courses = res.data.courses;
-            // console.log("courses get",courses)
-            this.setState({courses: courses});
+        axios.post(baseUrl + "/get_courses?mock_login=123", {}).then(res => {
+            const course_list = res.data.courses;
+            this.props.updateCourseList(course_list);
+            this.updateCurCourse(course_list[0])
+        })
+    }
+
+    handleCourseClick(course) {
+        this.updateCurCourse(course)
+    }
+
+    updateCurCourse(course) {
+        if (!course.course_id) {
+            return
+        }
+        axios.post(baseUrl + "/get_course_detail?mock_login=123", {
+            "course_id": course.course_id
+        }).then(res => {
+            const cur_course = res.data.course
+            this.props.updateCurCourse(cur_course)
         })
     }
 
@@ -39,7 +49,7 @@ class CourseList extends Component {
                 <div style={{
                     "marginTop": curstyle().gap.common
                 }}/>
-                {this.state.courses.map((course) => {
+                {this.props.course_list.map((course) => {
                         const ci = color_index
                         // @ts-ignore
                         const color_l = curstyle().colors[colors[ci] + "_l"];
@@ -57,6 +67,7 @@ class CourseList extends Component {
                                      "marginLeft": curstyle().gap.common,
                                      "marginRight": curstyle().gap.common,
                                  }}
+                                 onClick={() => this.handleCourseClick(course)}
                             >
                                 <Box data-tip={course.name}>
                                     <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
@@ -91,4 +102,26 @@ class CourseList extends Component {
     }
 }
 
-export default CourseList;
+const mapStateToProps = (state, props) => {
+    return {
+        cur_course: state.course.cur_course,
+        course_list: state.course.course_list
+    }
+}
+
+const mapDispatchToProps = {
+    updateCourseList: (course_list) => {
+        return {
+            type: "updateCourseList",
+            course_list: course_list
+        }
+    },
+    updateCurCourse: (course) => {
+        return {
+            type: "updateCurCourse",
+            cur_course: course
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseList);

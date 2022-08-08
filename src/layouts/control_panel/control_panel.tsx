@@ -2,127 +2,152 @@ import reuse from '@/assets/reuseable.less'
 import cp from './control_panel.less'
 
 import Button from '@mui/joy/Button';
-import {Box, Typography} from "@mui/joy";
+import {Avatar, Box, Typography} from "@mui/joy";
 import {curstyle} from "@/theme/curtheme";
 import {SetBar} from "@/layouts/control_panel/childs/setbar";
 import styled from "styled-components";
-import {Avator} from "@/layouts/reuseable_comps/avator";
+import {connect} from "react-redux";
 
-export default function ControlPanel() {
-    const arr=[]
-    for(let i=0;i<5;i++){
-        arr.push((<SetBar key={i}>
-            hello
-        </SetBar>))
-    }
-    //底部成员组件
-    const MemberWidContain = styled.div`
-      //cursor: pointer;
-      margin: ${curstyle().gap.common};
-      padding-bottom: ${curstyle().gap.m};
-      padding-left: ${curstyle().gap.common};
-    `;
-    const userheads=[]
-    for(let i=0;i<4;i++){
-        userheads.push(
-            <Box
-                sx={{
-                    marginRight:"-10px"
-                }}
-            >
-                <Avator>
-                    <Box
-                        sx={{
-                            width: curstyle().avatorsize.little,
-                            height: curstyle().avatorsize.little,
-                        }}
-                        />
-                </Avator>
-            </Box>
-        )
-    }
-    // @ts-ignore
-    return (
-        <div className={reuse.col_flex2side_container + " "
+import React, {Component} from 'react';
+
+class ControlPanel extends Component {
+    state = {}
+
+    render() {
+        const arr = []
+        for (let i = 0; i < 5; i++) {
+            arr.push((<SetBar key={i}>
+                hello
+            </SetBar>))
+        }
+        //底部成员组件
+        const MemberWidContain = styled.div`
+          //cursor: pointer;
+          margin: ${curstyle().gap.common};
+          padding-bottom: ${curstyle().gap.m};
+          padding-left: ${curstyle().gap.common};
+        `;
+        // @ts-ignore
+        const dirs = this.props.cur_course.directories
+        const members = this.props.cur_course.members
+        return (
+            <div className={reuse.col_flex2side_container + " "
             + cp.cpcont
-        }>
-            {/*up*/}
-            <Box
-                sx={{
-
-                    display: 'flex',
-                    flexDirection: 'column',
-
-                    height:"100%"
-                    // gap: curstyle().gap.common,
-                    // alignItems: 'center',
-                    // justifyContent: 'space-between',
-                }}
-            >
+            }>
+                {/*up*/}
                 <Box
                     sx={{
-                        padding:curstyle().gap.common,
-                        // paddingRight:curstyle().gap.common,
-                        marginLeft: curstyle().gap.common,
-                        marginRight: curstyle().gap.common,
-                        marginBottom:curstyle().gap.common,
+
+                        display: 'flex',
+                        flexDirection: 'column',
+
+                        height: "100%"
+                        // gap: curstyle().gap.common,
+                        // alignItems: 'center',
+                        // justifyContent: 'space-between',
                     }}
                 >
-                    <Typography className={cp.listitem} level="h6"
-                                sx={{
-                                    marginBottom:curstyle().gap.m
-                                }}
-                    >
-                        课题
-                    </Typography>
-                    <Typography className={cp.listitem} level="h7"
+                    <Box
                         sx={{
-
-                        color:curstyle().colors.font_second
+                            padding: curstyle().gap.common,
+                            // paddingRight:curstyle().gap.common,
+                            marginLeft: curstyle().gap.common,
+                            marginRight: curstyle().gap.common,
+                            marginBottom: curstyle().gap.common,
                         }}
                     >
-                        第一周
-                    </Typography>
+                        <Typography className={cp.listitem} level="h6"
+                                    sx={{
+                                        marginBottom: curstyle().gap.m
+                                    }}
+                        >
+                            {this.props.cur_course.name}
+                        </Typography>
+                        <Typography className={cp.listitem} level="h7"
+                                    sx={{
+
+                                        color: curstyle().colors.font_second
+                                    }}
+                        >
+                            开始时间: {this.props.cur_course.begin_at}
+                        </Typography>
+                    </Box>
+                    <Button
+                        sx={{
+                            marginLeft: curstyle().gap.common,
+                            marginRight: curstyle().gap.common,
+                            marginBottom: curstyle().gap.common,
+                            height: "36px"
+                        }}
+                        className={cp.listitem}
+                        variant="solid" color="primary">
+                        + 新建帖子
+                    </Button>
+                    {
+                        dirs ? dirs.map((dir) => {
+                            return (
+                                <SetBar key={dir.directory_id}>
+                                    {dir.name}
+                                </SetBar>
+                            )
+                        }) : null
+                    }
                 </Box>
-                <Button
-                    sx={{
-                        marginLeft: curstyle().gap.common,
-                        marginRight: curstyle().gap.common,
-                        marginBottom:curstyle().gap.common,
-                    }}
-                    className={cp.listitem}
-                    variant="solid" color="primary">
-                    + 新建帖子
-                </Button>
-                {arr}
-                {/*<Box className={*/}
-                {/*    cp.listitem}*/}
-                {/*     sx={{*/}
-                {/*         marginLeft: curstyle().gap.common,*/}
-                {/*         marginRight: curstyle().gap.common*/}
-                {/*     }}*/}
-                {/*>列表*/}
-                {/*</Box>*/}
-            </Box>
-            <MemberWidContain
-                className={reuse.row_flex2side_container}
-            >
-                <Box className={reuse.row_flexcontainer}
+                <MemberWidContain
+                    className={reuse.row_flex2side_container}
                 >
-                    {userheads}
-                </Box>
-                <Button>
-                   邀请成员
-                </Button>
-            </MemberWidContain>
-            {/*down*/}
-            {/*<div>*/}
-            {/*    <div>*/}
-            {/*        <div className={*/}
-            {/*            cp.item_pad}>成员*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-        </div>
-    );
+                    <Box className={reuse.row_flexcontainer}
+                    >
+                        {members ? members.map((member) => {
+                            return (
+                                <Box key={member.user_id}
+                                     sx={{
+                                         marginRight: "-10px"
+                                     }}
+                                >
+                                    <Avatar src={member.avatar}
+                                            sx={{
+                                                width: curstyle().avatorsize.little,
+                                                height: curstyle().avatorsize.little,
+                                                cursor: "pointer",
+                                                borderRadius: "50%",
+                                            }}
+                                    />
+                                </Box>
+                            )
+                        }) : null}
+                    </Box>
+                    <Button>
+                        邀请成员
+                    </Button>
+                </MemberWidContain>
+                {/*down*/}
+                {/*<div>*/}
+                {/*    <div>*/}
+                {/*        <div className={*/}
+                {/*            cp.item_pad}>成员*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+            </div>
+        );
+    }
 }
+
+
+const mapStateToProps = (state, props) => {
+    return {
+        cur_course: state.course.cur_course,
+    }
+}
+
+const mapDispatchToProps = {
+    updateCurCourse: (course) => {
+        return {
+            type: "updateCurCourse",
+            cur_course: course
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel);
