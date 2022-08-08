@@ -9,11 +9,23 @@ import styled from "styled-components";
 import {connect} from "react-redux";
 
 import React, {Component} from 'react';
+import {PaStateMan} from "@/utills/pa_state_man";
 
 class ControlPanel extends Component {
     state = {}
 
+//life
+    componentDidMount() {
+        PaStateMan.regist_comp(this,(registval,state)=>{
+            registval(state.course_cur);
+        })
+    }
+    componentWillUnmount() {
+        PaStateMan.unregist_comp(this)
+    }
     render() {
+        const state_course=PaStateMan.getstate().courseProxy()
+
         const arr = []
         for (let i = 0; i < 5; i++) {
             arr.push((<SetBar key={i}>
@@ -28,8 +40,9 @@ class ControlPanel extends Component {
           padding-left: ${curstyle().gap.common};
         `;
         // @ts-ignore
-        const dirs = this.props.cur_course.directories
-        const members = this.props.cur_course.members
+        const dirs = state_course.getCurCourse().directories
+        // @ts-ignore
+        const members = state_course.getCurCourse().members
         return (
             <div className={reuse.col_flex2side_container + " "
             + cp.cpcont
@@ -61,7 +74,7 @@ class ControlPanel extends Component {
                                         marginBottom: curstyle().gap.m
                                     }}
                         >
-                            {this.props.cur_course.name}
+                            {state_course.getCurCourse().name}
                         </Typography>
                         <Typography className={cp.listitem} level="h7"
                                     sx={{
@@ -69,7 +82,7 @@ class ControlPanel extends Component {
                                         color: curstyle().colors.font_second
                                     }}
                         >
-                            开始时间: {this.props.cur_course.begin_at}
+                            开始时间: {state_course.getCurCourse().begin_at}
                         </Typography>
                     </Box>
                     <Button

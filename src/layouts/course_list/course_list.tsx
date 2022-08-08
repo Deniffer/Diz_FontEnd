@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {baseUrl, Course, CourseListState} from "@/store/course_list";
 import {GlobalStoreState} from "@/store/store";
 import {attch_prop2fakecomp} from "@/utills/computils";
+import {PaState, PaStateMan} from "@/utills/pa_state_man";
 
 class CourseList extends Component{
     state = {
@@ -31,12 +32,16 @@ class CourseList extends Component{
 
     //life
     componentDidMount() {
-        axios.post(baseUrl + "/get_courses?mock_login=123", {}).then(res => {
-            const course_list = res.data.courses;
-            this.reduxf_updateCourseList(course_list);
-            this.updateCurCourse(course_list[0])
+        PaStateMan.regist_comp(this,(registval,state)=>{
+            registval(state.course_cur);
+            registval(state.course_list);
         })
+        PaStateMan.getstate().courseProxy().updateCourseList()
     }
+    componentWillUnmount() {
+        PaStateMan.unregist_comp(this)
+    }
+
     render() {
         this.state.rendercnt++;
         const colors = [
@@ -51,11 +56,11 @@ class CourseList extends Component{
         let color_index = 0
         return (
             <React.Fragment>
-                {/*{this.state.rendercnt}*/}
+                {this.state.rendercnt}
                 <div style={{
                     "marginTop": curstyle().gap.common
                 }}/>
-                {this.reduxv_course_list().map((course:Course) => {
+                {PaStateMan.getstate().courseProxy().getCourseList().map((course:Course) => {
                         const ci = color_index
                         // @ts-ignore
                         const color_l = curstyle().colors[colors[ci] + "_l"];
@@ -115,12 +120,13 @@ class CourseList extends Component{
         if (!course.course_id) {
             return
         }
-        axios.post(baseUrl + "/get_course_detail?mock_login=123", {
-            "course_id": course.course_id
-        }).then(res => {
-            const cur_course = res.data.course
-            this.reduxf_updateCurCourse(cur_course)
-        })
+        PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(course)
+        // axios.post(baseUrl + "/get_course_detail?mock_login=123", {
+        //     "course_id": course.course_id
+        // }).then(res => {
+        //     const cur_course = res.data.course
+        //     this.reduxf_updateCurCourse(cur_course)
+        // })
     }
 
 
