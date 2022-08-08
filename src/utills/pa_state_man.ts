@@ -1,11 +1,12 @@
 import {CourceStoreProxy, Course} from "@/store/course_list";
+import {PaState, PaStateProxy} from "@/store/pastate";
 
 class _PaStateMan{
-    _state=new PaState();
-    _comps:any={}
-    _nextcompid=0;
-    _valkey2compids:any={}
-    _recentgetkey=""
+    private _state=new PaState();
+    private _comps:any={}
+    private _nextcompid=0;
+    private _valkey2compids:any={}
+    private _recentgetkey=""
     regist_comp(comp:any,cb:(registval:(valinstate:any)=>void,state:PaState)=>void){
         this._comps[this._nextcompid+""]=comp;
         comp.___id___=this._nextcompid;
@@ -25,7 +26,7 @@ class _PaStateMan{
     getstate():PaStateProxy{
         return new PaStateProxy(this._state);
     }
-    _val_ope(key:string,oldval:any,val:any){
+    private _val_ope(key:string,oldval:any,val:any){
         if(key in this._valkey2compids){
             let delids:string[]=[]
             const ids=Object.keys(this._valkey2compids[key]);
@@ -74,29 +75,5 @@ class _PaStateMan{
         }
     }
 }
-class PaStateProxy{
-    addcnt(){
-        this.state.cnt++;
-    }
-    get cnt(){
-        return this.state.cnt
-    }
-    set cnt(cnt){}
-    courseProxy(){
-        return new CourceStoreProxy(this.state)
-    }
-    constructor(private state:PaState) {
-    }
-}
-export class PaState{
-    cnt=0;
 
-    course_list:Course[]=[];
-    course_cur:Course
-
-    constructor() {
-        this.course_cur=Course.pre();
-        this.course_list.push(this.course_cur)
-    }
-}
 export const PaStateMan= new _PaStateMan()
