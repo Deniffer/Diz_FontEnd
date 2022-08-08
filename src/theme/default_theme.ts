@@ -32,6 +32,7 @@ export const default_global_style={
     gap:{
         common:"12px !important",
         l:"16px !important",
+        xl:"20px !important",
         xxl:"24px !important",
         m:"8px !important",
     },

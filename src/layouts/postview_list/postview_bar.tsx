@@ -3,17 +3,31 @@ import styled from "styled-components";
 import {curstyle} from "@/theme/curtheme";
 import cp from "@/layouts/control_panel/control_panel.less";
 import {Box, Typography} from "@mui/joy";
+import {Fragment} from "react";
+import {Tag} from "@/layouts/reuseable_comps/tag";
+import reuse from '@/assets/reuseable.less'
 // import reuse from '@/assets/reuseable.less'
 // import Icon from 'supercons'
 
 export function PostViewBar() {
     //background: ${props => props.primary ? "palevioletred" : "white"};
     //color: ${props => props.primary ? "white" : "palevioletred"};
-    const Title = styled.div`
-        
+
+    const TagWrap=styled.div`
+        margin-right: ${curstyle().gap.common};  
     `;
+    const tags=[];
+    for(let i=0;i<8;i++){
+        tags.push(
+            <TagWrap>
+                <Tag>
+                    A{i}
+                </Tag>
+            </TagWrap>
+        )
+    }
     return (
-        <div>
+        <Fragment>
             <Typography className={cp.listitem} level="h5"
                         sx={{
                             fontWeight:curstyle().fontweight.bold,
@@ -26,6 +40,19 @@ export function PostViewBar() {
             <Box>
                 jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala
             </Box>
-        </div>
+            <Box
+                className={reuse.row_flex2side_container}
+                sx={{
+                    paddingBottom:curstyle().gap.xl,
+                    paddingTop:curstyle().gap.common
+                }}
+            >
+                <Box
+                    className={reuse.row_flexcontainer}
+                >
+                    {tags}
+                </Box>
+            </Box>
+        </Fragment>
     )
 }
