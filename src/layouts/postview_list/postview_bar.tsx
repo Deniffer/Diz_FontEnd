@@ -52,7 +52,7 @@ export class PostViewBar extends Component{
                                 paddingTop:curstyle().gap.common
                             }}
                             onClick={()=>{
-                                PaStateMan.getstate().cnt++;
+                                PaStateMan.getstate().addcnt();
                             }}
                 >
                     帖子{PaStateMan.getstate().cnt} {this.rendercnt}

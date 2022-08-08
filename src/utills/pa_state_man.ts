@@ -20,16 +20,24 @@ class _PaStateMan{
     unregist_comp(comp:any){
         delete this._comps[comp.___id___]
     }
-    getstate():PaState{
-        return this._state;
+    getstate():PaStateProxy{
+        return new PaStateProxy(this._state);
     }
     _val_ope(key:string,oldval:any,val:any){
         if(key in this._valkey2compids){
+            let delids:string[]=[]
             const ids=Object.keys(this._valkey2compids[key]);
             for(const i in ids){
-                const id=ids[i];
-                this._comps[id].forceUpdate();
+                const id:string=ids[i];
+                if(this._comps[id]){
+                    this._comps[id].forceUpdate();
+                }else{
+                    delids.push(id)
+                }
             }
+            delids.forEach((v)=>{
+                delete this._valkey2compids[v]
+            })
         }
     }
     constructor() {
@@ -62,6 +70,17 @@ class _PaStateMan{
                 }
             });
         }
+    }
+}
+class PaStateProxy{
+    addcnt(){
+        this.state.cnt++;
+    }
+    get cnt(){
+        return this.state.cnt
+    }
+    set cnt(cnt){}
+    constructor(private state:PaState) {
     }
 }
 class PaState{
