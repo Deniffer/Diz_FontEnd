@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Box, List, RadioGroup, Sheet, Typography} from "@mui/joy";
+import {Box, List, RadioGroup, TextField} from "@mui/joy";
 import $course_id_styles from "@/pages/create_post/$course_id.less";
 import reuse from "@/assets/reuseable.less";
 import post_form_styles from "./post_form.less"
@@ -35,6 +35,19 @@ class PostForm extends Component {
                             <Radio variant="soft" color="success" value="question" label="提问"/>
                         </List>
                     </RadioGroup>
+                </Box>
+
+                <Box sx={{
+                    width: '100%',
+                    marginTop: "60px",
+                    height: "720px"
+                }}>
+                    <TextField size="lg" placeholder="请输入标题" variant="plain"/>
+                    {/*<Box sx={{*/}
+                    {/*    height: "100%"*/}
+                    {/*}}>*/}
+                    {/*    <MDEditor height={200} value={"value"}/>*/}
+                    {/*</Box>*/}
                 </Box>
             </React.Fragment>
         )
