@@ -47,7 +47,7 @@ export const default_global_style={
         common:"40px",
         little:"34px"
     },
-    headlineheight:"68px"
+    headlineheight:"60px"
 }
 export type MyGlobalStyle = typeof default_global_style
 
