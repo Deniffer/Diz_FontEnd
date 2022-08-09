@@ -25,7 +25,7 @@ export class CourseListState {
         public course_list:Course[]
     ) {
     }
-};
+}
 export type CourseAction = typeof InitialAction;
 const InitialCourse = Course.pre();
 const InitialCourseListState = CourseListState.pre();

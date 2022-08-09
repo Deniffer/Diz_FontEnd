@@ -31,6 +31,7 @@ class Index extends Component {
         >
             <Headline></Headline>
         </Box>);
+
         return (
             <Provider store={store}>
                 <CssVarsProvider theme={theme}>
