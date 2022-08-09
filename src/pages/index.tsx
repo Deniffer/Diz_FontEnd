@@ -14,6 +14,7 @@ import {PostViewList} from "@/layouts/postview_list/postview_list";
 import {store} from "@/store/store";
 import { Provider } from 'react-redux'
 import React, {Component} from 'react';
+import {curstyle} from "@/theme/curtheme";
 
 class Index extends Component {
     // shouldComponentUpdate(nextProps: any, nextState: Readonly<{}>, nextContext: any): boolean {
@@ -21,9 +22,8 @@ class Index extends Component {
     // }
 
     render() {
-        bind_style_2_window();
-        const theme = get_default_theme();
-        const headheight = "68px"
+
+        const headheight = curstyle().headlineheight
         const head = (<Box className={index_styles.headline}
                            sx={{
                                height: headheight
@@ -33,17 +33,7 @@ class Index extends Component {
         </Box>);
 
         return (
-            <Provider store={store}>
-                <CssVarsProvider theme={theme}>
-                    <GlobalStyles<Theme>
-                        styles={(theme) => ({
 
-                            body: {
-                                margin: 0,
-                                fontFamily: theme.vars.fontFamily.body,
-                            },
-                        })}
-                    />
                     <div className={index_styles.whole + " "
                     + reuse_styles.col_flexcontainer}
                     >
@@ -72,8 +62,7 @@ class Index extends Component {
                             </Box>
                         </Box>
                     </div>
-                </CssVarsProvider>
-            </Provider>
+
         );
     }
 }

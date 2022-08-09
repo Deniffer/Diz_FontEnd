@@ -8,6 +8,8 @@ import $course_id_styles from "./$course_id.less";
 import Arrow from "@/layouts/reuseable_comps/arrow";
 import {Course} from "@/store/course_list";
 import CourseBar from "@/layouts/course_bar/course_bar";
+import {curstyle} from "@/theme/curtheme";
+import reuse from "@/assets/reuseable.less"
 
 class $CourseId extends Component {
     render() {
@@ -16,31 +18,58 @@ class $CourseId extends Component {
                 {/* nav bar */}
                 <Box className={index_styles.headline}
                      sx={{
-                         height: "60px"
+                         height: curstyle().headlineheight
                      }}
                 >
                     <Headline/>
                 </Box>
-
-                <Button onClick={() => window.history.back()}
+                <Box
+                    sx={{
+                        width:"800px",
+                        margin:"auto",
+                    }}>
+                    <Box
+                        className={reuse.row_flex2side_container}
                         sx={{
-                            left: "328px",
-                            top: "26px"
+                            alignItems:"center"
                         }}>
-                    <Arrow/>
-                </Button>
-                <Box sx={{
+                        <Box className={reuse.row_flex2side_container}
+                             sx={{
+                                 alignItems:"center",
+                                 gap:curstyle().gap.common
+                             }}
+                        >
+                            <Box onClick={() => window.history.back()}
+                                 sx={{
+                                     cursor:"pointer"
+                                     // left: "328px",
+                                     // top: "26px"
+                                 }}>
+                                <Arrow/>
+                            </Box>
+                            {/*<Box sx={{*/}
 
-                }}>
-                    <CourseBar/>
+                            {/*}}>*/}
+                            <CourseBar/>
+                            {/*</Box>*/}
+                        </Box>
+                        <Button variant="solid" color="primary"
+                                sx={{
+                                    background:curstyle().colors.main_s
+                                }}
+                        >
+                            发布
+                        </Button>
+
+                        {/*<Box sx={{*/}
+                        {/*    top: "137px"*/}
+                        {/*}}*/}
+                        {/*     className={$course_id_styles.gray_outline*/}
+                        {/*     }>*/}
+                        {/*</Box>*/}
+                    </Box>
                 </Box>
 
-                <Box sx={{
-                    top: "137px"
-                }}
-                     className={$course_id_styles.gray_outline
-                     }>
-                </Box>
             </Provider>
         );
     }
