@@ -16,15 +16,17 @@ class ControlPanel extends Component {
 
 //life
     componentDidMount() {
-        PaStateMan.regist_comp(this,(registval,state)=>{
+        PaStateMan.regist_comp(this, (registval, state) => {
             registval(state.course_cur);
         })
     }
+
     componentWillUnmount() {
         PaStateMan.unregist_comp(this)
     }
+
     render() {
-        const state_course=PaStateMan.getstate().courseProxy()
+        const state_course = PaStateMan.getstate().courseProxy()
 
         const arr = []
         for (let i = 0; i < 5; i++) {
@@ -85,15 +87,15 @@ class ControlPanel extends Component {
                             开始时间: {state_course.getCurCourse().begin_at}
                         </Typography>
                     </Box>
-                    <Button
-                        sx={{
-                            marginLeft: curstyle().gap.common,
-                            marginRight: curstyle().gap.common,
-                            marginBottom: curstyle().gap.common,
-                            height: "36px"
-                        }}
-                        className={cp.listitem}
-                        variant="solid" color="primary">
+                    <Button onClick={e => window.location.href = "/create_post/" + this.props.cur_course.course_id}
+                            sx={{
+                                marginLeft: curstyle().gap.common,
+                                marginRight: curstyle().gap.common,
+                                marginBottom: curstyle().gap.common,
+                                height: "36px"
+                            }}
+                            className={cp.listitem}
+                            variant="solid" color="primary">
                         + 新建帖子
                     </Button>
                     {/*{arr}*/}
