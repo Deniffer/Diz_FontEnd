@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {Box, Button} from "@mui/joy";
 import index_styles from "@/pages/index.less";
 import Headline from "@/layouts/headline/headline";
-import {store} from "@/store/store";
-import {Provider} from "react-redux";
+import {GlobalStoreState, store} from "@/store/store";
+import {connect, Provider} from "react-redux";
 import $course_id_styles from "./$course_id.less";
 import Arrow from "@/layouts/reuseable_comps/arrow";
+import {Course} from "@/store/course_list";
+import CourseBar from "@/layouts/course_bar/course_bar";
 
 class $CourseId extends Component {
     render() {
@@ -20,12 +22,18 @@ class $CourseId extends Component {
                     <Headline/>
                 </Box>
 
-                <Button sx={{
-                    left: "328px",
-                    top: "26px"
-                }}>
+                <Button onClick={() => window.history.back()}
+                        sx={{
+                            left: "328px",
+                            top: "26px"
+                        }}>
                     <Arrow/>
                 </Button>
+                <Box sx={{
+
+                }}>
+                    <CourseBar/>
+                </Box>
 
                 <Box sx={{
                     top: "137px"
@@ -33,8 +41,6 @@ class $CourseId extends Component {
                      className={$course_id_styles.gray_outline
                      }>
                 </Box>
-
-
             </Provider>
         );
     }

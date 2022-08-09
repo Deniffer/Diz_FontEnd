@@ -9,21 +9,22 @@ import {GlobalStoreState} from "@/store/store";
 import {attch_prop2fakecomp} from "@/utills/computils";
 import {PaState, PaStateMan} from "@/utills/pa_state_man";
 
-class CourseList extends Component{
+class CourseList extends Component {
     state = {
-        rendercnt:0
+        rendercnt: 0
     }
+
     shouldComponentUpdate(nextProps: Readonly<{}>, nextState: Readonly<{}>, nextContext: any): boolean {
-        const newc=new CourseList(nextProps);
-        const oldlist=this.reduxv_course_list();
-        const newlist=newc.reduxv_course_list();
-        if(newc.reduxv_course_list().length!=oldlist.length){
+        const newc = new CourseList(nextProps);
+        const oldlist = this.reduxv_course_list();
+        const newlist = newc.reduxv_course_list();
+        if (newc.reduxv_course_list().length != oldlist.length) {
             return true;
         }
-        for(let i=0;i<oldlist.length;i++){
-            if(oldlist[i].course_id!=newlist[i].course_id||
-                oldlist[i].name!=newlist[i].name
-            ){
+        for (let i = 0; i < oldlist.length; i++) {
+            if (oldlist[i].course_id != newlist[i].course_id ||
+                oldlist[i].name != newlist[i].name
+            ) {
                 return true;
             }
         }
@@ -32,12 +33,13 @@ class CourseList extends Component{
 
     //life
     componentDidMount() {
-        PaStateMan.regist_comp(this,(registval,state)=>{
+        PaStateMan.regist_comp(this, (registval, state) => {
             registval(state.course_cur.course_id);
             registval(state.course_list);
         })
         PaStateMan.getstate().courseProxy().updateCourseList()
     }
+
     componentWillUnmount() {
         PaStateMan.unregist_comp(this)
     }
@@ -60,7 +62,7 @@ class CourseList extends Component{
                 <div style={{
                     "marginTop": curstyle().gap.common
                 }}/>
-                {PaStateMan.getstate().courseProxy().getCourseList().map((course:Course) => {
+                {PaStateMan.getstate().courseProxy().getCourseList().map((course: Course) => {
                         const ci = color_index
                         // @ts-ignore
                         const color_l = curstyle().colors[colors[ci] + "_l"];
@@ -113,10 +115,11 @@ class CourseList extends Component{
     }
 
 
-    handleCourseClick(course:Course) {
+    handleCourseClick(course: Course) {
         this.updateCurCourse(course)
     }
-    updateCurCourse(course:Course) {
+
+    updateCurCourse(course: Course) {
         if (!course.course_id) {
             return
         }
@@ -130,27 +133,31 @@ class CourseList extends Component{
     }
 
 
-    reduxv_cur_course():Course{
+    reduxv_cur_course(): Course {
         // @ts-ignore
         return this.props.cur_course;
     }
-    reduxv_course_list():Course[]{
+
+    reduxv_course_list(): Course[] {
         // @ts-ignore
         return this.props.course_list;
     }
-    reduxf_updateCurCourse(to:Course){
+
+    reduxf_updateCurCourse(to: Course) {
         // @ts-ignore
         this.props.updateCurCourse(to)
     }
-    reduxf_updateCourseList(course_list: Course[]){
+
+    reduxf_updateCourseList(course_list: Course[]) {
         // @ts-ignore
         this.props.updateCourseList(course_list);
     }
 }
-namespace ReduxBind{
+
+namespace ReduxBind {
     //输出值通过connect绑定到CourseList组件上
     export const mapStateToProps = (state: GlobalStoreState,
-                             props: any) => {
+                                    props: any) => {
         return {
             cur_course: state.course.cur_course,
             course_list: state.course.course_list
@@ -172,4 +179,4 @@ namespace ReduxBind{
     }
 }
 
-export default connect(ReduxBind.mapStateToProps,ReduxBind.mapDispatchToProps)(CourseList);
+export default connect(ReduxBind.mapStateToProps, ReduxBind.mapDispatchToProps)(CourseList);
