@@ -96,6 +96,7 @@ class ControlPanel extends Component {
                         variant="solid" color="primary">
                         + 新建帖子
                     </Button>
+                    {/*{arr}*/}
                     {
                         dirs ? dirs.map((dir) => {
                             return (

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import {curstyle} from "@/theme/curtheme";
 import reuse from '@/assets/reuseable.less'
 import Icon from 'supercons'
+import {render} from "react-dom";
+import {Component, PureComponent} from "react";
 const Button = styled.div`
       cursor: pointer;
       /* Adapt the colors based on primary prop */
@@ -23,17 +25,29 @@ const Button = styled.div`
       border: 0px solid palevioletred;
       border-radius: ${curstyle().radius.common};
     `;
-export function SetBar(prop:{children:any}) {
+export class SetBar extends PureComponent{
+    constructor(props:any) {
+        super(props)
+    }
     //background: ${props => props.primary ? "palevioletred" : "white"};
     //color: ${props => props.primary ? "white" : "palevioletred"};
+    // props={
+    //     children:[]
+    // }
+    rendercnt=0;
+    render(){
+        this.rendercnt++;
+        // (prop:{children:any})
+        return (
+            <Button className={
+                reuse.trans_color_common+" "
+                +reuse.row_flex2side_container
+            }>
+                {this.rendercnt}
+                {this.props.children}
+                <Icon glyph="more" size={23}/>
+            </Button>
+        )
+    }
 
-    return (
-        <Button className={
-            reuse.trans_color_common+" "
-            +reuse.row_flex2side_container
-        }>
-            {prop.children}
-            <Icon glyph="more" size={23}/>
-        </Button>
-    )
 }

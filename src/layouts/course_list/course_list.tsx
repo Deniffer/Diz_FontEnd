@@ -33,7 +33,7 @@ class CourseList extends Component{
     //life
     componentDidMount() {
         PaStateMan.regist_comp(this,(registval,state)=>{
-            registval(state.course_cur);
+            registval(state.course_cur.course_id);
             registval(state.course_list);
         })
         PaStateMan.getstate().courseProxy().updateCourseList()
