@@ -87,7 +87,7 @@ class ControlPanel extends Component {
                             开始时间: {state_course.getCurCourse().begin_at}
                         </Typography>
                     </Box>
-                    <Button onClick={e => window.location.href = "/create_post/" + this.props.cur_course.course_id}
+                    <Button onClick={e => window.location.href = "/create_post/" + state_course.getCurCourse().course_id}
                             sx={{
                                 marginLeft: curstyle().gap.common,
                                 marginRight: curstyle().gap.common,
