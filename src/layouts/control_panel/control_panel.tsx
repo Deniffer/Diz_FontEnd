@@ -10,13 +10,15 @@ import {connect} from "react-redux";
 
 import React, {Component} from 'react';
 import {PaStateMan} from "@/utills/pa_state_man";
+import {history} from 'umi';
+
 //底部成员组件
 const MemberWidContain = styled.div`
-          //cursor: pointer;
-          margin: ${curstyle().gap.common};
-          padding-bottom: ${curstyle().gap.m};
-          padding-left: ${curstyle().gap.common};
-        `;
+  //cursor: pointer;
+  margin: ${curstyle().gap.common};
+  padding-bottom: ${curstyle().gap.m};
+  padding-left: ${curstyle().gap.common};
+`;
 
 class ControlPanel extends Component {
     state = {}
@@ -48,7 +50,7 @@ class ControlPanel extends Component {
         const members = state_course.getCurCourse().members
         return (
             <div className={reuse.col_flex2side_container + " "
-            + cp.cpcont
+                + cp.cpcont
             }>
                 {/*up*/}
                 <Box
@@ -88,7 +90,11 @@ class ControlPanel extends Component {
                             开始时间: {state_course.getCurCourse().begin_at}
                         </Typography>
                     </Box>
-                    <Button onClick={e => window.location.href = "/create_post/" + this.props.cur_course.course_id}
+                    <Button onClick={e => {
+                        history.push("/create_post/" + this.props.cur_course.course_id);
+                    }
+                        // (window.location.href = "/create_post/" + this.props.cur_course.course_id)
+                    }
                             sx={{
                                 marginLeft: curstyle().gap.common,
                                 marginRight: curstyle().gap.common,
