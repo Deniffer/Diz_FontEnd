@@ -10,6 +10,13 @@ import {connect} from "react-redux";
 
 import React, {Component} from 'react';
 import {PaStateMan} from "@/utills/pa_state_man";
+//底部成员组件
+const MemberWidContain = styled.div`
+          //cursor: pointer;
+          margin: ${curstyle().gap.common};
+          padding-bottom: ${curstyle().gap.m};
+          padding-left: ${curstyle().gap.common};
+        `;
 
 class ControlPanel extends Component {
     state = {}
@@ -34,13 +41,7 @@ class ControlPanel extends Component {
                 hello
             </SetBar>))
         }
-        //底部成员组件
-        const MemberWidContain = styled.div`
-          //cursor: pointer;
-          margin: ${curstyle().gap.common};
-          padding-bottom: ${curstyle().gap.m};
-          padding-left: ${curstyle().gap.common};
-        `;
+
         // @ts-ignore
         const dirs = state_course.getCurCourse().directories
         // @ts-ignore
