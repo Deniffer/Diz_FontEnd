@@ -16,7 +16,13 @@ class DirectoryButton extends Component {
                         this.setState({
                             clicked: new_clicked
                         })
-                    }}>
+                        this.props.handleOnChange({
+                            dir_id: this.props.dir_id,
+                            clicked: new_clicked
+                        })
+                    }}
+
+            >
                 {this.props.name}
             </Button>
         );

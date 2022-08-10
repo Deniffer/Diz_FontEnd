@@ -45,6 +45,7 @@ class CourseBar extends Component {
                             sx={{
                                 background: curstyle().colors.main_s
                             }}
+                            onClick={this.props.handlePublishPostClick}
                     >
                         发布
                     </Button>

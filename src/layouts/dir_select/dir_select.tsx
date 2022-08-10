@@ -22,7 +22,8 @@ class DirSelect extends Component {
                             let clicked = false
                             return (
                                 <Box key={dir.directory_id}>
-                                    <DirectoryButton name={dir.name} clicked={clicked}>
+                                    <DirectoryButton handleOnChange={this.props.handleDirOnChange} name={dir.name}
+                                                     clicked={clicked} dir_id={dir.directory_id}>
                                     </DirectoryButton>
                                 </Box>
                             )

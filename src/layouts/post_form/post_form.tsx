@@ -9,6 +9,68 @@ import DirSelect from "@/layouts/dir_select/dir_select";
 
 
 class PostForm extends Component {
+    state = {
+        new_post: {
+            type: "post",
+            course_id: 0,
+        },
+    }
+
+    handleEditorChange = (editorState) => {
+        let new_post = this.state.new_post
+        new_post.content = editorState.toHTML()
+        this.setState({
+            new_post: new_post
+        })
+    }
+
+    handleTypeOnChange = (e) => {
+        let new_post = this.state.new_post
+        new_post.type = e.target.value
+        this.setState({
+            new_post: new_post
+        })
+    }
+
+    handleTitleOnChange = (e) => {
+        let new_post = this.state.new_post
+        new_post.title = e.target.value
+        this.setState({
+            new_post: new_post
+        })
+    }
+
+    arr_remove(arr, e) {
+        if (!arr) {
+            return arr
+        }
+        let new_arr = []
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] !== e) {
+                new_arr.push(e)
+            }
+        }
+        return new_arr
+    }
+
+    handleDirOnChange = (e) => {
+        let dir_ids = this.state.new_post.directory_ids
+        if (e.clicked) {
+            if (dir_ids) {
+                dir_ids.push(e.dir_id)
+            } else {
+                dir_ids = [e.dir_id]
+            }
+        } else {
+            dir_ids = this.arr_remove(dir_ids, e.dir_id)
+        }
+        dir_ids.sort()
+        this.state.new_post.directory_ids = dir_ids
+        this.setState({
+            new_post: this.state.new_post
+        })
+    }
+
     render() {
         const marginLeft = "20px"
         return (
@@ -33,8 +95,11 @@ class PostForm extends Component {
                         <List row={true} sx={{
                             gap: 5
                         }}>
-                            <Radio variant="soft" color="success" value="post" label="帖子"/>
-                            <Radio variant="soft" color="success" value="question" label="提问"/>
+                            <Radio onChange={this.handleTypeOnChange} variant="soft" color="success" value="post"
+                                   label="帖子"/>
+                            <Radio onChange={this.handleTypeOnChange} variant="soft" color="success"
+                                   value="question"
+                                   label="提问"/>
                         </List>
                     </RadioGroup>
                 </Box>
@@ -44,14 +109,15 @@ class PostForm extends Component {
                     marginTop: "55px",
                     height: "720px",
                 }}>
-                    <TextField sx={{}} size="lg" placeholder="请输入标题" variant="plain"/>
+                    <TextField onChange={this.handleTitleOnChange} sx={{}} size="lg" placeholder="请输入标题"
+                               variant="plain"/>
                     <Box sx={{
                         marginTop: "20px"
                     }}>
                         <div className="editor-wrapper">
                             <BraftEditor
-                                // value={editorState}
-                                // onChange={this.handleChange}
+                                // value={""}
+                                onChange={this.handleEditorChange}
                                 placeholder="请输入正文..."
                                 contentStyle={{height: 110}}
                             />
@@ -71,7 +137,7 @@ class PostForm extends Component {
                             paddingTop: "25px",
                             marginBottom: "25px",
                         }}>
-                            <DirSelect cur_course={this.props.cur_course}/>
+                            <DirSelect cur_course={this.props.cur_course} handleDirOnChange={this.handleDirOnChange}/>
                         </Box>
                         <Box sx={{
                             width: this.props.width,
