@@ -91,7 +91,7 @@ class ControlPanel extends Component {
                         </Typography>
                     </Box>
                     <Button onClick={e => {
-                        history.push("/create_post/" + this.props.cur_course.course_id);
+                        history.push("/create_post/" + state_course.getCurCourse().course_id);
                     }
                         // (window.location.href = "/create_post/" + this.props.cur_course.course_id)
                     }
@@ -144,33 +144,9 @@ class ControlPanel extends Component {
                         邀请成员
                     </Button>
                 </MemberWidContain>
-                {/*down*/}
-                {/*<div>*/}
-                {/*    <div>*/}
-                {/*        <div className={*/}
-                {/*            cp.item_pad}>成员*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
         );
     }
 }
 
-
-const mapStateToProps = (state, props) => {
-    return {
-        cur_course: state.course.cur_course,
-    }
-}
-
-const mapDispatchToProps = {
-    updateCurCourse: (course) => {
-        return {
-            type: "updateCurCourse",
-            cur_course: course
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel);
+export default ControlPanel;
