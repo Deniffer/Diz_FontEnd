@@ -6,7 +6,6 @@ import {Avatar, Box, Typography} from "@mui/joy";
 import {curstyle} from "@/theme/curtheme";
 import {SetBar} from "@/layouts/control_panel/childs/setbar";
 import styled from "styled-components";
-import {connect} from "react-redux";
 
 import React, {Component} from 'react';
 import {PaStateMan} from "@/utills/pa_state_man";

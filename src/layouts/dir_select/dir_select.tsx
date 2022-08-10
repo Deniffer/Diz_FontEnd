@@ -29,7 +29,7 @@ class DirSelect extends Component {
                             )
                         }) : null
                     }
-                    <Button>
+                    <Button color={"success"} variant={"soft"}>
                         +
                     </Button>
                 </Box>

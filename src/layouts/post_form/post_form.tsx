@@ -3,7 +3,7 @@ import {Box, List, RadioGroup, Sheet, TextField, Typography} from "@mui/joy";
 import $course_id_styles from "@/pages/create_post/$course_id.less";
 import reuse from "@/assets/reuseable.less";
 import Radio from '@mui/joy/Radio';
-import BraftEditor from 'braft-editor';
+import BraftEditor, {EditorState} from 'braft-editor';
 import 'braft-editor/dist/index.css'
 import DirSelect from "@/layouts/dir_select/dir_select";
 
@@ -13,10 +13,13 @@ class PostForm extends Component {
         new_post: {
             type: "post",
             course_id: 0,
+            content: "",
+            title: "",
+            directory_ids: [],
         },
     }
 
-    handleEditorChange = (editorState) => {
+    handleEditorChange = (editorState: EditorState) => {
         let new_post = this.state.new_post
         new_post.content = editorState.toHTML()
         this.setState({
@@ -24,7 +27,7 @@ class PostForm extends Component {
         })
     }
 
-    handleTypeOnChange = (e) => {
+    handleTypeOnChange = (e: any) => {
         let new_post = this.state.new_post
         new_post.type = e.target.value
         this.setState({
@@ -32,7 +35,7 @@ class PostForm extends Component {
         })
     }
 
-    handleTitleOnChange = (e) => {
+    handleTitleOnChange = (e: any) => {
         let new_post = this.state.new_post
         new_post.title = e.target.value
         this.setState({
@@ -40,7 +43,7 @@ class PostForm extends Component {
         })
     }
 
-    arr_remove(arr, e) {
+    arr_remove(arr: [], e: Number) {
         if (!arr) {
             return arr
         }
@@ -53,7 +56,7 @@ class PostForm extends Component {
         return new_arr
     }
 
-    handleDirOnChange = (e) => {
+    handleDirOnChange = (e: any) => {
         let dir_ids = this.state.new_post.directory_ids
         if (e.clicked) {
             if (dir_ids) {
