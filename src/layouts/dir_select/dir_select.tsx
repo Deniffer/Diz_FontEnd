@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Box, Button, Typography} from "@mui/joy";
+import DirectoryButton from "@/layouts/dir_select/directory_button";
 
 class DirSelect extends Component {
     render() {
@@ -18,11 +19,13 @@ class DirSelect extends Component {
                 }}>
                     {
                         dirs ? dirs.map(dir => {
-                            return <Button sx={{
-                                "borderRadius": "4px",
-                            }} variant="soft" color="neutral" key={dir.directory_id}>
-                                {dir.name}
-                            </Button>
+                            let clicked = false
+                            return (
+                                <Box key={dir.directory_id}>
+                                    <DirectoryButton name={dir.name} clicked={clicked}>
+                                    </DirectoryButton>
+                                </Box>
+                            )
                         }) : null
                     }
                     <Button>
