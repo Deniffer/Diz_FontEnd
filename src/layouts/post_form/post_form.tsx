@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {Box, List, RadioGroup, TextField} from "@mui/joy";
+import {Box, List, RadioGroup, Sheet, TextField, Typography} from "@mui/joy";
 import $course_id_styles from "@/pages/create_post/$course_id.less";
 import reuse from "@/assets/reuseable.less";
 import post_form_styles from "./post_form.less"
 import {curstyle} from "@/theme/curtheme";
 import Radio from '@mui/joy/Radio';
+import BraftEditor from 'braft-editor';
+import 'braft-editor/dist/index.css'
 
 
 class PostForm extends Component {
@@ -21,7 +23,7 @@ class PostForm extends Component {
                 <Box className={reuse.row_flex2side_container}
                      sx={{
                          marginTop: "40px",
-                         marginLeft: "50px",
+                         marginLeft: "20px",
                      }}
                 >
                     <RadioGroup
@@ -39,15 +41,35 @@ class PostForm extends Component {
 
                 <Box sx={{
                     width: '100%',
-                    marginTop: "60px",
-                    height: "720px"
+                    marginTop: "55px",
+                    height: "720px",
                 }}>
-                    <TextField size="lg" placeholder="请输入标题" variant="plain"/>
-                    {/*<Box sx={{*/}
-                    {/*    height: "100%"*/}
-                    {/*}}>*/}
-                    {/*    <MDEditor height={200} value={"value"}/>*/}
-                    {/*</Box>*/}
+                    <TextField sx={{}} size="lg" placeholder="请输入标题" variant="plain"/>
+                    <Box sx={{
+                        marginTop: "20px"
+                    }}>
+                        <div className="editor-wrapper">
+                            <BraftEditor
+                                // value={editorState}
+                                // onChange={this.handleChange}
+                                placeholder="请输入正文..."
+                                contentStyle={{height: 110}}
+                            />
+                        </div>
+                    </Box>
+                    <Box sx={{
+                        width: this.props.width,
+                        marginTop: "40px"
+                    }}>
+                        <Box sx={{
+                            width: this.props.width,
+                        }}
+                             className={$course_id_styles.gray_outline}>
+                        </Box>
+                        <Typography>
+                            请选择帖子分组
+                        </Typography>
+                    </Box>
                 </Box>
             </React.Fragment>
         )
