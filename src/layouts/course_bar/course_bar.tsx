@@ -62,11 +62,4 @@ class CourseBar extends Component {
     }
 }
 
-const mapStateToProps = (state: GlobalStoreState,
-                         props: any) => {
-    return {
-        cur_course: state.course.cur_course,
-    }
-}
-
-export default connect(mapStateToProps)(CourseBar);
+export default CourseBar;

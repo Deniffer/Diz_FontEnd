@@ -1,34 +1,13 @@
-import React, {Component, PureComponent} from 'react';
+import React, {Component} from 'react';
 import {Box} from "@mui/joy";
-import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import {curstyle} from "@/theme/curtheme";
-import {connect} from "react-redux";
-import {baseUrl, Course, CourseListState} from "@/store/course_list";
-import {GlobalStoreState} from "@/store/store";
-import {attch_prop2fakecomp} from "@/utills/computils";
-import {PaState, PaStateMan} from "@/utills/pa_state_man";
+import {Course} from "@/store/course_list";
+import {PaStateMan} from "@/utills/pa_state_man";
 
 class CourseList extends Component {
     state = {
         rendercnt: 0
-    }
-
-    shouldComponentUpdate(nextProps: Readonly<{}>, nextState: Readonly<{}>, nextContext: any): boolean {
-        const newc = new CourseList(nextProps);
-        const oldlist = this.reduxv_course_list();
-        const newlist = newc.reduxv_course_list();
-        if (newc.reduxv_course_list().length != oldlist.length) {
-            return true;
-        }
-        for (let i = 0; i < oldlist.length; i++) {
-            if (oldlist[i].course_id != newlist[i].course_id ||
-                oldlist[i].name != newlist[i].name
-            ) {
-                return true;
-            }
-        }
-        return false;
     }
 
     //life
@@ -124,59 +103,7 @@ class CourseList extends Component {
             return
         }
         PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(course)
-        // axios.post(baseUrl + "/get_course_detail?mock_login=123", {
-        //     "course_id": course.course_id
-        // }).then(res => {
-        //     const cur_course = res.data.course
-        //     this.reduxf_updateCurCourse(cur_course)
-        // })
-    }
-
-
-    reduxv_cur_course(): Course {
-        // @ts-ignore
-        return this.props.cur_course;
-    }
-
-    reduxv_course_list(): Course[] {
-        // @ts-ignore
-        return this.props.course_list;
-    }
-
-    reduxf_updateCurCourse(to: Course) {
-        // @ts-ignore
-        this.props.updateCurCourse(to)
-    }
-
-    reduxf_updateCourseList(course_list: Course[]) {
-        // @ts-ignore
-        this.props.updateCourseList(course_list);
     }
 }
 
-namespace ReduxBind {
-    //输出值通过connect绑定到CourseList组件上
-    export const mapStateToProps = (state: GlobalStoreState,
-                                    props: any) => {
-        return {
-            cur_course: state.course.cur_course,
-            course_list: state.course.course_list
-        }
-    }
-    export const mapDispatchToProps = {
-        updateCourseList: (course_list: Course[]) => {
-            return {
-                type: "updateCourseList",
-                course_list: course_list
-            }
-        },
-        updateCurCourse: (course: Course) => {
-            return {
-                type: "updateCurCourse",
-                cur_course: course
-            }
-        }
-    }
-}
-
-export default connect(ReduxBind.mapStateToProps, ReduxBind.mapDispatchToProps)(CourseList);
+export default CourseList;
