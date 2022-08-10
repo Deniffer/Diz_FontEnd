@@ -10,9 +10,13 @@ import {Course} from "@/store/course_list";
 import CourseBar from "@/layouts/course_bar/course_bar";
 import {curstyle} from "@/theme/curtheme";
 import reuse from "@/assets/reuseable.less"
+import {PaStateMan} from "@/utills/pa_state_man";
+import PostForm from "@/layouts/post_form/post_form";
 
 class $CourseId extends Component {
+
     render() {
+        const main_container_width = "866px"
         return (
             <Provider store={store}>
                 {/* nav bar */}
@@ -25,51 +29,13 @@ class $CourseId extends Component {
                 </Box>
                 <Box
                     sx={{
-                        width:"800px",
-                        margin:"auto",
+                        width: main_container_width,
+                        margin: "20px auto",
                     }}>
-                    <Box
-                        className={reuse.row_flex2side_container}
-                        sx={{
-                            alignItems:"center"
-                        }}>
-                        <Box className={reuse.row_flex2side_container}
-                             sx={{
-                                 alignItems:"center",
-                                 gap:curstyle().gap.common
-                             }}
-                        >
-                            <Box onClick={() => window.history.back()}
-                                 sx={{
-                                     cursor:"pointer"
-                                     // left: "328px",
-                                     // top: "26px"
-                                 }}>
-                                <Arrow/>
-                            </Box>
-                            {/*<Box sx={{*/}
+                    <CourseBar width={main_container_width}/>
 
-                            {/*}}>*/}
-                            <CourseBar/>
-                            {/*</Box>*/}
-                        </Box>
-                        <Button variant="solid" color="primary"
-                                sx={{
-                                    background:curstyle().colors.main_s
-                                }}
-                        >
-                            发布
-                        </Button>
-
-                        {/*<Box sx={{*/}
-                        {/*    top: "137px"*/}
-                        {/*}}*/}
-                        {/*     className={$course_id_styles.gray_outline*/}
-                        {/*     }>*/}
-                        {/*</Box>*/}
-                    </Box>
+                    <PostForm width={main_container_width}/>
                 </Box>
-
             </Provider>
         );
     }
