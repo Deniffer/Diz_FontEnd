@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {Box, List, RadioGroup, Sheet, TextField, Typography} from "@mui/joy";
 import $course_id_styles from "@/pages/create_post/$course_id.less";
 import reuse from "@/assets/reuseable.less";
-import post_form_styles from "./post_form.less"
-import {curstyle} from "@/theme/curtheme";
 import Radio from '@mui/joy/Radio';
 import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/index.css'
@@ -12,6 +10,7 @@ import DirSelect from "@/layouts/dir_select/dir_select";
 
 class PostForm extends Component {
     render() {
+        const marginLeft = "20px"
         return (
             <React.Fragment>
                 <Box sx={{
@@ -24,7 +23,7 @@ class PostForm extends Component {
                 <Box className={reuse.row_flex2side_container}
                      sx={{
                          marginTop: "40px",
-                         marginLeft: "20px",
+                         marginLeft: marginLeft,
                      }}
                 >
                     <RadioGroup
@@ -60,14 +59,25 @@ class PostForm extends Component {
                     </Box>
                     <Box sx={{
                         width: this.props.width,
-                        marginTop: "40px"
+                        marginTop: "40px",
                     }}>
                         <Box sx={{
                             width: this.props.width,
                         }}
                              className={$course_id_styles.gray_outline}>
                         </Box>
-                        <DirSelect/>
+                        <Box sx={{
+                            marginLeft: marginLeft,
+                            paddingTop: "25px",
+                            marginBottom: "25px",
+                        }}>
+                            <DirSelect cur_course={this.props.cur_course}/>
+                        </Box>
+                        <Box sx={{
+                            width: this.props.width,
+                        }}
+                             className={$course_id_styles.gray_outline}>
+                        </Box>
                     </Box>
                 </Box>
             </React.Fragment>

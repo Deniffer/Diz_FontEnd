@@ -1,17 +1,33 @@
 import React, {Component} from 'react';
-import {Box, Typography} from "@mui/joy";
-import {PaStateMan} from "@/utills/pa_state_man";
+import {Box, Button, Typography} from "@mui/joy";
 
 class DirSelect extends Component {
     render() {
-
+        const dirs = this.props.cur_course.directories
+        console.log(dirs)
         return (
             <React.Fragment>
                 <Typography>
                     请选择帖子分组
                 </Typography>
-                <Box>
-
+                <Box sx={{
+                    marginTop: "15px",
+                    display: "flex",
+                    direction: "row",
+                    gap: 1,
+                }}>
+                    {
+                        dirs ? dirs.map(dir => {
+                            return <Button sx={{
+                                "borderRadius": "4px",
+                            }} variant="soft" color="neutral" key={dir.directory_id}>
+                                {dir.name}
+                            </Button>
+                        }) : null
+                    }
+                    <Button>
+                        +
+                    </Button>
                 </Box>
             </React.Fragment>
         );

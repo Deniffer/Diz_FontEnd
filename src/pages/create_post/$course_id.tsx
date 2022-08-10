@@ -6,14 +6,29 @@ import {GlobalStoreState, store} from "@/store/store";
 import {connect, Provider} from "react-redux";
 import $course_id_styles from "./$course_id.less";
 import Arrow from "@/layouts/reuseable_comps/arrow";
-import {Course} from "@/store/course_list";
+import {baseUrl, Course} from "@/store/course_list";
 import CourseBar from "@/layouts/course_bar/course_bar";
 import {curstyle} from "@/theme/curtheme";
 import reuse from "@/assets/reuseable.less"
 import {PaStateMan} from "@/utills/pa_state_man";
 import PostForm from "@/layouts/post_form/post_form";
+import axios from "axios";
 
 class $CourseId extends Component {
+    state = {
+        cur_course: {},
+    }
+
+    componentDidMount() {
+        let course_id = window.location.pathname.replace("/create_post/", "")
+        axios.post(baseUrl + "/get_course_detail?mock_login=123", {
+            "course_id": Number(course_id)
+        }).then(res => {
+            this.setState({
+                cur_course: res.data.course
+            })
+        })
+    }
 
     render() {
         const main_container_width = "866px"
@@ -32,9 +47,8 @@ class $CourseId extends Component {
                         width: main_container_width,
                         margin: "20px auto",
                     }}>
-                    <CourseBar width={main_container_width}/>
-
-                    <PostForm width={main_container_width}/>
+                    <CourseBar cur_course={this.state.cur_course} width={main_container_width}/>
+                    <PostForm cur_course={this.state.cur_course} width={main_container_width}/>
                 </Box>
             </Provider>
         );

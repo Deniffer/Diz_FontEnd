@@ -11,7 +11,6 @@ import cp from "@/layouts/control_panel/control_panel.less";
 
 class CourseBar extends Component {
     render() {
-        const curcourse = PaStateMan.getstate().courseProxy().getCurCourse()
         return (
             <React.Fragment>
                 <Box
@@ -39,7 +38,7 @@ class CourseBar extends Component {
                                 fill="#F22D74"/>
                         </svg>
                         <Typography className={cp.listitem} level="h6">
-                            {curcourse.name}
+                            {this.props.cur_course.name}
                         </Typography>
                     </Box>
                     <Button variant="solid" color="primary"

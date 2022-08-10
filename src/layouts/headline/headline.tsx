@@ -36,7 +36,6 @@ export default class Headline extends Component {
                         </svg>
                     </div>
                 </Box>
-                {/*<div className={headline.title}>localpiazza</div>*/}
                 <div>user</div>
             </div>
         );
