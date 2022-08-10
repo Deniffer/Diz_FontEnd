@@ -7,6 +7,7 @@ import {curstyle} from "@/theme/curtheme";
 import Radio from '@mui/joy/Radio';
 import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/index.css'
+import DirSelect from "@/layouts/dir_select/dir_select";
 
 
 class PostForm extends Component {
@@ -66,9 +67,7 @@ class PostForm extends Component {
                         }}
                              className={$course_id_styles.gray_outline}>
                         </Box>
-                        <Typography>
-                            请选择帖子分组
-                        </Typography>
+                        <DirSelect/>
                     </Box>
                 </Box>
             </React.Fragment>
