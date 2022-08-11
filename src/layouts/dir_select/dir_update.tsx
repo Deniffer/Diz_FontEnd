@@ -3,6 +3,8 @@ import {Box, Button, List} from "@mui/joy";
 import {Modal} from "antd";
 import DirAdd from "@/layouts/dir_select/dir_add";
 import DirBtnEdit from "@/layouts/dir_select/dir_btn_edit";
+import axios from "axios";
+import {baseUrl} from "@/store/course_list";
 
 class DirUpdate extends Component {
     state = {
@@ -11,6 +13,37 @@ class DirUpdate extends Component {
     handleOnClick = () => {
         this.setState({
             dialogVisible: true
+        })
+    }
+
+    handleSubmit(dirs) {
+        for (let i = 0; i < dirs.length; i++) {
+            const name = this.refs["dir_" + dirs[i].directory_id].state.name
+            if (name !== dirs[i].name) {
+                console.log("todo: change", dirs[i].name, "to", name)
+            }
+        }
+        const new_dirs = this.refs["new_dirs"].state.new_dirs
+        for (let i = 0; i < new_dirs.length; i++) {
+            if (!new_dirs[i].name) {
+                alert("课程分组名字不能为空")
+                return
+            } else {
+                new_dirs[i].course_id = this.props.course_id
+            }
+        }
+        console.log(new_dirs)
+        axios.post(baseUrl + "/course/directories?mock_login=123", {
+            directories: new_dirs
+        }).then(res => {
+            if (res.data.meta.code != 0) {
+                alert(res.data.meta.msg)
+                return
+            }
+            this.props.fetchCurCourse()
+            this.setState({
+                dialogVisible: false
+            })
         })
     }
 
@@ -28,7 +61,9 @@ class DirUpdate extends Component {
                            })
                        }}
                        footer={[
-                           <Button>
+                           <Button onClick={() => {
+                               this.handleSubmit(dirs)
+                           }}>
                                保存
                            </Button>
                        ]}
@@ -37,16 +72,18 @@ class DirUpdate extends Component {
                         display: "flex",
                         flexDirection: "row",
                         gap: this.props.gap,
+                        flexWrap: "wrap",
                     }}>
                         {
                             dirs.map(dir => {
+                                let dir_id = dir.directory_id
                                 return (
-                                    <DirBtnEdit dir={dir} key={dir.directory_id}>
+                                    <DirBtnEdit ref={"dir_" + dir_id} dir={dir} key={dir_id}>
                                     </DirBtnEdit>
                                 )
                             })
                         }
-                        <DirAdd/>
+                        <DirAdd ref={"new_dirs"}/>
                     </Box>
                 </Modal>
             </React.Fragment>

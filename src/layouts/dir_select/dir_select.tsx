@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {Box, Button, Typography} from "@mui/joy";
+import {Box, Typography} from "@mui/joy";
 import DirectoryButton from "@/layouts/dir_select/directory_button";
 import 'antd/dist/antd.css';
 import DirUpdate from "@/layouts/dir_select/dir_update";
-import DirList from "@/layouts/dir_select/dir_list";
 
 class DirSelect extends Component {
     render() {
-        const dirs = this.props.cur_course.directories
+        let dirs = this.props.cur_course.directories
+        dirs = dirs ? dirs : []
         const gap = 1
         return (
             <React.Fragment>
@@ -32,7 +32,7 @@ class DirSelect extends Component {
                             )
                         }) : null
                     }
-                    <DirUpdate gap={gap} dirs={dirs}>
+                    <DirUpdate fetchCurCourse={this.props.fetchCurCourse} course_id={this.props.cur_course.course_id} gap={gap} dirs={dirs}>
                     </DirUpdate>
                 </Box>
             </React.Fragment>

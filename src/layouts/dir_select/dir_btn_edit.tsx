@@ -3,7 +3,15 @@ import {Box, Button, TextField} from "@mui/joy";
 
 class DirBtnEdit extends Component {
     state = {
-        clicked: false
+        clicked: false,
+        name: this.props.dir.name
+    }
+
+
+    handleOnChange(e) {
+        this.setState({
+            name: e.target.value
+        })
     }
 
     render() {
@@ -26,7 +34,10 @@ class DirBtnEdit extends Component {
                     <TextField sx={{
                         display: this.state.clicked ? "" : "none",
                         width: "100px"
-                    }} size="sm" defaultValue={this.props.dir.name}>
+                    }} size="sm" defaultValue={this.props.dir.name}
+                               onChange={(e) => {
+                                   this.handleOnChange(e)
+                               }}>
                     </TextField>
                 </Box>
             </React.Fragment>

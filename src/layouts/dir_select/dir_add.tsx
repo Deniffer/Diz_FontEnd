@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Box, Button, Chip, ChipDelete, TextField, Typography} from "@mui/joy";
+import {Box, Button, Chip, TextField} from "@mui/joy";
 
 class DirAdd extends Component {
     state = {
@@ -10,7 +10,7 @@ class DirAdd extends Component {
         let new_dirs = this.state.new_dirs
         new_dirs.push({
             idx: this.state.new_dirs.length,
-            name: "haha"
+            name: ""
         })
         this.setState({
             new_dirs: this.state.new_dirs
@@ -29,6 +29,18 @@ class DirAdd extends Component {
         })
     }
 
+    handleDirNameOnChange = (value, idx) => {
+        let dirs = this.state.new_dirs
+        for (let i = 0; i < dirs.length; i++) {
+            if (dirs[i].idx === idx) {
+                dirs[i].name = value
+            }
+        }
+        this.setState({
+            new_dirs: dirs
+        })
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -37,6 +49,9 @@ class DirAdd extends Component {
                         return (
                             <Box sx={{width: "120px"}}>
                                 <TextField size="sm" key={new_dir.idx} placeholder={"课程资料"}
+                                           onChange={(e) => {
+                                               this.handleDirNameOnChange(e.target.value, new_dir.idx)
+                                           }}
                                            endDecorator={
                                                <Chip sx={{
                                                    cursor: "pointer"
@@ -51,7 +66,7 @@ class DirAdd extends Component {
                         )
                     })
                 }
-                <Button sx={{}} onClick={this.handleOnClick} color={"success"} variant={"soft"}>
+                <Button onClick={this.handleOnClick} color={"success"} variant={"soft"}>
                     +
                 </Button>
             </React.Fragment>

@@ -18,6 +18,10 @@ class $CourseId extends Component {
     }
 
     componentDidMount() {
+        this.fetchCurCourse()
+    }
+
+    fetchCurCourse = () => {
         let course_id = this.state.course_id
         axios.post(baseUrl + "/get_course_detail?mock_login=123", {
             "course_id": course_id
@@ -57,7 +61,8 @@ class $CourseId extends Component {
                     }}>
                     <CourseBar handlePublishPostClick={this.handlePublishPostClick} cur_course={this.state.cur_course}
                                width={main_container_width}/>
-                    <PostForm ref='post_form' cur_course={this.state.cur_course} width={main_container_width}/>
+                    <PostForm fetchCurCourse={this.fetchCurCourse} ref='post_form' cur_course={this.state.cur_course}
+                              width={main_container_width}/>
                 </Box>
             </Provider>
 
