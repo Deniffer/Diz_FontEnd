@@ -17,12 +17,18 @@ class DirUpdate extends Component {
     }
 
     handleSubmit(dirs) {
+        // 修改课程分组的名字
         for (let i = 0; i < dirs.length; i++) {
             const name = this.refs["dir_" + dirs[i].directory_id].state.name
             if (name !== dirs[i].name) {
                 console.log("todo: change", dirs[i].name, "to", name)
+                this.refs["dir_" + dirs[i].directory_id].setState({
+                    name: name,
+                    clicked: false
+                })
             }
         }
+        // 创建新的课程分组
         const new_dirs = this.refs["new_dirs"].state.new_dirs
         for (let i = 0; i < new_dirs.length; i++) {
             if (!new_dirs[i].name) {
@@ -32,6 +38,7 @@ class DirUpdate extends Component {
                 new_dirs[i].course_id = this.props.course_id
             }
         }
+
         console.log(new_dirs)
         axios.post(baseUrl + "/course/directories?mock_login=123", {
             directories: new_dirs
@@ -43,6 +50,9 @@ class DirUpdate extends Component {
             this.props.fetchCurCourse()
             this.setState({
                 dialogVisible: false
+            })
+            this.refs["new_dirs"].setState({
+                new_dirs: []
             })
         })
     }
