@@ -21,7 +21,6 @@ class DirectoryButton extends Component {
                             clicked: new_clicked
                         })
                     }}
-
             >
                 {this.props.name}
             </Button>

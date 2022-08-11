@@ -54,14 +54,9 @@ class ControlPanel extends Component {
                 {/*up*/}
                 <Box
                     sx={{
-
                         display: 'flex',
                         flexDirection: 'column',
-
                         height: "100%"
-                        // gap: curstyle().gap.common,
-                        // alignItems: 'center',
-                        // justifyContent: 'space-between',
                     }}
                 >
                     <Box

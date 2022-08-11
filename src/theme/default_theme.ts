@@ -60,7 +60,6 @@ export function get_default_theme(){
         colorSchemes: {
             light: {
                 palette: {
-
                     primary:{
                         solidBg: curstyle().colors.main_s,
                         solidHoverBg: curstyle().colors.main_sx,
@@ -94,7 +93,6 @@ export function get_default_theme(){
                 styleOverrides: {
                     root: ({ ownerState }) => ({
                         borderRadius: curstyle().radius.common,
-                        // fontWeight:curstyle().fontweight.common,
                         boxShadow: '0 1px 0 0 rgba(27, 31, 35, 0.04)',
                         transition: '80ms cubic-bezier(0.33, 1, 0.68, 1)',
                         transitionProperty: 'color,background-color,box-shadow,border-color',
