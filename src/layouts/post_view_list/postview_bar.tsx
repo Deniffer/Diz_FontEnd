@@ -7,8 +7,6 @@ import {Component, Fragment} from "react";
 import {Tag} from "@/layouts/reuseable_comps/tag";
 import reuse from '@/assets/reuseable.less'
 import {PaStateMan} from "@/utills/pa_state_man";
-// import reuse from '@/assets/reuseable.less'
-// import Icon from 'supercons'
 const TagWrap=styled.div`
     margin-right: ${curstyle().gap.common};  
 `;
@@ -29,10 +27,6 @@ export class PostViewBar extends Component{
     rendercnt=0
     render() {
         this.rendercnt++;
-        //background: ${props => props.primary ? "palevioletred" : "white"};
-        //color: ${props => props.primary ? "white" : "palevioletred"};
-
-
         const tags=[];
         for(let i=0;i<8;i++){
             tags.push(

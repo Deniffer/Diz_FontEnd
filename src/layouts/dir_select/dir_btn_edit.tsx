@@ -7,7 +7,6 @@ class DirBtnEdit extends Component {
         name: this.props.dir.name
     }
 
-
     handleOnChange(e) {
         this.setState({
             name: e.target.value

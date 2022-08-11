@@ -32,7 +32,10 @@ class DirSelect extends Component {
                             )
                         }) : null
                     }
-                    <DirUpdate fetchCurCourse={this.props.fetchCurCourse} course_id={this.props.cur_course.course_id} gap={gap} dirs={dirs}>
+                    <DirUpdate fetchCurCourse={this.props.fetchCurCourse}
+                               course_id={this.props.cur_course.course_id}
+                               gap={gap}
+                               dirs={dirs}>
                     </DirUpdate>
                 </Box>
             </React.Fragment>

@@ -140,7 +140,10 @@ class PostForm extends Component {
                             paddingTop: "25px",
                             marginBottom: "25px",
                         }}>
-                            <DirSelect fetchCurCourse={this.props.fetchCurCourse} cur_course={this.props.cur_course} handleDirOnChange={this.handleDirOnChange}/>
+                            <DirSelect
+                                fetchCurCourse={this.props.fetchCurCourse}
+                                cur_course={this.props.cur_course}
+                                handleDirOnChange={this.handleDirOnChange}/>
                         </Box>
                         <Box sx={{
                             width: this.props.width,

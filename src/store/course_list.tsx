@@ -12,7 +12,7 @@ export class Course {
 
     static pre() {
         return new Course(31,
-            "操作系统",
+            "啥也不是",
             "")
     }
 }

@@ -29,25 +29,17 @@ export class SetBar extends PureComponent{
     constructor(props:any) {
         super(props)
     }
-    //background: ${props => props.primary ? "palevioletred" : "white"};
-    //color: ${props => props.primary ? "white" : "palevioletred"};
-    // props={
-    //     children:[]
-    // }
     rendercnt=0;
     render(){
         this.rendercnt++;
-        // (prop:{children:any})
         return (
             <Button className={
                 reuse.trans_color_common+" "
                 +reuse.row_flex2side_container
             }>
-                {this.rendercnt}
                 {this.props.children}
                 <Icon glyph="more" size={23}/>
             </Button>
         )
     }
-
 }

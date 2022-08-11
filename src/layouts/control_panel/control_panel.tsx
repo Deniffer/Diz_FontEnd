@@ -13,7 +13,6 @@ import {history} from 'umi';
 
 //底部成员组件
 const MemberWidContain = styled.div`
-  //cursor: pointer;
   margin: ${curstyle().gap.common};
   padding-bottom: ${curstyle().gap.m};
   padding-left: ${curstyle().gap.common};
@@ -22,7 +21,7 @@ const MemberWidContain = styled.div`
 class ControlPanel extends Component {
     state = {}
 
-//life
+    //life
     componentDidMount() {
         PaStateMan.regist_comp(this, (registval, state) => {
             registval(state.course_cur);
@@ -35,23 +34,14 @@ class ControlPanel extends Component {
 
     render() {
         const state_course = PaStateMan.getstate().courseProxy()
-
-        const arr = []
-        for (let i = 0; i < 5; i++) {
-            arr.push((<SetBar key={i}>
-                hello
-            </SetBar>))
-        }
-
         // @ts-ignore
         const dirs = state_course.getCurCourse().directories
         // @ts-ignore
         const members = state_course.getCurCourse().members
         return (
             <div className={reuse.col_flex2side_container + " "
-                + cp.cpcont
+            + cp.cpcont
             }>
-                {/*up*/}
                 <Box
                     sx={{
                         display: 'flex',
@@ -62,7 +52,6 @@ class ControlPanel extends Component {
                     <Box
                         sx={{
                             padding: curstyle().gap.common,
-                            // paddingRight:curstyle().gap.common,
                             marginLeft: curstyle().gap.common,
                             marginRight: curstyle().gap.common,
                             marginBottom: curstyle().gap.common,
@@ -99,7 +88,6 @@ class ControlPanel extends Component {
                             variant="solid" color="primary">
                         + 新建帖子
                     </Button>
-                    {/*{arr}*/}
                     {
                         dirs ? dirs.map((dir) => {
                             return (
