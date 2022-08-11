@@ -5,6 +5,7 @@ import React, {Component, Fragment} from "react";
 import {PaStateMan} from "@/utills/pa_state_man";
 import axios from "axios";
 import {baseUrl} from "@/store/course_list";
+import {PostViewBar} from "@/layouts/post_view_list/postview_bar";
 
 const PostViewBarWrap = styled.div`
   border-bottom: 1px solid ${curstyle().colors.gray_d};
@@ -21,18 +22,24 @@ class PostViewList extends Component {
     state = {
         posts: [],
         limit: 20,
+        course_id: PaStateMan.getstate().courseProxy().getCurCourse().course_id
     }
 
     //life
     componentDidMount() {
+        PaStateMan.regist_comp(this, (registval, state) => {
+            registval(state.course_cur);
+        })
         this.fetchPosts()
     }
 
+    componentWillUnmount() {
+        PaStateMan.unregist_comp(this)
+    }
+
     fetchPosts = () => {
-        let course_id = PaStateMan.getstate().courseProxy().getCurCourse().course_id
-        console.log("this.state.cur_course.course_id",course_id)
         axios.post(baseUrl + "/get_posts?mock_login=123", {
-            course_id: course_id,
+            course_id: PaStateMan.getstate().courseProxy().getCurCourse().course_id,
             limit: 20
         }).then(res => {
             console.log(res.data)
@@ -42,24 +49,25 @@ class PostViewList extends Component {
         })
     }
 
-    componentWillUnmount() {
-        PaStateMan.unregist_comp(this)
-    }
-
-
     render() {
+        const course_id = PaStateMan.getstate().courseProxy().getCurCourse().course_id
+        if (course_id !== this.state.course_id) {
+            this.setState({
+                course_id: course_id
+            })
+            this.fetchPosts()
+        }
         return (
             <Fragment>
                 <Wrap>
                     <Space/>
-                    {PaStateMan.getstate().courseProxy().getCurCourse().course_id}
                     {
                         this.state.posts.map(post => {
                             return (
                                 <PostViewBarWrap
                                     key={post.post_id}
                                 >
-                                    {post.title}
+                                    <PostViewBar key={post.post_id} post={post}/>
                                 </PostViewBarWrap>
                             )
                         })

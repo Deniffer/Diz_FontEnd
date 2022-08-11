@@ -7,28 +7,32 @@ import {Component, Fragment} from "react";
 import {Tag} from "@/layouts/reuseable_comps/tag";
 import reuse from '@/assets/reuseable.less'
 import {PaStateMan} from "@/utills/pa_state_man";
-const TagWrap=styled.div`
-    margin-right: ${curstyle().gap.common};  
+
+const TagWrap = styled.div`
+  margin-right: ${curstyle().gap.common};
 `;
 
-export class PostViewBar extends Component{
+export class PostViewBar extends Component {
     componentDidMount() {
-        PaStateMan.regist_comp(this,(registval,state)=>{
+        PaStateMan.regist_comp(this, (registval, state) => {
             registval(state.cnt);
         })
     }
+
     componentWillUnmount() {
         PaStateMan.unregist_comp(this)
-        // PaStateMan
     }
+
     shouldComponentUpdate(nextProps: Readonly<{}>, nextState: Readonly<{}>, nextContext: any): boolean {
-            return false;
+        return false;
     }
-    rendercnt=0
+
+    rendercnt = 0
+
     render() {
         this.rendercnt++;
-        const tags=[];
-        for(let i=0;i<8;i++){
+        const tags = [];
+        for (let i = 0; i < 8; i++) {
             tags.push(
                 <TagWrap key={i}>
                     <Tag>
@@ -41,24 +45,24 @@ export class PostViewBar extends Component{
             <Fragment>
                 <Typography className={cp.listitem} level="h5"
                             sx={{
-                                fontWeight:curstyle().fontweight.bold,
-                                paddingBottom:curstyle().gap.common,
-                                paddingTop:curstyle().gap.common
+                                fontWeight: curstyle().fontweight.bold,
+                                paddingBottom: curstyle().gap.common,
+                                paddingTop: curstyle().gap.common
                             }}
-                            onClick={()=>{
+                            onClick={() => {
                                 PaStateMan.getstate().addcnt();
                             }}
                 >
-                    帖子{PaStateMan.getstate().cnt} {this.rendercnt}
+                    {this.props.post.title}
                 </Typography>
                 <Box>
-                    jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala jiliguala
+                    {this.props.post.content}
                 </Box>
                 <Box
                     className={reuse.row_flex2side_container}
                     sx={{
-                        paddingBottom:curstyle().gap.xl,
-                        paddingTop:curstyle().gap.common
+                        paddingBottom: curstyle().gap.xl,
+                        paddingTop: curstyle().gap.common
                     }}
                 >
                     <Box
