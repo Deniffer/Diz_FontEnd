@@ -6,6 +6,8 @@ import {PaStateMan} from "@/utills/pa_state_man";
 import axios from "axios";
 import {baseUrl} from "@/store/course_list";
 import {PostViewBar} from "@/layouts/post_view_list/postview_bar";
+import {Box} from "@mui/joy";
+import {history} from "umi";
 
 const PostViewBarWrap = styled.div`
   border-bottom: 1px solid ${curstyle().colors.gray_d};
@@ -64,11 +66,13 @@ class PostViewList extends Component {
                     {
                         this.state.posts.map(post => {
                             return (
-                                <PostViewBarWrap
-                                    key={post.post_id}
-                                >
-                                    <PostViewBar key={post.post_id} post={post}/>
-                                </PostViewBarWrap>
+                                <Box>
+                                    <PostViewBarWrap
+                                        key={post.post_id}
+                                    >
+                                        <PostViewBar course_id={course_id} key={post.post_id} post={post}/>
+                                    </PostViewBarWrap>
+                                </Box>
                             )
                         })
                     }

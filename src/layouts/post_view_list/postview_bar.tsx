@@ -7,6 +7,7 @@ import {Component, Fragment} from "react";
 import {Tag} from "@/layouts/reuseable_comps/tag";
 import reuse from '@/assets/reuseable.less'
 import {PaStateMan} from "@/utills/pa_state_man";
+import {history} from "@@/core/history";
 
 const TagWrap = styled.div`
   margin-right: ${curstyle().gap.common};
@@ -43,20 +44,24 @@ export class PostViewBar extends Component {
         }
         return (
             <Fragment>
-                <Typography className={cp.listitem} level="h5"
-                            sx={{
-                                fontWeight: curstyle().fontweight.bold,
-                                paddingBottom: curstyle().gap.common,
-                                paddingTop: curstyle().gap.common
-                            }}
-                            onClick={() => {
-                                PaStateMan.getstate().addcnt();
-                            }}
-                >
-                    {this.props.post.title}
-                </Typography>
-                <Box>
-                    {this.props.post.content}
+                <Box onClick={() => {
+                    history.push("/post?post_id=" + this.props.post.post_id + "&course_id=" + this.props.course_id)
+                }} sx={{
+                    cursor: "pointer"
+                }}>
+                    <Typography className={cp.listitem} level="h5"
+                                sx={{
+                                    fontWeight: curstyle().fontweight.bold,
+                                    paddingBottom: curstyle().gap.common,
+                                    paddingTop: curstyle().gap.common,
+
+                                }}
+                    >
+                        {this.props.post.title}
+                    </Typography>
+                    <Box>
+                        {this.props.post.content}
+                    </Box>
                 </Box>
                 <Box
                     className={reuse.row_flex2side_container}
