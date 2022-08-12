@@ -8,12 +8,16 @@ import {Tag} from "@/layouts/reuseable_comps/tag";
 import reuse from '@/assets/reuseable.less'
 import {PaStateMan} from "@/utills/pa_state_man";
 import {history} from "@@/core/history";
+import {Post} from "@/store/models/post";
 
 const TagWrap = styled.div`
   margin-right: ${curstyle().gap.common};
 `;
-
-export class PostViewBar extends Component {
+interface Prop{
+    post:Post,
+    course_id:number
+}
+export class PostViewBar extends Component<Prop> {
     componentDidMount() {
         PaStateMan.regist_comp(this, (registval, state) => {
             registval(state.cnt);
