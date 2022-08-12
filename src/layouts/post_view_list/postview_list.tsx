@@ -26,7 +26,6 @@ const Space = styled.div`
 interface State{
     posts:Post[],
     limit:number,
-    course_id:number
 }
 interface Prop{
 
@@ -35,21 +34,12 @@ class PostViewList extends Component<Prop,State> {
     state = {
         posts: [] as Post[],
         limit: 20,
-        course_id: PaStateMan.getstate().courseProxy().getCurCourse().course_id
     }
-
     //life
     componentDidMount() {
         PaStateMan.regist_comp(this, (registval, state) => {
-            registval(state.course_cur,()=>{
-                const course_id = PaStateMan.getstate().courseProxy().getCurCourse().course_id
-
-                if (course_id !== this.state.course_id) {
-                    this.setState({
-                        course_id: course_id
-                    })
-                    this.fetchPosts()
-                }
+            registval(state.course_cur.course_id,()=>{
+                this.fetchPosts()
             });
         })
         this.fetchPosts()
