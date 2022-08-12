@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Box, Button, Typography} from "@mui/joy";
 import BraftEditor from "braft-editor";
 import 'braft-editor/dist/output.css'
-import {curstyle} from "@/theme/curtheme";
 import {Tag} from "@/layouts/reuseable_comps/tag";
 import {get_dir_color} from "@/utills/computils";
 
@@ -67,7 +66,8 @@ class PostView extends Component {
                                 color_idx++
                                 return (
                                     <Tag key={dir.directory_id}
-                                         color={get_dir_color(idx)}>
+                                         color={get_dir_color(idx)}
+                                    >
                                         {dir.name}
                                     </Tag>
                                 )
