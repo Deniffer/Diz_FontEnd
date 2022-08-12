@@ -3,6 +3,7 @@ import reuse from '@/assets/reuseable.less'
 import {Box} from "@mui/joy";
 import {curstyle} from "@/theme/curtheme";
 import {Component, useState} from "react";
+import {history} from "umi";
 
 export default class Headline extends Component {
     rendercnt=0
@@ -10,11 +11,7 @@ export default class Headline extends Component {
         this.rendercnt++;
         return (
             <div className={reuse.row_flex2side_container}>
-                {/*{this.rendercnt}*/}
                 <Box
-                    // onClick={() => {
-                    //     this.forceUpdate()
-                    // }}
                     className={
                         reuse.col_flexcenter_container + " "
                         // +headline.logo
@@ -25,8 +22,9 @@ export default class Headline extends Component {
                         cursor: "pointer"
                     }}
                 >
-                    <div
+                    <Box
                         className={reuse.row_flex2center_container}
+                        onClick={()=>{history.push("/")}}
                     >
                         <svg width="38" height="27" viewBox="0 0 38 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -34,7 +32,7 @@ export default class Headline extends Component {
                                 fill={curstyle().colors.main_s}
                             />
                         </svg>
-                    </div>
+                    </Box>
                 </Box>
                 <div>user</div>
             </div>
