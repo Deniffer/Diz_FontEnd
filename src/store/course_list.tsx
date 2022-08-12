@@ -76,9 +76,17 @@ export class CourceStoreProxy {
 
     updateCourseList() {
         axios.post(baseUrl + "/get_courses?mock_login=123", {}).then(res => {
-            const course_list = res.data.courses;
+            const course_list:Course[] = res.data.courses;
+
+            let find_cur_coursei=0;
+            for(let i=0;i<this.state.course_list.length;i++){
+                if(this.state.course_list[i].course_id==this.state.course_cur.course_id){
+                    find_cur_coursei=i;
+                    break;
+                }
+            }
             this.state.course_list = course_list;
-            this.fetchCourceDetailAndSetCur(course_list[0])
+            this.fetchCourceDetailAndSetCur(course_list[find_cur_coursei])
         })
     }
 
