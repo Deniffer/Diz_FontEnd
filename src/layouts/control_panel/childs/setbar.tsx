@@ -42,6 +42,8 @@ export class SetBar extends PureComponent<Prop> {
             background: ${curstyle().colors.main_l};
             color: ${curstyle().colors.main_s};
           }
+
+          user-select: none;
           background: ${seldir==this.props.dirid?curstyle().colors.main_l:''};
           font-size: 1em;
           margin-right: ${curstyle().gap.common};

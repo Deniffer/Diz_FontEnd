@@ -12,6 +12,7 @@ import {PaStateMan} from "@/utills/pa_state_man";
 import {history} from 'umi';
 import {RouteCtrl} from "@/store/route_ctrl";
 import {DirectoryVo} from "@/store/models/directory";
+import {SetBarAdd} from "@/layouts/control_panel/childs/setbar_add";
 
 //底部成员组件
 const MemberWidContain = styled.div`
@@ -103,6 +104,7 @@ class ControlPanel extends Component {
                             )
                         }) : null
                     }
+                    <SetBarAdd/>
                 </Box>
                 <MemberWidContain
                     className={reuse.row_flex2side_container}
