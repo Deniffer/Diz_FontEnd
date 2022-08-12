@@ -41,7 +41,16 @@ class PostViewList extends Component<Prop,State> {
     //life
     componentDidMount() {
         PaStateMan.regist_comp(this, (registval, state) => {
-            registval(state.course_cur);
+            registval(state.course_cur,()=>{
+                const course_id = PaStateMan.getstate().courseProxy().getCurCourse().course_id
+
+                if (course_id !== this.state.course_id) {
+                    this.setState({
+                        course_id: course_id
+                    })
+                    this.fetchPosts()
+                }
+            });
         })
         this.fetchPosts()
     }
@@ -63,12 +72,7 @@ class PostViewList extends Component<Prop,State> {
 
     render() {
         const course_id = PaStateMan.getstate().courseProxy().getCurCourse().course_id
-        if (course_id !== this.state.course_id) {
-            this.setState({
-                course_id: course_id
-            })
-            this.fetchPosts()
-        }
+
         return (
             <Fragment>
                 <Wrap>
