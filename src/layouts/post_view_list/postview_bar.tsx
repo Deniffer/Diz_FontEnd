@@ -9,6 +9,7 @@ import reuse from '@/assets/reuseable.less'
 import {PaStateMan} from "@/utills/pa_state_man";
 import {history} from "@@/core/history";
 import {Post} from "@/store/models/post";
+import {AvatarRepeat} from "@/layouts/reuseable_comps/avator";
 
 const TagWrap = styled.div`
   margin-right: ${curstyle().gap.common};
@@ -88,6 +89,19 @@ export class PostViewBar extends Component<Prop> {
                     >
                         {tags}
                     </Box>
+                    <Box>
+                        <AvatarRepeat max={5} members={
+                            this.props.post.repliers
+                        }/>
+                        <Box
+                            sx={{
+                                color:curstyle().colors.font_second
+                            }}
+                        >
+                            最新 {this.props.post.updated_at}
+                        </Box>
+                    </Box>
+
                 </Box>
             </Fragment>
         )

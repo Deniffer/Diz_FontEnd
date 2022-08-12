@@ -105,20 +105,24 @@ class ControlPanel extends Component {
                     >
                         {members ? members.map((member) => {
                             return (
-                                <Box key={member.user_id}
-                                     sx={{
-                                         marginRight: "-10px"
-                                     }}
-                                >
-                                    <Avatar src={member.avatar}
+                                // <Box key={member.user_id}
+                                //      sx={{
+                                //          marginRight: "-10px"
+                                //      }}
+                                // >
+                                    <Avatar
+                                        key={member.user_id}
+
+                                        src={member.avatar}
                                             sx={{
                                                 width: curstyle().avatorsize.little,
                                                 height: curstyle().avatorsize.little,
                                                 cursor: "pointer",
                                                 borderRadius: "50%",
+                                                marginRight: "-10px"
                                             }}
                                     />
-                                </Box>
+                                // </Box>
                             )
                         }) : null}
                     </Box>
