@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Box, Typography} from "@mui/joy";
+import {Box, Button, Typography} from "@mui/joy";
 import BraftEditor from "braft-editor";
 import 'braft-editor/dist/output.css'
+import {Tag} from "@/layouts/reuseable_comps/tag";
+import {get_dir_color} from "@/utills/computils";
 
 function edit_svg() {
     return (
@@ -18,8 +20,10 @@ function edit_svg() {
 
 class PostView extends Component {
     render() {
-        const content = BraftEditor.createEditorState(this.props.post.content)
-        console.log(content)
+        let post = this.props.post
+        const content = BraftEditor.createEditorState(post.content)
+        const dirs = post.directories ? post.directories : []
+        let color_idx = 0
         return (
             <React.Fragment>
                 <Box sx={{
@@ -51,8 +55,24 @@ class PostView extends Component {
                              dangerouslySetInnerHTML={{__html: content.toHTML()}}>
                         </Box>
                     </Box>
-                    <Box>
-                        dirs
+                    <Box sx={{
+                        display: "flex",
+                        direction: "row",
+                        gap: 1
+                    }}>
+                        {
+                            dirs.map(dir => {
+                                let idx = color_idx
+                                color_idx++
+                                return (
+                                    <Tag key={dir.directory_id}
+                                         color={get_dir_color(idx)}
+                                    >
+                                        {dir.name}
+                                    </Tag>
+                                )
+                            })
+                        }
                     </Box>
                 </Box>
 

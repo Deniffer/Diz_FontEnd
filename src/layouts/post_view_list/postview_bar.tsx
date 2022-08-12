@@ -10,14 +10,17 @@ import {PaStateMan} from "@/utills/pa_state_man";
 import {history} from "@@/core/history";
 import {Post} from "@/store/models/post";
 import {AvatarRepeat} from "@/layouts/reuseable_comps/avator";
+import {get_dir_color} from "@/utills/computils";
 
 const TagWrap = styled.div`
   margin-right: ${curstyle().gap.common};
 `;
-interface Prop{
-    post:Post,
-    course_id:number
+
+interface Prop {
+    post: Post,
+    course_id: number
 }
+
 export class PostViewBar extends Component<Prop> {
     componentDidMount() {
         PaStateMan.regist_comp(this, (registval, state) => {
@@ -38,14 +41,12 @@ export class PostViewBar extends Component<Prop> {
     render() {
         this.rendercnt++;
         const tags = [];
-        const dirs=this.props.post.directories;
-        const colors=['_1','_2','_3','_4','_5','_6','main'];
-        for (let i = 0; i < Math.min(dirs.length,6); i++) {
+        const dirs = this.props.post.directories;
+        for (let i = 0; i < Math.min(dirs.length, 6); i++) {
             // @ts-ignore
-            const color=curstyle().colors[colors[i]+"_l"]
             tags.push(
                 <TagWrap key={i}>
-                    <Tag color={color}>
+                    <Tag color={get_dir_color(i)}>
                         {dirs[i].name}
                     </Tag>
                 </TagWrap>
@@ -53,7 +54,7 @@ export class PostViewBar extends Component<Prop> {
         }
         return (
             <Fragment>
-                <Box  sx={{
+                <Box sx={{
                     cursor: "pointer"
                 }}>
                     <Typography
@@ -61,20 +62,19 @@ export class PostViewBar extends Component<Prop> {
                             history.push("/post?post_id=" + this.props.post.post_id + "&course_id=" + this.props.course_id)
                         }}
                         className={cp.listitem} level="h5"
-                                sx={{
-                                    fontWeight: curstyle().fontweight.bold,
-                                    paddingBottom: curstyle().gap.common,
-                                    paddingTop: curstyle().gap.common,
+                        sx={{
+                            fontWeight: curstyle().fontweight.bold,
+                            paddingBottom: curstyle().gap.common,
+                            paddingTop: curstyle().gap.common,
 
-                                }}
+                        }}
                     >
                         {this.props.post.title}
                     </Typography>
 
                     <Box
-                        dangerouslySetInnerHTML = {{__html:this.props.post.content}}
+                        dangerouslySetInnerHTML={{__html: this.props.post.content}}
                     >
-
                     </Box>
                 </Box>
                 <Box
@@ -95,7 +95,7 @@ export class PostViewBar extends Component<Prop> {
                         }/>
                         <Box
                             sx={{
-                                color:curstyle().colors.font_second
+                                color: curstyle().colors.font_second
                             }}
                         >
                             最新 {this.props.post.updated_at}
