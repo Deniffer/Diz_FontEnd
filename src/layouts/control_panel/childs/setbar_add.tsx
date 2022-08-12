@@ -10,6 +10,7 @@ import {Input1} from "@/layouts/reuseable_comps/input";
 import {Box} from "@mui/joy";
 import {api_dirs_create} from "@/store/apis/dirs_create";
 import {DirectoryVo} from "@/store/models/directory";
+import {message} from "antd";
 
 interface Prop {
 }
@@ -89,6 +90,9 @@ export class SetBarAdd extends PureComponent<Prop,State> {
                                     [this.newset_content]
                                 ).then((res)=>{
                                     console.log(res)
+                                    if(res=="exist"){
+                                        message.warning('该分组已经存在！');
+                                    }
                                     this.setState({
                                         adding:false
                                     })
