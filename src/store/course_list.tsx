@@ -70,7 +70,12 @@ export class CourceStoreProxy {
             const cur_course: Course = res.data.course
             // if(!compare_one_layer( this.state.course_cur,cur_course)){
             // console.log("curcourse_change",this.state.course_cur,cur_course)
-            this.state.course_cur = cur_course
+            if(this.state.course_cur.course_id!=cur_course.course_id){
+                //课程选择变更
+                this.state.course_cur = cur_course
+                //需要复位选择栏为全部
+                this.state.course_dir_id_selected=-1
+            }
             RouteCtrl.push_cid_inroute(cur_course.course_id)
             // }
             // this.reduxf_updateCurCourse(cur_course)
