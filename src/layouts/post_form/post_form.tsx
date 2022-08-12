@@ -6,17 +6,19 @@ import Radio from '@mui/joy/Radio';
 import BraftEditor, {EditorState} from 'braft-editor';
 import 'braft-editor/dist/index.css'
 import DirSelect from "@/layouts/dir_select/dir_select";
+import {CreatePostRequest} from "@/store/apis/post_create";
 
 
 class PostForm extends Component {
     state = {
-        new_post: {
-            type: "post",
-            course_id: 0,
-            content: "",
-            title: "",
-            directory_ids: [],
-        },
+        new_post: new CreatePostRequest(
+            "",
+            "",
+            [],
+            "",
+            0,
+            "note"
+        )
     }
 
     handleEditorChange = (editorState: EditorState) => {

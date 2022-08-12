@@ -9,6 +9,8 @@ import CourseBar from "@/layouts/course_bar/course_bar";
 import {curstyle} from "@/theme/curtheme";
 import PostForm from "@/layouts/post_form/post_form";
 import axios from "axios";
+import {api_post_create} from "@/store/apis/post_create";
+import {RouteCtrl} from "@/store/route_ctrl";
 
 class $CourseId extends Component {
     state = {
@@ -35,11 +37,19 @@ class $CourseId extends Component {
     handlePublishPostClick = () => {
         const post = this.refs.post_form.state.new_post
         post.course_id = this.state.course_id
-        axios.post(baseUrl + "/post?mock_login=123", post).then(
-            res => {
-                alert(res.data.meta.msg)
+        api_post_create(
+            post
+        ).then((res)=>{
+            if(res){
+                alert(res.meta.msg)
+                RouteCtrl.back()
             }
-        )
+        })
+        // axios.post(baseUrl + "/post?mock_login=123", post).then(
+        //     res => {
+        //         alert(res.data.meta.msg)
+        //     }
+        // )
     }
 
     render() {
@@ -59,7 +69,8 @@ class $CourseId extends Component {
                         width: main_container_width,
                         margin: "20px auto",
                     }}>
-                    <CourseBar handlePublishPostClick={this.handlePublishPostClick} cur_course={this.state.cur_course}
+                    <CourseBar handlePublishPostClick={this.handlePublishPostClick.bind(this)}
+                               cur_course={this.state.cur_course}
                                width={main_container_width}/>
                     <PostForm fetchCurCourse={this.fetchCurCourse} ref='post_form' cur_course={this.state.cur_course}
                               width={main_container_width}/>

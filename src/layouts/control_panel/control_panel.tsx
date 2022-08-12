@@ -10,6 +10,7 @@ import styled from "styled-components";
 import React, {Component} from 'react';
 import {PaStateMan} from "@/utills/pa_state_man";
 import {history} from 'umi';
+import {RouteCtrl} from "@/store/route_ctrl";
 
 //底部成员组件
 const MemberWidContain = styled.div`
@@ -74,7 +75,8 @@ class ControlPanel extends Component {
                         </Typography>
                     </Box>
                     <Button onClick={e => {
-                        history.push("/create_post/" + state_course.getCurCourse().course_id);
+                        RouteCtrl.push_createpost( state_course.getCurCourse().course_id)
+                        // history.push("/create_post/" + state_course.getCurCourse().course_id);
                     }
                         // (window.location.href = "/create_post/" + this.props.cur_course.course_id)
                     }
