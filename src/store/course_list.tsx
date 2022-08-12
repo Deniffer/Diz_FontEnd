@@ -4,6 +4,7 @@ import {PaState} from "@/store/pastate";
 import {RouteCtrl} from "@/store/route_ctrl";
 import {Member} from "@/store/models/member";
 import {DirectoryVo} from "@/store/models/directory";
+import {api_dirs_create} from "@/store/apis/dirs_create";
 
 export class Course {
     constructor(
@@ -75,11 +76,12 @@ export class CourceStoreProxy {
             "course_id": course.course_id
         }).then(res => {
             const cur_course: Course = res.data.course
+            //课程选择变更
+            this.state.course_cur = cur_course
             // if(!compare_one_layer( this.state.course_cur,cur_course)){
             // console.log("curcourse_change",this.state.course_cur,cur_course)
             if(this.state.course_cur.course_id!=cur_course.course_id){
-                //课程选择变更
-                this.state.course_cur = cur_course
+
                 //需要复位选择栏为全部
                 this.state.course_dir_id_selected=-1
             }
@@ -134,7 +136,20 @@ export class CourceStoreProxy {
                     }
                 }
             }
-            resolve("ok")
+            let dirs_:DirectoryVo[]=[]
+            dirs.forEach((v)=>{
+                dirs_.push(new DirectoryVo(
+                    0,v,this.state.course_cur.course_id
+                ))
+            })
+            api_dirs_create(dirs_).then(
+                res=>{
+                    if(res&&res.meta.code==0){
+                        resolve("ok")
+                    }
+                    resolve("netfail")
+                }
+            )
         })
     }
 

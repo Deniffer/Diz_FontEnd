@@ -95,6 +95,10 @@ export class SetBarAdd extends PureComponent<Prop, State> {
                                         console.log(res)
                                         if (res == "exist") {
                                             message.warning('该分组已经存在！');
+                                        }else if(res=="ok"){
+                                            message.success('分组添加成功！');
+                                            const p=PaStateMan.getstate().courseProxy()
+                                            p.fetchCourceDetailAndSetCur(p.getCurCourse())
                                         }
                                         this.setState({
                                             adding: false
