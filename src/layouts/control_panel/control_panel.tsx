@@ -11,6 +11,7 @@ import React, {Component} from 'react';
 import {PaStateMan} from "@/utills/pa_state_man";
 import {history} from 'umi';
 import {RouteCtrl} from "@/store/route_ctrl";
+import {DirectoryVo} from "@/store/models/directory";
 
 //底部成员组件
 const MemberWidContain = styled.div`
@@ -90,10 +91,13 @@ class ControlPanel extends Component {
                             variant="solid" color="primary">
                         + 新建帖子
                     </Button>
+                    <SetBar dirid={-1}>
+                        全部
+                    </SetBar>
                     {
-                        dirs ? dirs.map((dir) => {
+                        dirs ? dirs.map((dir:DirectoryVo) => {
                             return (
-                                <SetBar key={dir.directory_id}>
+                                <SetBar key={dir.directory_id} dirid={dir.directory_id}>
                                     {dir.name}
                                 </SetBar>
                             )
