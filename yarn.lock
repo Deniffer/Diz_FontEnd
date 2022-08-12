@@ -451,7 +451,7 @@
 
 "@emotion/react@^11.10.0":
   version "11.10.0"
-  resolved "https://registry.npmmirror.com/@emotion/react/-/react-11.10.0.tgz"
+  resolved "https://registry.npmmirror.com/@emotion/react/-/react-11.10.0.tgz#53c577f063f26493f68a05188fb87528d912ff2e"
   integrity sha512-K6z9zlHxxBXwN8TcpwBKcEsBsOw4JWCCmR+BeeOWgqp8GIU1yA2Odd41bwdAAr0ssbQrbJbVnndvv7oiv1bZeQ==
   dependencies:
     "@babel/runtime" "^7.18.3"
