@@ -1,4 +1,5 @@
 import {CourceStoreProxy, Course} from "@/store/course_list";
+import {DirectoryVo} from "@/store/models/directory";
 
 export class PaStateProxy{
     addcnt(){
@@ -8,6 +9,14 @@ export class PaStateProxy{
         return this.state.cnt
     }
     set cnt(cnt){}
+
+    course_dir_sel_set(dirid:number){
+        return this.state.course_dir_id_selected=dirid
+    }
+    course_dir_sel_get(){
+        return this.state.course_dir_id_selected
+    }
+
     private coursep;
     courseProxy(){
         return this.coursep
@@ -21,6 +30,8 @@ export class PaState{
 
     course_list:Course[]=[];
     course_cur:Course
+
+    course_dir_id_selected=-1
 
     constructor() {
         this.course_cur=Course.pre();

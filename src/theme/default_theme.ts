@@ -14,6 +14,7 @@ export const default_global_style={
         _5_l:"#FBC0D5",
         _6_l:"#BEEDF3",
         main_l:"#d9f0de",
+        main_ll:"#effff7",
         //_s solid
         _1_s:"#ffbe33",
         _2_s:"#326bff",
