@@ -30,11 +30,13 @@ export const default_global_style={
         font_second:"#BDBDBD"
     },
     gap:{
-        common:"12px !important",
-        l:"16px !important",
-        xl:"20px !important",
-        xxl:"24px !important",
-        m:"8px !important",
+        common:"12px",
+        l:"16px",
+        xl:"20px",
+        xxl:"24px",
+        m:"8px",
+        s:"4px",
+        ss:"2px",
     },
     radius:{
         common:"5px"
@@ -47,7 +49,11 @@ export const default_global_style={
         common:"40px",
         little:"34px"
     },
-    headlineheight:"60px"
+    headlineheight:"60px",
+    fontsize:{
+        s:"14px",
+        ss:"12px",
+    }
 }
 export type MyGlobalStyle = typeof default_global_style
 

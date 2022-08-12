@@ -8,12 +8,16 @@ import {Tag} from "@/layouts/reuseable_comps/tag";
 import reuse from '@/assets/reuseable.less'
 import {PaStateMan} from "@/utills/pa_state_man";
 import {history} from "@@/core/history";
+import {Post} from "@/store/models/post";
 
 const TagWrap = styled.div`
   margin-right: ${curstyle().gap.common};
 `;
-
-export class PostViewBar extends Component {
+interface Prop{
+    post:Post,
+    course_id:number
+}
+export class PostViewBar extends Component<Prop> {
     componentDidMount() {
         PaStateMan.regist_comp(this, (registval, state) => {
             registval(state.cnt);
@@ -33,23 +37,29 @@ export class PostViewBar extends Component {
     render() {
         this.rendercnt++;
         const tags = [];
-        for (let i = 0; i < 8; i++) {
+        const dirs=this.props.post.directories;
+        const colors=['_1','_2','_3','_4','_5','_6','main'];
+        for (let i = 0; i < Math.min(dirs.length,6); i++) {
+            // @ts-ignore
+            const color=curstyle().colors[colors[i]+"_l"]
             tags.push(
                 <TagWrap key={i}>
-                    <Tag>
-                        A{i}
+                    <Tag color={color}>
+                        {dirs[i].name}
                     </Tag>
                 </TagWrap>
             )
         }
         return (
             <Fragment>
-                <Box onClick={() => {
-                    history.push("/post?post_id=" + this.props.post.post_id + "&course_id=" + this.props.course_id)
-                }} sx={{
+                <Box  sx={{
                     cursor: "pointer"
                 }}>
-                    <Typography className={cp.listitem} level="h5"
+                    <Typography
+                        onClick={() => {
+                            history.push("/post?post_id=" + this.props.post.post_id + "&course_id=" + this.props.course_id)
+                        }}
+                        className={cp.listitem} level="h5"
                                 sx={{
                                     fontWeight: curstyle().fontweight.bold,
                                     paddingBottom: curstyle().gap.common,
@@ -59,8 +69,11 @@ export class PostViewBar extends Component {
                     >
                         {this.props.post.title}
                     </Typography>
-                    <Box>
-                        {this.props.post.content}
+
+                    <Box
+                        dangerouslySetInnerHTML = {{__html:this.props.post.content}}
+                    >
+
                     </Box>
                 </Box>
                 <Box

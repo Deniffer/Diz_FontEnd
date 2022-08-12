@@ -8,6 +8,8 @@ import {baseUrl} from "@/store/course_list";
 import {PostViewBar} from "@/layouts/post_view_list/postview_bar";
 import {Box} from "@mui/joy";
 import {history} from "umi";
+import {api_get_posts} from "@/store/apis/get_posts";
+import {Post} from "@/store/models/post";
 
 const PostViewBarWrap = styled.div`
   border-bottom: 1px solid ${curstyle().colors.gray_d};
@@ -20,9 +22,18 @@ const Space = styled.div`
   height: ${curstyle().gap.common};
 `
 
-class PostViewList extends Component {
+
+interface State{
+    posts:Post[],
+    limit:number,
+    course_id:number
+}
+interface Prop{
+
+}
+class PostViewList extends Component<Prop,State> {
     state = {
-        posts: [],
+        posts: [] as Post[],
         limit: 20,
         course_id: PaStateMan.getstate().courseProxy().getCurCourse().course_id
     }
@@ -40,14 +51,13 @@ class PostViewList extends Component {
     }
 
     fetchPosts = () => {
-        axios.post(baseUrl + "/get_posts?mock_login=123", {
-            course_id: PaStateMan.getstate().courseProxy().getCurCourse().course_id,
-            limit: 20
-        }).then(res => {
-            console.log(res.data)
-            this.setState({
-                posts: res.data.posts
-            })
+        api_get_posts().then(res => {
+            console.log(res)
+            if(res){
+                this.setState({
+                    posts: res.posts
+                })
+            }
         })
     }
 
