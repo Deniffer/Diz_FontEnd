@@ -2,19 +2,26 @@ import axios from "axios";
 import {compare_one_layer} from "@/utills/tsutils";
 import {PaState} from "@/store/pastate";
 import {RouteCtrl} from "@/store/route_ctrl";
+import {Member} from "@/store/models/member";
+import {DirectoryVo} from "@/store/models/directory";
 
 export class Course {
     constructor(
         public course_id: number,
         public name: string,
         public begin_at: string,
+        public duration:number,
+        public invite_code:string,
+        public created_at:string,
+        public members:Member[],
+        public directories:DirectoryVo[]
     ) {
     }
 
     static pre() {
         return new Course(31,
             "啥也不是",
-            "")
+            "",0,"","",[],[])
     }
 }
 
@@ -114,6 +121,21 @@ export class CourceStoreProxy {
 
     getCurCourse() {
         return this.state.course_cur
+    }
+
+    curcourse_add_new_dirs(dirs:string[]):Promise<"exist"|"netfail"|"ok">{
+        return new Promise(resolve => {
+            for(const key in this.state.course_cur.directories){
+                const v=this.state.course_cur.directories[key]
+                for(const nk in dirs){
+                    if(dirs[nk]==v.name){
+                        //重名
+                        resolve("exist")
+                    }
+                }
+            }
+            resolve("ok")
+        })
     }
 
     constructor(private state: PaState) {

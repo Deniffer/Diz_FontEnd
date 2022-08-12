@@ -8,6 +8,8 @@ import styled from "@emotion/styled";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {Input1} from "@/layouts/reuseable_comps/input";
 import {Box} from "@mui/joy";
+import {api_dirs_create} from "@/store/apis/dirs_create";
+import {DirectoryVo} from "@/store/models/directory";
 
 interface Prop {
 }
@@ -82,9 +84,20 @@ export class SetBarAdd extends PureComponent<Prop,State> {
                         this.newset_content=e.target.value
                     }}
                         onBlur={()=>{
-                            this.setState({
-                                adding:false
-                            })
+                            if(this.newset_content!=""){
+                                PaStateMan.getstate().courseProxy().curcourse_add_new_dirs(
+                                    [this.newset_content]
+                                ).then((res)=>{
+                                    console.log(res)
+                                    this.setState({
+                                        adding:false
+                                    })
+                                })
+                            }else {
+                                this.setState({
+                                    adding:false
+                                })
+                            }
                         }}
                 />
             </Box>:

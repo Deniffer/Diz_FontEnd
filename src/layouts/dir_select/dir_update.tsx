@@ -5,6 +5,7 @@ import DirAdd from "@/layouts/dir_select/dir_add";
 import DirBtnEdit from "@/layouts/dir_select/dir_btn_edit";
 import axios from "axios";
 import {baseUrl} from "@/store/course_list";
+import {api_dirs_create} from "@/store/apis/dirs_create";
 
 class DirUpdate extends Component {
     state = {
@@ -40,21 +41,26 @@ class DirUpdate extends Component {
         }
 
         console.log(new_dirs)
-        axios.post(baseUrl + "/course/directories?mock_login=123", {
-            directories: new_dirs
-        }).then(res => {
-            if (res.data.meta.code != 0) {
-                alert(res.data.meta.msg)
-                return
+        api_dirs_create(new_dirs).then(res=>{
+            if(res){
+                if (res.meta.code != 0) {
+                    alert(res.meta.msg)
+                    return
+                }
+                this.props.fetchCurCourse()
+                this.setState({
+                    dialogVisible: false
+                })
+                this.refs["new_dirs"].setState({
+                    new_dirs: []
+                })
             }
-            this.props.fetchCurCourse()
-            this.setState({
-                dialogVisible: false
-            })
-            this.refs["new_dirs"].setState({
-                new_dirs: []
-            })
         })
+        // axios.post(baseUrl + "/course/directories?mock_login=123", {
+        //     directories: new_dirs
+        // }).then(res => {
+        //
+        // })
     }
 
     render() {
