@@ -33,18 +33,24 @@ export namespace RouteCtrl{
         history.push("/create_post/" + courseid);
     }
     export function back(){
+
         history.back();
     }
-    export function replace_cid_inroute(courseid:number){
+    export function push_cid_inroute(courseid:number){
         const p=getUrlParams(history.location.search)
         p.cid=courseid
-        history.replace({
-            pathname:history.location.pathname+ UrlParams2Suffix(p),
+
+        // console.log("push before",window.location)
+        history.push({
+            pathname:window.location.pathname+ UrlParams2Suffix(p),
         })
+        // history.go(0)
+        // console.log("push after",window.location)
     }
 
     export function get_curcouseid_in_route():undefined|number{
-        const params=getUrlParams(history.location.search)
+        const params=getUrlParams(window.location.search)
+        // console.log("get_curcouseid_in_route",window.location,params.cid,parseInt(params.cid))
         return parseInt(params.cid)
     }
 }
