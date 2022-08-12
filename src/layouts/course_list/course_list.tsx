@@ -37,7 +37,6 @@ class CourseList extends Component {
         let color_index = 0
         return (
             <React.Fragment>
-                {this.state.rendercnt}
                 <div style={{
                     "marginTop": curstyle().gap.common
                 }}/>
@@ -56,8 +55,6 @@ class CourseList extends Component {
                                      "cursor": "pointer",
                                      "height": "60px",
                                      "marginTop": curstyle().gap.common,
-                                     "marginLeft": curstyle().gap.common,
-                                     "marginRight": curstyle().gap.common,
                                  }}
                                  onClick={() => this.handleCourseClick(course)}
                             >
