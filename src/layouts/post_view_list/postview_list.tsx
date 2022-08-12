@@ -76,13 +76,13 @@ class PostViewList extends Component<Prop,State> {
                     {
                         this.state.posts.map(post => {
                             return (
-                                <Box>
+                                // <Box>
                                     <PostViewBarWrap
                                         key={post.post_id}
                                     >
                                         <PostViewBar course_id={course_id} key={post.post_id} post={post}/>
                                     </PostViewBarWrap>
-                                </Box>
+                                // </Box>
                             )
                         })
                     }

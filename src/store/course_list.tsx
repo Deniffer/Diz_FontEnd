@@ -1,6 +1,7 @@
 import axios from "axios";
 import {compare_one_layer} from "@/utills/tsutils";
 import {PaState} from "@/store/pastate";
+import {RouteCtrl} from "@/store/route_ctrl";
 
 export class Course {
     constructor(
@@ -62,13 +63,15 @@ export const courseReducer = (state = InitialCourseListState,
 
 export class CourceStoreProxy {
     fetchCourceDetailAndSetCur(course: Course) {
+        console.log("fetchCourceDetailAndSetCur",course.course_id)
         axios.post(baseUrl + "/get_course_detail?mock_login=123", {
             "course_id": course.course_id
         }).then(res => {
-            const cur_course = res.data.course
+            const cur_course :Course= res.data.course
             // if(!compare_one_layer( this.state.course_cur,cur_course)){
             // console.log("curcourse_change",this.state.course_cur,cur_course)
             this.state.course_cur = cur_course
+            RouteCtrl.replace_cid_inroute(cur_course.course_id)
             // }
             // this.reduxf_updateCurCourse(cur_course)
         })
@@ -77,16 +80,22 @@ export class CourceStoreProxy {
     updateCourseList() {
         axios.post(baseUrl + "/get_courses?mock_login=123", {}).then(res => {
             const course_list:Course[] = res.data.courses;
-
+            const cidinpath=RouteCtrl.get_curcouseid_in_route()
+            let tarcid=this.state.course_cur.course_id
+            if(cidinpath&&cidinpath!=tarcid){
+                tarcid=cidinpath
+            }
+            console.log("tarcid",tarcid)
             let find_cur_coursei=0;
-            for(let i=0;i<this.state.course_list.length;i++){
-                if(this.state.course_list[i].course_id==this.state.course_cur.course_id){
+            for(let i=0;i<course_list.length;i++){
+                if(course_list[i].course_id==tarcid){
                     find_cur_coursei=i;
                     break;
                 }
             }
             this.state.course_list = course_list;
-            this.fetchCourceDetailAndSetCur(course_list[find_cur_coursei])
+                this.fetchCourceDetailAndSetCur(course_list[find_cur_coursei])
+
         })
     }
 
