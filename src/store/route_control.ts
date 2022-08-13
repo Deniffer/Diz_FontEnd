@@ -38,10 +38,11 @@ export namespace RouteControl{
     }
     export function push_post(course_id:number,
                               post_id:number,
-                              dir_id?:number){
+                              ){
         let r="/post?post_id=" + post_id + "&cid=" + course_id;
-        if(dir_id){
-            r+="&did="+dir_id
+        const params=getUrlParams(window.location.search)
+        if(params.did){
+            r+="&did="+params.did
         }
         history.push(r)
     }
