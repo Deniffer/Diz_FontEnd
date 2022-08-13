@@ -6,7 +6,11 @@ import Headline from "@/layouts/headline/headline";
 import PostsPanel from "@/layouts/posts_panel/posts_panel";
 import PostView from "@/layouts/post_view/post_view";
 import axios from "axios";
-import {baseUrl} from "@/store/course_list";
+import {baseUrl, Course} from "@/store/course_list";
+import {api_get_posts} from "@/store/apis/get_posts";
+import {Post as PostStruct} from "@/store/models/post";
+import {PaStateMan} from "@/utills/pa_state_man";
+import {RouteCtrl} from "@/store/route_ctrl";
 
 function getQueryString(name: string) {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -20,11 +24,17 @@ function getQueryString(name: string) {
 class Post extends Component {
     state = {
         post_id: Number(getQueryString("post_id")),
-        course_id: Number(getQueryString("course_id")),
-        post: {}
+        post: {},
     }
-
+    course_id=0
     componentDidMount() {
+        const cid=RouteCtrl.get_curcouseid_in_route()
+        if(cid==undefined){
+            RouteCtrl.back();
+            return;
+        }
+        console.log("cid",cid)
+        this.course_id=cid
         axios.post(baseUrl + '/get_post_detail?mock_login=123', {
             post_id: this.state.post_id
         }).then(res => {
@@ -36,7 +46,12 @@ class Post extends Component {
                 post: res.data.post_detail
             })
         })
+        PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(
+            {course_id:this.course_id} as Course
+        )
     }
+
+
 
     render() {
         const content_height = "calc(100vh - 1px - " + curstyle().headlineheight + ")"

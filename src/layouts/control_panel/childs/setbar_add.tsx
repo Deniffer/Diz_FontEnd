@@ -40,7 +40,7 @@ export class SetBarAdd extends PureComponent<Prop, State> {
     rendercnt = 0;
     newset_content = ""
     on_key_down(e:KeyboardEvent){
-        console.log(e)
+        // console.log(e)
         if(e.code=='Enter'){
             this.add_new_set()
         }

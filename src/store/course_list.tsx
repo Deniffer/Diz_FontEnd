@@ -70,11 +70,12 @@ export const courseReducer = (state = InitialCourseListState,
 }
 
 export class CourceStoreProxy {
-    fetchCourceDetailAndSetCur(course: Course) {
+    async fetchCourceDetailAndSetCur(course: Course) {
         console.log("fetchCourceDetailAndSetCur", course.course_id)
-        axios.post(baseUrl + "/get_course_detail?mock_login=123", {
+        await axios.post(baseUrl + "/get_course_detail?mock_login=123", {
             "course_id": course.course_id
         }).then(res => {
+            console.log(res)
             const cur_course: Course = res.data.course
             //课程选择变更
             this.state.course_cur = cur_course

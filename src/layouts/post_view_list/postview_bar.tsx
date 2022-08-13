@@ -11,6 +11,7 @@ import {history} from "@@/core/history";
 import {Post} from "@/store/models/post";
 import {AvatarRepeat} from "@/layouts/reuseable_comps/avator";
 import {get_dir_color} from "@/utills/computils";
+import {RouteCtrl} from "@/store/route_ctrl";
 
 const TagWrap = styled.div`
   margin-right: ${curstyle().gap.common};
@@ -59,7 +60,9 @@ export class PostViewBar extends Component<Prop> {
                 }}>
                     <Typography
                         onClick={() => {
-                            history.push("/post?post_id=" + this.props.post.post_id + "&course_id=" + this.props.course_id)
+                            RouteCtrl.push_post(
+                                this.props.course_id,this.props.post.post_id ,
+                            )
                         }}
                         className={cp.listitem} level="h5"
                         sx={{

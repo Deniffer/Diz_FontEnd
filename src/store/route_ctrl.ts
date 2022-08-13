@@ -21,7 +21,7 @@ function UrlParams2Suffix(params:any){
     let first=true
     for (const key in params){
         if(!first){
-            make+=','
+            make+='&'
         }
         first=false;
         make+=key+'='+params[key]
@@ -36,12 +36,15 @@ export namespace RouteCtrl{
 
         history.back();
     }
+    export function push_post(cid:number,pid:number){
+        history.push("/post?post_id=" + pid + "&cid=" + cid)
+    }
     export function push_cid_inroute(courseid:number){
-        const p=getUrlParams(history.location.search)
+        const p=getUrlParams(window.location.search)
         p.cid=courseid
 
         // console.log("push before",window.location)
-        history.push({
+        history.replace({
             pathname:window.location.pathname+ UrlParams2Suffix(p),
         })
         // history.go(0)
