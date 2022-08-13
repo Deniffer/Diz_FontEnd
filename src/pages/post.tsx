@@ -43,6 +43,16 @@ class Post extends Component {
             })
         })
     }
+    on_route_change(){
+        const pids=getQueryString("post_id");
+        if(pids&&this){//撤回后可能当前页面没了
+            const pid=parseInt(pids)
+            //根据当前路径更新全局post选择变量，不跳转
+            PaStateMan.getstate().postViewProxy().select_cur_post(
+                pid,false)
+            this.fetchPost()
+        }
+    }
     componentDidMount() {
         const cid=RouteCtrl.get_curcouseid_in_route()
         if(cid==undefined){
@@ -64,6 +74,15 @@ class Post extends Component {
             this.state.post_id,false)
         console.log("cid",cid)
         this.fetchPost()
+
+        //post部分发生路由跳转
+        window.addEventListener("popstate",
+            this.on_route_change.bind(this));
+    }
+    componentWillUnmount() {
+        //post部分发生路由跳转
+        window.removeEventListener("popstate",
+            this.on_route_change.bind(this));
     }
 
     render() {
@@ -89,7 +108,9 @@ class Post extends Component {
                         borderColor: curstyle().colors.gray_d
                     }}>
                         <PostsPanel
-                            fetchPostDetail={()=>{this.fetchPost()}}
+                            fetchPostDetail={()=>{
+                                this.fetchPost()
+                            }}
                         >
                         </PostsPanel>
                     </Box>
