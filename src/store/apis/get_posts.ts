@@ -1,8 +1,8 @@
 import axios from "axios";
-import {baseUrl} from "@/store/course_list";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {ApiMeta} from "@/store/apis/apimeta";
 import {Post} from "@/store/models/post";
+import {baseUrl} from "@/store/apis/baseurl";
 
 export class GetPostsRes{
     constructor(

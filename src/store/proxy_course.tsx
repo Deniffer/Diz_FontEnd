@@ -1,73 +1,16 @@
 import axios from "axios";
 import {compare_one_layer} from "@/utills/tsutils";
 import {PaState} from "@/store/pastate";
-import {RouteCtrl} from "@/store/route_ctrl";
+import {RouteControl} from "@/store/route_control";
 import {Member} from "@/store/models/member";
 import {DirectoryVo} from "@/store/models/directory";
 import {api_dirs_create} from "@/store/apis/dirs_create";
-
-export class Course {
-    constructor(
-        public course_id: number,
-        public name: string,
-        public begin_at: string,
-        public duration:number,
-        public invite_code:string,
-        public created_at:string,
-        public members:Member[],
-        public directories:DirectoryVo[]
-    ) {
-    }
-
-    static pre() {
-        return new Course(-1,
-            "啥也不是",
-            "",0,"","",[],[])
-    }
-}
-
-export class CourseListState {
-    static pre() {
-        return new CourseListState(
-            InitialCourse,
-            [InitialCourse]
-        )
-    }
-
-    constructor(
-        public cur_course: Course,
-        public course_list: Course[]
-    ) {
-    }
-}
-
-export type CourseAction = typeof InitialAction;
-const InitialCourse = Course.pre();
-const InitialCourseListState = CourseListState.pre();
-const InitialAction = {
-    type: "",
-    course_list: [InitialCourse],
-    cur_course: InitialCourse,
-}
+import {Course} from "@/store/models/course";
+import {baseUrl} from "@/store/apis/baseurl";
 
 
-export const courseReducer = (state = InitialCourseListState,
-                              action = InitialAction) => {
-    switch (action.type) {
-        case "updateCourseList":
-            return {
-                cur_course: state.cur_course,
-                course_list: action.course_list
-            }
-        case "updateCurCourse":
-            return {
-                cur_course: action.cur_course,
-                course_list: state.course_list
-            }
-        default:
-            return state
-    }
-}
+
+
 
 export class CourceStoreProxy {
     async fetchCourceDetailAndSetCur(course: Course,pushroute:boolean=true) {
@@ -87,7 +30,7 @@ export class CourceStoreProxy {
                 this.state.course_dir_id_selected=-1
             }
             if(pushroute){
-                RouteCtrl.push_cid_inroute(cur_course.course_id)
+                RouteControl.push_cid_inroute(cur_course.course_id)
             }
             // }
             // this.reduxf_updateCurCourse(cur_course)
@@ -98,7 +41,7 @@ export class CourceStoreProxy {
         axios.post(baseUrl + "/get_courses?mock_login=123", {}).then(res => {
 
             const course_list: Course[] = res.data.courses;
-            const cidinpath = RouteCtrl.get_curcouseid_in_route()
+            const cidinpath = RouteControl.get_curcouseid_in_route()
             let tarcid = this.state.course_cur.course_id
             console.log("tarcid in path", cidinpath)
             if (cidinpath != undefined && cidinpath != tarcid) {
@@ -160,4 +103,32 @@ export class CourceStoreProxy {
     }
 }
 
-export const baseUrl = "https://www.asueeer.com"
+
+//
+// export type CourseAction = typeof InitialAction;
+// const InitialCourse = Course.pre();
+// const InitialCourseListState = CourseListState.pre();
+// const InitialAction = {
+//     type: "",
+//     course_list: [InitialCourse],
+//     cur_course: InitialCourse,
+// }
+//
+//
+// export const courseReducer = (state = InitialCourseListState,
+//                               action = InitialAction) => {
+//     switch (action.type) {
+//         case "updateCourseList":
+//             return {
+//                 cur_course: state.cur_course,
+//                 course_list: action.course_list
+//             }
+//         case "updateCurCourse":
+//             return {
+//                 cur_course: action.cur_course,
+//                 course_list: state.course_list
+//             }
+//         default:
+//             return state
+//     }
+// }

@@ -10,7 +10,7 @@ import styled from "styled-components";
 import React, {Component} from 'react';
 import {PaStateMan} from "@/utills/pa_state_man";
 import {history} from 'umi';
-import {RouteCtrl} from "@/store/route_ctrl";
+import {RouteControl} from "@/store/route_control";
 import {DirectoryVo} from "@/store/models/directory";
 import {SetBarAdd} from "@/layouts/control_panel/childs/setbar_add";
 
@@ -79,7 +79,7 @@ class ControlPanel extends Component {
                         </Typography>
                     </Box>
                     <Button onClick={e => {
-                        RouteCtrl.push_createpost( state_course.getCurCourse().course_id)
+                        RouteControl.push_createpost( state_course.getCurCourse().course_id)
                         // history.push("/create_post/" + state_course.getCurCourse().course_id);
                     }
                         // (window.location.href = "/create_post/" + this.props.cur_course.course_id)

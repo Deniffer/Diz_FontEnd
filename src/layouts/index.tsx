@@ -14,7 +14,7 @@ export default function Layout() {
 
     return (
         <div className={styles.navs}>
-            <Provider store={store}>
+            {/*<Provider store={store}>*/}
                 <CssVarsProvider theme={theme}>
                     <GlobalStyles<Theme>
                         styles={(theme) => ({
@@ -27,7 +27,7 @@ export default function Layout() {
                     />
                     <Outlet/>
                 </CssVarsProvider>
-            </Provider>
+            {/*</Provider>*/}
         </div>
     );
 }

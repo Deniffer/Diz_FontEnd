@@ -28,7 +28,7 @@ function UrlParams2Suffix(params:any){
     }
     return make
 }
-export namespace RouteCtrl{
+export namespace RouteControl{
     export function push_createpost(courseid:number){
         history.push("/create_post/" + courseid);
     }
@@ -36,8 +36,25 @@ export namespace RouteCtrl{
 
         history.back();
     }
-    export function push_post(cid:number,pid:number){
-        history.push("/post?post_id=" + pid + "&cid=" + cid)
+    export function push_post(course_id:number,
+                              post_id:number,
+                              dir_id?:number){
+        let r="/post?post_id=" + post_id + "&cid=" + course_id;
+        if(dir_id){
+            r+="&did="+dir_id
+        }
+        history.push(r)
+    }
+    export function replace_dirid_in_route(dirid:number){
+        const params=getUrlParams(window.location.search)
+        if(dirid==-1){
+            delete params.did
+        }else{
+            params.did=dirid
+        }
+        history.replace({
+            pathname:window.location.pathname+ UrlParams2Suffix(params),
+        })
     }
     export function push_cid_inroute(courseid:number){
         const p=getUrlParams(window.location.search)
@@ -51,9 +68,29 @@ export namespace RouteCtrl{
         // console.log("push after",window.location)
     }
 
-    export function get_curcouseid_in_route():undefined|number{
+    export function
+    get_curcouseid_in_route():undefined|number{
         const params=getUrlParams(window.location.search)
         // console.log("get_curcouseid_in_route",window.location,params.cid,parseInt(params.cid))
         return parseInt(params.cid)
+    }
+
+    export function
+    get_curpostid_in_route():undefined|number{
+        const params=getUrlParams(window.location.search)
+        if(params.post_id){
+            return parseInt(params.post_id)
+        }
+        // console.log("get_curcouseid_in_route",window.location,params.cid,parseInt(params.cid))
+        return undefined
+    }
+    export function
+    get_dirid_in_route():undefined|number{
+        const params=getUrlParams(window.location.search)
+        if(params.did){
+            return parseInt(params.did)
+        }
+        // console.log("get_curcouseid_in_route",window.location,params.cid,parseInt(params.cid))
+        return undefined
     }
 }

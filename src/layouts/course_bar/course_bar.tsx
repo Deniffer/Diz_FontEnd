@@ -1,6 +1,6 @@
 import React, {Component, PureComponent} from 'react';
-import {connect} from "react-redux";
-import {GlobalStoreState} from "@/store/store";
+// import {connect} from "react-redux";
+// import {GlobalStoreState} from "@/store/store";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {Box, Button, Typography} from "@mui/joy";
 import reuse from "@/assets/reuseable.less";

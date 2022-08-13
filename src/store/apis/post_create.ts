@@ -1,6 +1,6 @@
 import axios from "axios";
-import {baseUrl} from "@/store/course_list";
 import {ApiMeta} from "@/store/apis/apimeta";
+import {baseUrl} from "@/store/apis/baseurl";
 
 
 export class CreatePostRequest {

@@ -7,13 +7,13 @@ import CourseList from "@/layouts/course_list/course_list";
 import React, {Component} from 'react';
 import {curstyle} from "@/theme/curtheme";
 import PostViewList from "@/layouts/post_view_list/postview_list";
-import {RouteCtrl} from "@/store/route_ctrl";
+import {RouteControl} from "@/store/route_control";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {Course} from "@/store/course_list";
 
 class Index extends Component {
     on_route_change(){
-        const cid=RouteCtrl.get_curcouseid_in_route()
+        const cid=RouteControl.get_curcouseid_in_route()
         if(cid!=undefined){
             PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(
                 {course_id:cid} as Course,false
@@ -21,6 +21,10 @@ class Index extends Component {
         }
     }
     componentDidMount() {
+        const dirid=RouteControl.get_dirid_in_route()
+        if(dirid){
+            PaStateMan.getstate().course_dir_select(dirid)
+        }
         //post部分发生路由跳转
         window.addEventListener("popstate",
             this.on_route_change.bind(this));

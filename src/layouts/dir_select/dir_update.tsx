@@ -4,7 +4,7 @@ import {Modal} from "antd";
 import DirAdd from "@/layouts/dir_select/dir_add";
 import DirBtnEdit from "@/layouts/dir_select/dir_btn_edit";
 import axios from "axios";
-import {baseUrl} from "@/store/course_list";
+import {baseUrl} from "@/store/apis/baseurl";
 import {api_dirs_create} from "@/store/apis/dirs_create";
 
 class DirUpdate extends Component {

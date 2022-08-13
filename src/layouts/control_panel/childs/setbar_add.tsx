@@ -81,7 +81,7 @@ export class SetBarAdd extends PureComponent<Prop, State> {
         }
     }
     render() {
-        const seldir = PaStateMan.getstate().course_dir_sel_get()
+        const seldir = PaStateMan.getstate().course_dir_id_selected_get()
         const Button = styled.div`
           cursor: pointer;
           /* Adapt the colors based on primary prop */

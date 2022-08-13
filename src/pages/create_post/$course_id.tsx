@@ -1,16 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Box} from "@mui/joy";
 import index_styles from "@/pages/index.less";
 import Headline from "@/layouts/headline/headline";
-import {store} from "@/store/store";
-import {Provider} from "react-redux";
-import {baseUrl, Course} from "@/store/course_list";
+// import {Provider} from "react-redux";
 import CourseBar from "@/layouts/course_bar/course_bar";
 import {curstyle} from "@/theme/curtheme";
 import PostForm from "@/layouts/post_form/post_form";
 import axios from "axios";
 import {api_post_create} from "@/store/apis/post_create";
-import {RouteCtrl} from "@/store/route_ctrl";
+import {RouteControl} from "@/store/route_control";
+import {baseUrl} from "@/store/apis/baseurl";
 
 class $CourseId extends Component {
     state = {
@@ -42,7 +41,7 @@ class $CourseId extends Component {
         ).then((res)=>{
             if(res){
                 alert(res.meta.msg)
-                RouteCtrl.back()
+                RouteControl.back()
             }
         })
         // axios.post(baseUrl + "/post?mock_login=123", post).then(
@@ -55,7 +54,7 @@ class $CourseId extends Component {
     render() {
         const main_container_width = "866px"
         return (
-            <Provider store={store}>
+            <Fragment>
                 {/* nav bar */}
                 <Box className={index_styles.headline}
                      sx={{
@@ -75,7 +74,7 @@ class $CourseId extends Component {
                     <PostForm fetchCurCourse={this.fetchCurCourse} ref='post_form' cur_course={this.state.cur_course}
                               width={main_container_width}/>
                 </Box>
-            </Provider>
+            </Fragment>
 
         );
     }

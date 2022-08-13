@@ -29,7 +29,7 @@ export class SetBar extends PureComponent<Prop> {
 
     rendercnt = 0;
     render() {
-        const seldir=PaStateMan.getstate().course_dir_sel_get()
+        const seldir=PaStateMan.getstate().course_dir_id_selected_get()
         const Button = styled.div`
           cursor: pointer;
           /* Adapt the colors based on primary prop */
@@ -70,7 +70,7 @@ export class SetBar extends PureComponent<Prop> {
                 + reuse.row_flex2side_container
             }
                 onClick={()=>{
-                    PaStateMan.getstate().course_dir_sel_set(this.props.dirid)
+                    PaStateMan.getstate().course_dir_select(this.props.dirid)
                 }}
             >
                 {this.props.children}

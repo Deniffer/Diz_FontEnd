@@ -17,7 +17,7 @@ class PostsPanel extends PureComponent<Prop> {
             registval(state.course_cur.course_id,()=>{
                 this.fetchPosts()
             });
-            registval(state.postview_cur_pid)//切换文章需要重新渲染
+            registval(state.post_id_selected)//切换文章需要重新渲染
         })
         this.fetchPosts()
     }
@@ -37,17 +37,18 @@ class PostsPanel extends PureComponent<Prop> {
     }
 
     render() {
-        const postproxy=PaStateMan.getstate().postViewProxy()
+        const gstate=PaStateMan.getstate()
         return (
             <React.Fragment>
                 {this.state.posts.map((v)=>{
-                    const selected=v.post_id==postproxy.cur_postid();
+                    const selected=v.post_id==gstate.postid_selected_get();
                     return <Box
                         key={v.post_id}
                         onClick={()=>{
-                            if(postproxy.select_cur_post(
+                            if(gstate.postid_selected_set(
                                 v.post_id,true
                             )){
+                                //有变化，更新文章内容
                                 this.props.fetchPostDetail()
                             }
                         }}

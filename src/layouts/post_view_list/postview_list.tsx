@@ -4,7 +4,7 @@ import {curstyle} from "@/theme/curtheme";
 import React, {Component, Fragment} from "react";
 import {PaStateMan} from "@/utills/pa_state_man";
 import axios from "axios";
-import {baseUrl} from "@/store/course_list";
+import {baseUrl} from "@/store/apis/baseurl";
 import {PostViewBar} from "@/layouts/post_view_list/postview_bar";
 import {Box} from "@mui/joy";
 import {history} from "umi";

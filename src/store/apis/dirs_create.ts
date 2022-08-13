@@ -1,5 +1,5 @@
 import axios from "axios";
-import {baseUrl} from "@/store/course_list";
+import {baseUrl} from "@/store/apis/baseurl";
 import {DirectoryVo} from "@/store/models/directory";
 import {ApiMeta} from "@/store/apis/apimeta";
 
