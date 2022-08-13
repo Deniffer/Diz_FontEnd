@@ -27,6 +27,22 @@ class Post extends Component {
         post: {},
     }
     course_id=0
+
+    fetchPost(){
+        const postproxy=PaStateMan.getstate().postViewProxy();
+        axios.post(baseUrl + '/get_post_detail?mock_login=123', {
+            post_id: postproxy.cur_postid()
+        }).then(res => {
+            if (res.data.meta.code !== 0) {
+                alert(res.data.meta.msg)
+                return
+            }
+            this.setState({
+                post: res.data.post_detail,
+                post_id: postproxy.cur_postid()
+            })
+        })
+    }
     componentDidMount() {
         const cid=RouteCtrl.get_curcouseid_in_route()
         if(cid==undefined){
@@ -43,21 +59,12 @@ class Post extends Component {
                 {course_id:this.course_id} as Course
             )
         }
+        //根据当前路径更新全局post选择变量，不跳转
+        PaStateMan.getstate().postViewProxy().select_cur_post(
+            this.state.post_id,false)
         console.log("cid",cid)
-        axios.post(baseUrl + '/get_post_detail?mock_login=123', {
-            post_id: this.state.post_id
-        }).then(res => {
-            if (res.data.meta.code !== 0) {
-                alert(res.data.meta.msg)
-                return
-            }
-            this.setState({
-                post: res.data.post_detail
-            })
-        })
+        this.fetchPost()
     }
-
-
 
     render() {
         const content_height = "calc(100vh - 1px - " + curstyle().headlineheight + ")"
@@ -81,7 +88,9 @@ class Post extends Component {
                         borderStyle: "solid",
                         borderColor: curstyle().colors.gray_d
                     }}>
-                        <PostsPanel>
+                        <PostsPanel
+                            fetchPostDetail={()=>{this.fetchPost()}}
+                        >
                         </PostsPanel>
                     </Box>
                     <Box sx={{
