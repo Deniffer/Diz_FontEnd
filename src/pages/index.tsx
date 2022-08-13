@@ -21,10 +21,7 @@ class Index extends Component {
         }
     }
     componentDidMount() {
-        const dirid=RouteControl.get_dirid_in_route()
-        if(dirid){
-            PaStateMan.getstate().course_dir_select(dirid)
-        }
+
         //post部分发生路由跳转
         window.addEventListener("popstate",
             this.on_route_change.bind(this));
