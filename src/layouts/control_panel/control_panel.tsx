@@ -47,9 +47,11 @@ class ControlPanel extends Component {
             }>
                 <Box
                     sx={{
+                        height:"calc(100% - 42px)",
                         display: 'flex',
                         flexDirection: 'column',
-                        height: "100%"
+                        overflowY:'scroll'
+                        // height: "100%"
                     }}
                 >
                     <Box
