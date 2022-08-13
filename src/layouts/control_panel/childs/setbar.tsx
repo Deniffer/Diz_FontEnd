@@ -6,6 +6,8 @@ import {render} from "react-dom";
 import {Component, PureComponent} from "react";
 import styled from "@emotion/styled";
 import {PaStateMan} from "@/utills/pa_state_man";
+import {MenuItem, MenuList} from "@mui/joy";
+import { ClickAwayListener } from "@mui/material";
 
 interface Prop {
     dirid: number
@@ -26,7 +28,6 @@ export class SetBar extends PureComponent<Prop> {
     }
 
     rendercnt = 0;
-
     render() {
         const seldir=PaStateMan.getstate().course_dir_sel_get()
         const Button = styled.div`
@@ -57,6 +58,12 @@ export class SetBar extends PureComponent<Prop> {
         `;
 
         this.rendercnt++;
+        const handleClose=()=>{
+
+        }
+        const handleListKeyDown=()=>{
+
+        }
         return (
             <Button className={
                 reuse.trans_color_common + " "
@@ -67,7 +74,9 @@ export class SetBar extends PureComponent<Prop> {
                 }}
             >
                 {this.props.children}
-                <Icon glyph="more" size={23}/>
+                <div>
+                    <Icon glyph="more" size={23}/>
+                </div>
             </Button>
         )
     }

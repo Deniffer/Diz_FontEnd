@@ -11,6 +11,7 @@ export class PaStateProxy{
     }
     set cnt(cnt){}
 
+    //文章类别选择
     course_dir_sel_set(dirid:number){
         return this.state.course_dir_id_selected=dirid
     }
@@ -19,12 +20,12 @@ export class PaStateProxy{
     }
 
     private post_view_proxy;
-    postViewProxy():PostsViewProxy{
+    postViewProxy():PostsViewProxy{//文章浏览页相关的全局状态操作逻辑
         return this.post_view_proxy
     }
 
     private coursep;
-    courseProxy(){
+    courseProxy(){//课程相关的全局状态的操作逻辑
         return this.coursep
     }
     constructor(private state:PaState) {
@@ -42,7 +43,7 @@ export class PaState{
     course_dir_id_selected=-1
 
     //post浏览界面的一些参数
-    postview_cur_pid=-1;
+    postview_cur_pid=-1;//给postview监听当前文章编号
     constructor() {
         this.course_cur=Course.pre();
         this.course_list.push(this.course_cur)
