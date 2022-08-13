@@ -18,6 +18,7 @@ class DirSelect extends Component {
                     marginTop: "15px",
                     display: "flex",
                     direction: "row",
+                    flexWrap: "wrap",
                     gap: gap,
                 }}>
                     {
