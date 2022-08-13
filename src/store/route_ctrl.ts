@@ -44,7 +44,7 @@ export namespace RouteCtrl{
         p.cid=courseid
 
         // console.log("push before",window.location)
-        history.replace({
+        history.push({
             pathname:window.location.pathname+ UrlParams2Suffix(p),
         })
         // history.go(0)

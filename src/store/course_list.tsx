@@ -70,7 +70,7 @@ export const courseReducer = (state = InitialCourseListState,
 }
 
 export class CourceStoreProxy {
-    async fetchCourceDetailAndSetCur(course: Course) {
+    async fetchCourceDetailAndSetCur(course: Course,pushroute:boolean=true) {
         console.log("fetchCourceDetailAndSetCur", course.course_id)
         await axios.post(baseUrl + "/get_course_detail?mock_login=123", {
             "course_id": course.course_id
@@ -86,7 +86,9 @@ export class CourceStoreProxy {
                 //需要复位选择栏为全部
                 this.state.course_dir_id_selected=-1
             }
-            RouteCtrl.push_cid_inroute(cur_course.course_id)
+            if(pushroute){
+                RouteCtrl.push_cid_inroute(cur_course.course_id)
+            }
             // }
             // this.reduxf_updateCurCourse(cur_course)
         })

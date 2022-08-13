@@ -7,8 +7,31 @@ import CourseList from "@/layouts/course_list/course_list";
 import React, {Component} from 'react';
 import {curstyle} from "@/theme/curtheme";
 import PostViewList from "@/layouts/post_view_list/postview_list";
+import {RouteCtrl} from "@/store/route_ctrl";
+import {PaStateMan} from "@/utills/pa_state_man";
+import {Course} from "@/store/course_list";
 
 class Index extends Component {
+    on_route_change(){
+        const cid=RouteCtrl.get_curcouseid_in_route()
+        if(cid!=undefined){
+            PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(
+                {course_id:cid} as Course,false
+            )
+        }
+    }
+    componentDidMount() {
+        //post部分发生路由跳转
+        window.addEventListener("popstate",
+            this.on_route_change.bind(this));
+
+    }
+    componentWillUnmount() {
+        //post部分发生路由跳转
+        window.addEventListener("popstate",
+            this.on_route_change.bind(this));
+    }
+
     render() {
         const headheight = curstyle().headlineheight
         const head = (<Box className={index_styles.headline}
