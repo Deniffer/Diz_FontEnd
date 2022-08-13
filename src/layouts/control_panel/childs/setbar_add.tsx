@@ -39,7 +39,47 @@ export class SetBarAdd extends PureComponent<Prop, State> {
     }
     rendercnt = 0;
     newset_content = ""
-
+    on_key_down(e:KeyboardEvent){
+        console.log(e)
+        if(e.code=='Enter'){
+            this.add_new_set()
+        }
+        else if(e.code=='Escape'){
+            this.newset_content="";
+            this.add_new_set()
+        }
+    }
+    add_new_set(){
+        if (this.newset_content != "") {
+            const content=this.newset_content;
+            this.newset_content="";
+            PaStateMan.getstate().courseProxy().curcourse_add_new_dirs(
+                [content]
+            ).then((res) => {
+                console.log(res)
+                if (res == "exist") {
+                    message.warning('该分组已经存在！');
+                }else if(res=="ok"){
+                    message.success('分组添加成功！');
+                    const p=PaStateMan.getstate().courseProxy()
+                    p.fetchCourceDetailAndSetCur(p.getCurCourse())
+                }
+                this.setState({
+                    adding: false
+                },()=>{
+                    window.removeEventListener(
+                        'keydown',this.on_key_down.bind(this))
+                })
+            })
+        } else {
+            this.setState({
+                adding: false
+            },()=>{
+                window.removeEventListener(
+                    'keydown',this.on_key_down.bind(this))
+            })
+        }
+    }
     render() {
         const seldir = PaStateMan.getstate().course_dir_sel_get()
         const Button = styled.div`
@@ -88,27 +128,7 @@ export class SetBarAdd extends PureComponent<Prop, State> {
                                 this.newset_content = e.target.value
                             }}
                             onBlur={() => {
-                                if (this.newset_content != "") {
-                                    PaStateMan.getstate().courseProxy().curcourse_add_new_dirs(
-                                        [this.newset_content]
-                                    ).then((res) => {
-                                        console.log(res)
-                                        if (res == "exist") {
-                                            message.warning('该分组已经存在！');
-                                        }else if(res=="ok"){
-                                            message.success('分组添加成功！');
-                                            const p=PaStateMan.getstate().courseProxy()
-                                            p.fetchCourceDetailAndSetCur(p.getCurCourse())
-                                        }
-                                        this.setState({
-                                            adding: false
-                                        })
-                                    })
-                                } else {
-                                    this.setState({
-                                        adding: false
-                                    })
-                                }
+                                this.add_new_set();
                             }}
                     />
                 </Box> :
@@ -120,6 +140,8 @@ export class SetBarAdd extends PureComponent<Prop, State> {
                             this.setState({
                                 adding: true
                             }, () => {
+                                window.addEventListener(
+                                    'keydown',this.on_key_down.bind(this))
                             })
                         }}
                 >
