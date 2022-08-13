@@ -20,7 +20,7 @@ export class Course {
     }
 
     static pre() {
-        return new Course(31,
+        return new Course(-1,
             "啥也不是",
             "",0,"","",[],[])
     }

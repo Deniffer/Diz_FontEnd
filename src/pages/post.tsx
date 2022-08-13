@@ -33,8 +33,17 @@ class Post extends Component {
             RouteCtrl.back();
             return;
         }
-        console.log("cid",cid)
         this.course_id=cid
+
+        const coursep=PaStateMan.getstate().courseProxy();
+        //未加载
+        if(coursep.getCurCourse().course_id!=this.course_id){
+            //加载post列表
+            PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(
+                {course_id:this.course_id} as Course
+            )
+        }
+        console.log("cid",cid)
         axios.post(baseUrl + '/get_post_detail?mock_login=123', {
             post_id: this.state.post_id
         }).then(res => {
@@ -46,9 +55,6 @@ class Post extends Component {
                 post: res.data.post_detail
             })
         })
-        PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(
-            {course_id:this.course_id} as Course
-        )
     }
 
 
