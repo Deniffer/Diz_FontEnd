@@ -42,8 +42,7 @@ export class Tag extends PureComponent<Prop> {
           font-size: ${curstyle().fontsize.ss};
           border-radius: ${curstyle().radius.common};
           background: ${this.props.color};
-          padding: .4em;
-          padding-left: 50px";
+          padding: 0.1em 0.7em;
           height: 25px;
           text-align: center;
           font-weight: 400;
