@@ -4,6 +4,8 @@ import BraftEditor from "braft-editor";
 import 'braft-editor/dist/output.css'
 import {Tag} from "@/layouts/reuseable_comps/tag";
 import {get_dir_color} from "@/utills/computils";
+import DirAdd from "@/layouts/dir_select/dir_add";
+import DirUpdate from "@/layouts/dir_select/dir_update";
 
 function edit_svg() {
     return (
@@ -17,6 +19,8 @@ function edit_svg() {
         </svg>
     )
 }
+
+
 
 class PostView extends Component {
     render() {
@@ -73,6 +77,15 @@ class PostView extends Component {
                                 )
                             })
                         }
+                        <Box sx={{
+                            cursor: "pointer"
+                        }}>
+                            <DirUpdate fetchCurCourse={this.props.fetchCurCourse}
+                                       course_id={this.props.course_id}
+                                       gap={1}
+                                       dirs={dirs}>
+                            </DirUpdate>
+                        </Box>
                     </Box>
                 </Box>
 

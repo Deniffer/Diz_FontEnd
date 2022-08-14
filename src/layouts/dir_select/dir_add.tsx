@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Box, Button, Chip, TextField} from "@mui/joy";
+import DirAddSvg from "@/layouts/dir_select/dir_add_svg";
 
 class DirAdd extends Component {
     state = {
@@ -66,9 +67,10 @@ class DirAdd extends Component {
                         )
                     })
                 }
-                <Button onClick={this.handleOnClick} color={"success"} variant={"soft"}>
-                    +
-                </Button>
+                <Box onClick={this.handleOnClick}>
+                    <DirAddSvg>
+                    </DirAddSvg>
+                </Box>
             </React.Fragment>
         );
     }

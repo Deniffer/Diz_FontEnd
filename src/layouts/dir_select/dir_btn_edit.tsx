@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Box, Button, TextField} from "@mui/joy";
+import {Tag} from "@/layouts/reuseable_comps/tag";
+import {curstyle} from "@/theme/curtheme";
 
 class DirBtnEdit extends Component {
     state = {
@@ -17,22 +19,23 @@ class DirBtnEdit extends Component {
         return (
             <React.Fragment>
                 <Box>
-                    <Button color={"neutral"}
-                            variant={"soft"}
-                            onClick={() => {
-                                this.setState({
-                                    clicked: true
-                                })
-                            }}
-                            sx={{
-                                display: this.state.clicked ? "none" : ""
-                            }}
-                    >
-                        {this.props.dir.name}
-                    </Button>
+                    <Box onClick={() => {
+                        this.setState({
+                            clicked: true
+                        })
+                    }}
+                         sx={{
+                             display: this.state.clicked ? "none" : ""
+                         }}>
+                        <Tag color={curstyle().colors.gray_common}>
+                            {this.props.dir.name}
+                        </Tag>
+                    </Box>
+
                     <TextField sx={{
                         display: this.state.clicked ? "" : "none",
-                        width: "100px"
+                        height: "25px",
+                        width: "87px"
                     }} size="sm" defaultValue={this.props.dir.name}
                                onChange={(e) => {
                                    this.handleOnChange(e)

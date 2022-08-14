@@ -123,7 +123,7 @@ class Post extends Component {
                         width: "72vw",
                         height: content_height
                     }}>
-                        <PostView post={this.state.post}/>
+                        <PostView post={this.state.post} course_id={this.course_id}/>
                     </Box>
                 </Box>
             </React.Fragment>

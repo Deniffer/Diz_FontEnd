@@ -6,6 +6,7 @@ import DirBtnEdit from "@/layouts/dir_select/dir_btn_edit";
 import axios from "axios";
 import {baseUrl} from "@/store/apis/baseurl";
 import {api_dirs_create} from "@/store/apis/dirs_create";
+import DirAddSvg from "@/layouts/dir_select/dir_add_svg";
 
 class DirUpdate extends Component {
     state = {
@@ -56,20 +57,19 @@ class DirUpdate extends Component {
                 })
             }
         })
-        // axios.post(baseUrl + "/course/directories?mock_login=123", {
-        //     directories: new_dirs
-        // }).then(res => {
-        //
-        // })
     }
 
     render() {
         let dirs = this.props.dirs ? this.props.dirs : []
         return (
             <React.Fragment>
-                <Button onClick={this.handleOnClick} color={"success"} variant={"soft"}>
-                    +
-                </Button>
+                <Box onClick={this.handleOnClick} sx={{
+                    cursor: "pointer"
+                }}>
+                    <DirAddSvg>
+                    </DirAddSvg>
+                </Box>
+
                 <Modal title="编辑帖子分组" visible={this.state.dialogVisible}
                        onCancel={() => {
                            this.setState({
