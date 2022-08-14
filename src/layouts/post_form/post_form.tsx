@@ -7,6 +7,7 @@ import BraftEditor, {EditorState} from 'braft-editor';
 import 'braft-editor/dist/index.css'
 import DirSelect from "@/layouts/dir_select/dir_select";
 import {CreatePostRequest} from "@/store/apis/post_create";
+import BraftEditorCustom from "@/layouts/braft_editor_custom/braft_editor_custom";
 
 
 class PostForm extends Component {
@@ -120,12 +121,8 @@ class PostForm extends Component {
                         marginTop: "20px"
                     }}>
                         <div className="editor-wrapper">
-                            <BraftEditor
-                                // value={""}
-                                onChange={this.handleEditorChange}
-                                placeholder="请输入正文..."
-                                contentStyle={{height: 110}}
-                            />
+                            <BraftEditorCustom handleEditorChange={this.handleEditorChange}>
+                            </BraftEditorCustom>
                         </div>
                     </Box>
                     <Box sx={{
