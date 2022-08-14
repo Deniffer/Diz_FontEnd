@@ -29,8 +29,17 @@ function UrlParams2Suffix(params:any){
     return make
 }
 export namespace RouteControl{
+    var push_post_cnt=0
     export function push_createpost(courseid:number){
         history.push("/create_post/" + courseid);
+    }
+    export function back2index(){
+        if(window.location.pathname=='/post'){
+
+            const params=getUrlParams(window.location.search)
+            delete params.did
+            history.push("/"+UrlParams2Suffix(params))
+        }
     }
     export function back(){
 
@@ -45,6 +54,7 @@ export namespace RouteControl{
             r+="&did="+params.did
         }
         history.push(r)
+        push_post_cnt++;
     }
     export function replace_dirid_in_route(dirid:number){
         const params=getUrlParams(window.location.search)

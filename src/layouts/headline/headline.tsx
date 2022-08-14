@@ -6,6 +6,7 @@ import {Component, PureComponent, useState} from "react";
 import {history} from "umi";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {Course} from "@/store/models/course";
+import {RouteControl} from "@/store/route_control";
 
 interface Prop {
     is_post?: boolean
@@ -51,7 +52,7 @@ export default class Headline extends PureComponent<Prop> {
                         <Box
                             className={reuse.row_flex2center_container}
                             onClick={() => {
-                                history.push("/")
+                                RouteControl.back2index()
                             }}
                         >
                             <svg width="38" height="27" viewBox="0 0 38 27" fill="none"
