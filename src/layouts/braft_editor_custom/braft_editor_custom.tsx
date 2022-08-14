@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import BraftEditor from "braft-editor";
 
 class BraftEditorCustom extends Component {
-    state = {
-        placeholder: "请输入正文..."
-    }
-
     render() {
         const controls = [
             'text-color', 'code'
@@ -14,14 +10,9 @@ class BraftEditorCustom extends Component {
         return (
             <React.Fragment>
                 <BraftEditor
-                    onChange={() => {
-                        this.setState({
-                            placeholder: ""
-                        })
-                        this.props.handleEditorChange.bind(this)
-                    }}
+                    onChange={this.props.handleEditorChange}
                     controls={controls}
-                    placeholder={this.state.placeholder}
+                    placeholder={this.props.placeholder}
                     contentStyle={{height: 110}}
                 />
             </React.Fragment>

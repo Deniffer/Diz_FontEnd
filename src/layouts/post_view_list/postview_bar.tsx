@@ -76,7 +76,7 @@ export class PostViewBar extends Component<Prop> {
                     </Typography>
 
                     <Box
-                        dangerouslySetInnerHTML={{__html: this.props.post.content}}
+                        dangerouslySetInnerHTML={{__html: this.props.post.abstract}}
                     >
                     </Box>
                 </Box>

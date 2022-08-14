@@ -3,7 +3,7 @@ import {Box, List, RadioGroup, Sheet, TextField, Typography} from "@mui/joy";
 import $course_id_styles from "@/pages/create_post/$course_id.less";
 import reuse from "@/assets/reuseable.less";
 import Radio from '@mui/joy/Radio';
-import BraftEditor, {EditorState} from 'braft-editor';
+import {EditorState} from 'braft-editor';
 import 'braft-editor/dist/index.css'
 import DirSelect from "@/layouts/dir_select/dir_select";
 import {CreatePostRequest} from "@/store/apis/post_create";
@@ -19,14 +19,19 @@ class PostForm extends Component {
             "",
             0,
             "note"
-        )
+        ),
+        placeholder: "请输入正文..."
     }
 
     handleEditorChange = (editorState: EditorState) => {
         let new_post = this.state.new_post
-        new_post.content = editorState.toHTML()
+        new_post.content = editorState.toRAW()
+        new_post.abstract = editorState.toText()
         this.setState({
             new_post: new_post
+        })
+        this.setState({
+            placeholder: ""
         })
     }
 
@@ -121,7 +126,8 @@ class PostForm extends Component {
                         marginTop: "20px"
                     }}>
                         <div className="editor-wrapper">
-                            <BraftEditorCustom handleEditorChange={this.handleEditorChange}>
+                            <BraftEditorCustom placeholder={this.state.placeholder}
+                                               handleEditorChange={this.handleEditorChange}>
                             </BraftEditorCustom>
                         </div>
                     </Box>

@@ -36,19 +36,12 @@ class $CourseId extends Component {
     handlePublishPostClick = () => {
         const post = this.refs.post_form.state.new_post
         post.course_id = this.state.course_id
-        api_post_create(
-            post
-        ).then((res)=>{
-            if(res){
+        api_post_create(post).then((res) => {
+            if (res) {
                 alert(res.meta.msg)
                 RouteControl.back()
             }
         })
-        // axios.post(baseUrl + "/post?mock_login=123", post).then(
-        //     res => {
-        //         alert(res.data.meta.msg)
-        //     }
-        // )
     }
 
     render() {

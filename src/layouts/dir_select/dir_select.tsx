@@ -25,7 +25,7 @@ class DirSelect extends Component {
                         dirs ? dirs.map(dir => {
                             let clicked = false
                             return (
-                                <Box key={dir.directory_id}>
+                                <Box key={dir.directory_id} >
                                     <DirectoryButton handleOnChange={this.props.handleDirOnChange} name={dir.name}
                                                      clicked={clicked} dir_id={dir.directory_id}>
                                     </DirectoryButton>
