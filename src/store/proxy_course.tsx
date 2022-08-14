@@ -21,6 +21,7 @@ export class CourceStoreProxy {
             console.log(res)
             const cur_course: Course = res.data.course
             //课程选择变更
+            console.log("course fetched",cur_course)
             this.state.course_cur = cur_course
             // if(!compare_one_layer( this.state.course_cur,cur_course)){
             // console.log("curcourse_change",this.state.course_cur,cur_course)

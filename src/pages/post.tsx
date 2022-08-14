@@ -99,7 +99,7 @@ class Post extends Component {
                          height: curstyle().headlineheight
                      }}
                 >
-                    <Headline/>
+                    <Headline is_post={true}/>
                 </Box>
                 <Box sx={{
                     display: "flex",
