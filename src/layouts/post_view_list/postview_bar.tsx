@@ -47,7 +47,7 @@ export class PostViewBar extends Component<Prop> {
             // @ts-ignore
             tags.push(
                 <TagWrap key={i}>
-                    <Tag color={get_dir_color(i)}>
+                    <Tag cursor="pointer" color={get_dir_color(i)}>
                         {dirs[i].name}
                     </Tag>
                 </TagWrap>

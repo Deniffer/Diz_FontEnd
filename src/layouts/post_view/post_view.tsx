@@ -21,7 +21,6 @@ function edit_svg() {
 }
 
 
-
 class PostView extends Component {
     render() {
         let post = this.props.post
@@ -69,7 +68,8 @@ class PostView extends Component {
                                 let idx = color_idx
                                 color_idx++
                                 return (
-                                    <Tag key={dir.directory_id}
+                                    <Tag cursor="pointer"
+                                         key={dir.directory_id}
                                          color={get_dir_color(idx)}
                                     >
                                         {dir.name}

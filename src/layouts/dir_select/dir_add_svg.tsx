@@ -3,11 +3,9 @@ import {Box} from "@mui/joy";
 
 export function add_dir_svg() {
     return (
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="24" height="25" rx="4" fill="#44B75E" fill-opacity="0.2"/>
-            <path
-                d="M11.4392 10.868V13.328H8.96719V14.456H11.4392V16.928H12.5672V14.456H15.0272V13.328H12.5672V10.868H11.4392Z"
-                fill="#44B75E"/>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="4" fill="#44B75E" fill-opacity="0.2"/>
+            <path d="M14.9922 20.3537V13.6321H16.3295V20.3537H14.9922ZM12.3026 17.6591V16.3217H19.0241V17.6591H12.3026Z" fill="#44B75E"/>
         </svg>
     )
 }
@@ -16,7 +14,7 @@ class DirAddSvg extends Component {
     render() {
         return (
             <Box sx={{
-                cursor: "pointer"
+                cursor: "pointer",
             }}>
                 {add_dir_svg()}
             </Box>

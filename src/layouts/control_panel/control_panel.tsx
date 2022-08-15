@@ -9,7 +9,6 @@ import styled from "styled-components";
 
 import React, {Component} from 'react';
 import {PaStateMan} from "@/utills/pa_state_man";
-import {history} from 'umi';
 import {RouteControl} from "@/store/route_control";
 import {DirectoryVo} from "@/store/models/directory";
 import {SetBarAdd} from "@/layouts/control_panel/childs/setbar_add";

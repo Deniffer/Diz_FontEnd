@@ -1,6 +1,22 @@
 import React, {Component} from 'react';
-import {Box, Button, Chip, TextField} from "@mui/joy";
+import {Box, Button, Chip, TextField, Typography} from "@mui/joy";
 import DirAddSvg from "@/layouts/dir_select/dir_add_svg";
+import LittleInput from "@/layouts/dir_select/childs/little_input";
+import {Tag} from "@/layouts/reuseable_comps/tag";
+import {curstyle} from "@/theme/curtheme";
+import dir_select_styles from './dir_select.less'
+
+function get_cancel_svg() {
+    return (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4L4 12" stroke="#96979C" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 4L12 12" stroke="#96979C" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    )
+}
 
 class DirAdd extends Component {
     state = {
@@ -11,7 +27,8 @@ class DirAdd extends Component {
         let new_dirs = this.state.new_dirs
         new_dirs.push({
             idx: this.state.new_dirs.length,
-            name: ""
+            name: "",
+            focused: true
         })
         this.setState({
             new_dirs: this.state.new_dirs
@@ -42,28 +59,81 @@ class DirAdd extends Component {
         })
     }
 
+    onBlur = (idx: Number) => {
+        let dirs = this.state.new_dirs
+        let new_dirs = []
+        for (let i = 0; i < dirs.length; i++) {
+            if (dirs[i].idx === idx) {
+                dirs[i].focused = false
+                if (dirs[i].name !== "") {
+                    new_dirs.push(dirs[i])
+                }
+            } else {
+                new_dirs.push(dirs[i])
+            }
+        }
+        this.setState({
+            new_dirs: new_dirs
+        })
+    }
+    onFocus = (idx: Number) => {
+        let dirs = this.state.new_dirs
+        for (let i = 0; i < dirs.length; i++) {
+            if (dirs[i].idx === idx) {
+                dirs[i].focused = true
+            } else {
+            }
+        }
+        this.setState({
+            new_dirs: dirs
+        })
+    }
+
     render() {
         return (
             <React.Fragment>
                 {
                     this.state.new_dirs.map(new_dir => {
                         return (
-                            <Box sx={{width: "120px"}}>
-                                <TextField size="sm" key={new_dir.idx} placeholder={"课程资料"}
-                                           onChange={(e) => {
-                                               this.handleDirNameOnChange(e.target.value, new_dir.idx)
-                                           }}
-                                           endDecorator={
-                                               <Chip sx={{
-                                                   cursor: "pointer"
-                                               }} onClick={() => {
-                                                   this.handleOnClickDeleteChip(new_dir.idx)
-                                               }} color="success" size="sm" variant="soft">
-                                                   ×
-                                               </Chip>
-                                           }>
-                                </TextField>
-                            </Box>
+                            <React.Fragment>
+                                <Box display={new_dir.focused ? "" : "none"}>
+                                    <LittleInput key={new_dir.idx} placeholder={"课程资料"}
+                                                 onChange={(e) => {
+                                                     this.handleDirNameOnChange(e.target.value, new_dir.idx)
+                                                 }}
+                                                 value={new_dir.name}
+                                                 onBlur={() => {
+                                                     this.onBlur(new_dir.idx)
+                                                 }}>
+                                    </LittleInput>
+                                </Box>
+                                <Box display={new_dir.focused ? "none" : ""}>
+                                    <Tag cursor=""
+                                         color={curstyle().colors.main_l}>
+                                        <Box sx={{
+                                            display: "flex",
+                                            direction: "row",
+                                        }}>
+                                            <Box sx={{
+                                                cursor: "pointer"
+                                            }} onClick={() => {
+                                                this.onFocus(new_dir.idx)
+                                            }}>
+                                                {new_dir.name}
+                                            </Box>
+                                            <Box sx={{
+                                                marginTop: "3px",
+                                                marginLeft: "10px",
+                                                cursor: "pointer"
+                                            }} onClick={() => {
+                                                this.handleOnClickDeleteChip(new_dir.idx)
+                                            }}>
+                                                {get_cancel_svg()}
+                                            </Box>
+                                        </Box>
+                                    </Tag>
+                                </Box>
+                            </React.Fragment>
                         )
                     })
                 }

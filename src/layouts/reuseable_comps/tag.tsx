@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 interface Prop {
     children: any,
     color: string,
+    cursor: string
 }
 
 export class Tag extends PureComponent<Prop> {
@@ -20,33 +21,33 @@ export class Tag extends PureComponent<Prop> {
 
     prop = {
         children: undefined,
-        color: ""
+        color: "",
+        cursor: undefined
     }
 
     render() {
         const _Tag = styled.div`
-          cursor: pointer;
+          cursor: ${this.props.cursor};
           /* Adapt the colors based on primary prop */
           // &:hover {
-          //   background: ${curstyle().colors.gray_common}; // <Thing> when hovered
+            //   background: ${curstyle().colors.gray_common}; // <Thing> when hovered
           // }
           // &:active{
-          //   background: ${curstyle().colors.main_l};
-          //   color: ${curstyle().colors.main_s};
+            //   background: ${curstyle().colors.main_l};
+            //   color: ${curstyle().colors.main_s};
           // }
           //font-size: 1em;
-          // margin-right: ${curstyle().gap.common};
-          //margin-left: ${curstyle().gap.common};
+            // margin-right: ${curstyle().gap.common};
+            //margin-left: ${curstyle().gap.common};
           //text-align: left;
-          padding: ${curstyle().gap.ss + " " + curstyle().gap.s};
-          font-size: ${curstyle().fontsize.ss};
+            // padding: ${curstyle().gap.ss + " " + curstyle().gap.s};
+          font-size: ${curstyle().fontsize.s};
           border-radius: ${curstyle().radius.common};
           background: ${this.props.color};
-          padding: 0.1em 0.7em;
-          height: 25px;
+          padding: 0.4em 0.7em;
+          height: 32px;
           text-align: center;
           font-weight: 400;
-          font-size: 14px;
         `;
         return (
             <_Tag>

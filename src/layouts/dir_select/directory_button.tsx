@@ -21,7 +21,7 @@ class DirectoryButton extends Component {
                     clicked: new_clicked
                 })
             }}>
-                <Tag color={clicked ? curstyle().colors.main_l : curstyle().colors.gray_common}>
+                <Tag cursor={"pointer"} color={clicked ? curstyle().colors.main_l : curstyle().colors.gray_common}>
                     {this.props.name}
                 </Tag>
             </Box>
