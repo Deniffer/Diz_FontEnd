@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Box, Button, Typography} from "@mui/joy";
+import {Box, TextField, Typography} from "@mui/joy";
 import BraftEditor from "braft-editor";
 import 'braft-editor/dist/output.css'
 import {Tag} from "@/layouts/reuseable_comps/tag";
 import {get_dir_color} from "@/utills/computils";
-import DirAdd from "@/layouts/dir_select/dir_add";
 import DirUpdate from "@/layouts/dir_select/dir_update";
+import BraftEditorCustom from "@/layouts/braft_editor_custom/braft_editor_custom";
+import 'braft-editor/dist/index.css';
 
 function edit_svg() {
     return (
@@ -22,6 +23,68 @@ function edit_svg() {
 
 
 class PostView extends Component {
+    state = {
+        editing: false
+    }
+    edit_width = "45vw"
+    title_viewing = () => {
+        return (
+            <Typography sx={{
+                left: 0,
+            }} level="h4">
+                {this.props.post ? this.props.post.title : "胡乱写写"}
+            </Typography>
+        )
+    }
+
+    title_editing = () => {
+        return (
+            <Box sx={{
+                width: this.edit_width,
+                marginLeft: "32px",
+            }}>
+                <TextField fullWidth value={this.props.post.title} sz="lg"/>
+            </Box>
+        )
+    }
+
+    content_viewing = () => {
+        let post = this.props.post
+        const content = BraftEditor.createEditorState(post.content)
+        return (
+            <Box sx={{
+                marginTop: "20px",
+            }} className="braft-output-content"
+                 dangerouslySetInnerHTML={{__html: content.toHTML()}}>
+            </Box>
+        )
+    }
+
+    content_editing = () => {
+        return (
+            <React.Fragment>
+                <Box className="editor-wrapper" sx={{
+                    width: this.edit_width,
+                    marginTop: "20px",
+                    marginLeft: "32px",
+                    marginBottom: "60px",
+                }}>
+                    <BraftEditorCustom placeholder={this.state.placeholder}
+                                       handleEditorChange={this.handleEditorChange}
+                                       defaultValue={this.props.post.content}
+                                       height={"50vh"}
+                    >
+                    </BraftEditorCustom>
+                </Box>
+                <Box sx={{
+                    border: "1px solid rgba(68, 183, 94, 0.2)",
+                    marginBottom: "7vh"
+                }}>
+                </Box>
+            </React.Fragment>
+        )
+    }
+
     render() {
         let post = this.props.post
         const content = BraftEditor.createEditorState(post.content)
@@ -34,34 +97,43 @@ class PostView extends Component {
                     marginTop: "45px",
                     marginLeft: "45px",
                 }}>
+                    {/* 文章显示/编辑区域 */}
                     <Box sx={{
-                        display: "flex",
-                        direction: "row",
+                        border: !this.state.editing ? "" : "3px solid rgba(68, 183, 94, 0.2)",
+                        borderRadius: "15px"
                     }}>
-                        <Typography sx={{
-                            left: 0,
-                        }} level="h4">
-                            {this.props.post ? this.props.post.title : "胡乱写写"}
-                        </Typography>
                         <Box sx={{
-                            right: 0,
-                            margin: "auto",
-                            marginRight: "0"
+                            display: "flex",
+                            direction: "row",
+                            marginTop: "32px"
                         }}>
-                            {edit_svg()}
+                            {!this.state.editing ? this.title_viewing() : this.title_editing()}
+                            <Box sx={{
+                                right: 0,
+                                margin: "auto",
+                                marginRight: "0",
+                                cursor: "pointer"
+                            }} onClick={() => {
+                                this.setState({
+                                    editing: true
+                                })
+                            }}>
+                                {!this.state.editing ? edit_svg() : null}
+                            </Box>
                         </Box>
+                        {/* 文章正文内容 */}
+                        {!this.state.editing ?
+                            this.content_viewing() :
+                            this.content_editing()
+                        }
                     </Box>
-                    <Box sx={{
-                        marginTop: "20px"
-                    }}>
-                        <Box className="braft-output-content"
-                             dangerouslySetInnerHTML={{__html: content.toHTML()}}>
-                        </Box>
-                    </Box>
+
+                    {/* 帖子分组 */}
                     <Box sx={{
                         display: "flex",
                         direction: "row",
-                        gap: 1
+                        gap: 1,
+                        marginTop: "30px"
                     }}>
                         {
                             dirs.map(dir => {
@@ -91,7 +163,8 @@ class PostView extends Component {
 
 
             </React.Fragment>
-        );
+        )
+            ;
     }
 }
 

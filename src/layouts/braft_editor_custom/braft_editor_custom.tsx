@@ -13,7 +13,10 @@ class BraftEditorCustom extends Component {
                     onChange={this.props.handleEditorChange}
                     controls={controls}
                     placeholder={this.props.placeholder}
-                    contentStyle={{height: 110}}
+                    contentStyle={{
+                        height: this.props.height ? this.props.height : "210px"
+                    }}
+                    defaultValue={BraftEditor.createEditorState(this.props.defaultValue)}
                 />
             </React.Fragment>
         );

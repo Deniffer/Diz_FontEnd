@@ -4,7 +4,7 @@ import $course_id_styles from "@/pages/create_post/$course_id.less";
 import reuse from "@/assets/reuseable.less";
 import Radio from '@mui/joy/Radio';
 import {EditorState} from 'braft-editor';
-import 'braft-editor/dist/index.css'
+import 'braft-editor/dist/index.css';
 import DirSelect from "@/layouts/dir_select/dir_select";
 import {CreatePostRequest} from "@/store/apis/post_create";
 import BraftEditorCustom from "@/layouts/braft_editor_custom/braft_editor_custom";
@@ -125,11 +125,9 @@ class PostForm extends Component {
                     <Box sx={{
                         marginTop: "20px"
                     }}>
-                        <div className="editor-wrapper">
-                            <BraftEditorCustom placeholder={this.state.placeholder}
-                                               handleEditorChange={this.handleEditorChange}>
-                            </BraftEditorCustom>
-                        </div>
+                        <BraftEditorCustom placeholder={this.state.placeholder}
+                                           handleEditorChange={this.handleEditorChange}>
+                        </BraftEditorCustom>
                     </Box>
                     <Box sx={{
                         width: this.props.width,
