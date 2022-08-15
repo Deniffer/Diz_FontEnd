@@ -39,6 +39,12 @@ export class PostViewBar extends Component<Prop> {
 
     rendercnt = 0
 
+    view_post = () => {
+        RouteControl.push_post(
+            this.props.course_id, this.props.post.post_id,
+        )
+    }
+
     render() {
         this.rendercnt++;
         const tags = [];
@@ -59,11 +65,7 @@ export class PostViewBar extends Component<Prop> {
                     cursor: "pointer"
                 }}>
                     <Typography
-                        onClick={() => {
-                            RouteControl.push_post(
-                                this.props.course_id,this.props.post.post_id ,
-                            )
-                        }}
+                        onClick={this.view_post}
                         className={cp.listitem} level="h5"
                         sx={{
                             fontWeight: curstyle().fontweight.bold,
@@ -75,7 +77,7 @@ export class PostViewBar extends Component<Prop> {
                         {this.props.post.title}
                     </Typography>
 
-                    <Box
+                    <Box onClick={this.view_post}
                         dangerouslySetInnerHTML={{__html: this.props.post.abstract}}
                     >
                     </Box>
