@@ -12,6 +12,14 @@ class DirBtnEdit extends Component {
         changed: false
     }
 
+    componentDidMount() {
+        window.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.code === 'Enter') {
+                this.onBlur()
+            }
+        })
+    }
+
     handleOnChange = (e) => {
         console.log(e.target.value)
         this.setState({
@@ -20,7 +28,6 @@ class DirBtnEdit extends Component {
     }
 
     onBlur = () => {
-        console.log("lose!", this.state.name)
         this.setState({
             changed: this.state.name !== this.state.origin_name,
             clicked: false,

@@ -114,11 +114,6 @@ class ControlPanel extends Component {
                     >
                         {members ? members.map((member) => {
                             return (
-                                // <Box key={member.user_id}
-                                //      sx={{
-                                //          marginRight: "-10px"
-                                //      }}
-                                // >
                                     <Avatar
                                         key={member.user_id}
 
@@ -131,7 +126,6 @@ class ControlPanel extends Component {
                                                 marginRight: "-10px"
                                             }}
                                     />
-                                // </Box>
                             )
                         }) : null}
                     </Box>

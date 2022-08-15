@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
-import {Box, Button, Chip, TextField, Typography} from "@mui/joy";
+import {Box} from "@mui/joy";
 import DirAddSvg from "@/layouts/dir_select/dir_add_svg";
 import LittleInput from "@/layouts/dir_select/childs/little_input";
 import {Tag} from "@/layouts/reuseable_comps/tag";
 import {curstyle} from "@/theme/curtheme";
-import dir_select_styles from './dir_select.less'
 
 function get_cancel_svg() {
     return (
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
              xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 4L4 12" stroke="#96979C" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M4 4L12 12" stroke="#96979C" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 4L4 12" stroke="#96979C" strokeWidth="2"
+                  strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M4 4L12 12" stroke="#96979C" strokeWidth="2"
+                  strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
     )
 }
@@ -21,6 +20,18 @@ function get_cancel_svg() {
 class DirAdd extends Component {
     state = {
         new_dirs: []
+    }
+
+    componentDidMount() {
+        window.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.code === 'Enter') {
+                for (let i = 0; i < this.state.new_dirs.length; i++) {
+                    if (this.state.new_dirs[i].focused) {
+                        this.onBlur(i)
+                    }
+                }
+            }
+        })
     }
 
     handleOnClick = () => {
@@ -103,7 +114,8 @@ class DirAdd extends Component {
                                                  value={new_dir.name}
                                                  onBlur={() => {
                                                      this.onBlur(new_dir.idx)
-                                                 }}>
+                                                 }}
+                                    >
                                     </LittleInput>
                                 </Box> :
                                 <Box>
