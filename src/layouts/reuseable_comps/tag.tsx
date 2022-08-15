@@ -27,6 +27,7 @@ export class Tag extends PureComponent<Prop> {
 
     render() {
         const _Tag = styled.div`
+          user-select: none;
           cursor: ${this.props.cursor};
           /* Adapt the colors based on primary prop */
           // &:hover {

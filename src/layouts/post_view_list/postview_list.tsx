@@ -41,6 +41,9 @@ class PostViewList extends Component<Prop,State> {
             registval(state.course_cur.course_id,()=>{
                 this.fetchPosts()
             });
+            registval(state.course_dir_id_selected, ()=>{
+                this.fetchPosts()
+            })
         })
         this.fetchPosts()
     }
@@ -51,7 +54,6 @@ class PostViewList extends Component<Prop,State> {
 
     fetchPosts = () => {
         api_get_posts().then(res => {
-            console.log(res)
             if(res){
                 this.setState({
                     posts: res.posts
@@ -70,13 +72,11 @@ class PostViewList extends Component<Prop,State> {
                     {
                         this.state.posts.map(post => {
                             return (
-                                // <Box>
                                     <PostViewBarWrap
                                         key={post.post_id}
                                     >
                                         <PostViewBar course_id={course_id} key={post.post_id} post={post}/>
                                     </PostViewBarWrap>
-                                // </Box>
                             )
                         })
                     }
