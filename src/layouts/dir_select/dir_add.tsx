@@ -23,15 +23,7 @@ class DirAdd extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('keydown', (e: KeyboardEvent) => {
-            if (e.code === 'Enter') {
-                for (let i = 0; i < this.state.new_dirs.length; i++) {
-                    if (this.state.new_dirs[i].focused) {
-                        this.onBlur(i)
-                    }
-                }
-            }
-        })
+
     }
 
     handleOnClick = () => {

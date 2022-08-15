@@ -13,11 +13,6 @@ class DirBtnEdit extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('keydown', (e: KeyboardEvent) => {
-            if (e.code === 'Enter') {
-                this.onBlur()
-            }
-        })
     }
 
     handleOnChange = (e) => {
