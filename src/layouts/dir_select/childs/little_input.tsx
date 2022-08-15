@@ -3,6 +3,10 @@ import {Box} from "@mui/joy";
 import li from "./little_input.less"
 
 class LittleInput extends Component {
+    componentDidMount() {
+        this.refs.input.focus()
+    }
+
     render() {
         return (
             <Box sx={{
@@ -12,7 +16,7 @@ class LittleInput extends Component {
                        onChange={this.props.onChange} value={this.props.value}
                        defaultValue={this.props.defaultValue}
                        onBlur={this.props.onBlur}
-                       autoFocus
+                       ref={"input"}
                 >
                 </input>
             </Box>

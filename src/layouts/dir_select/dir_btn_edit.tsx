@@ -30,30 +30,25 @@ class DirBtnEdit extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            !this.state.clicked ?
                 <Box onClick={() => {
-                         this.setState({
-                             clicked: true
-                         })
-                     }}
+                    this.setState({
+                        clicked: true
+                    })
+                }}
                 >
-                    <Box sx={{
-                        display: this.state.clicked ? "none" : ""
-                    }}>
-                        <Tag color={this.state.changed ? curstyle().colors.main_l : curstyle().colors.gray_common} cursor={"pointer"}>
-                            {this.state.name}
-                        </Tag>
-                    </Box>
-                </Box>
+                    <Tag color={this.state.changed ? curstyle().colors.main_l : curstyle().colors.gray_common}
+                         cursor={"pointer"}>
+                        {this.state.name}
+                    </Tag>
+                </Box> :
                 <LittleInput defaultValue={this.props.dir.name}
                              onChange={(e) => {
                                  this.handleOnChange(e)
                              }}
                              onBlur={this.onBlur}
-                             display={this.state.clicked ? "" : "none"}
                 >
                 </LittleInput>
-            </React.Fragment>
         );
     }
 }

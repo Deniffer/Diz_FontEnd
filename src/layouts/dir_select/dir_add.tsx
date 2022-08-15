@@ -81,7 +81,6 @@ class DirAdd extends Component {
         for (let i = 0; i < dirs.length; i++) {
             if (dirs[i].idx === idx) {
                 dirs[i].focused = true
-            } else {
             }
         }
         this.setState({
@@ -95,8 +94,8 @@ class DirAdd extends Component {
                 {
                     this.state.new_dirs.map(new_dir => {
                         return (
-                            <React.Fragment>
-                                <Box display={new_dir.focused ? "" : "none"}>
+                            new_dir.focused ?
+                                <Box>
                                     <LittleInput key={new_dir.idx} placeholder={"课程资料"}
                                                  onChange={(e) => {
                                                      this.handleDirNameOnChange(e.target.value, new_dir.idx)
@@ -106,8 +105,8 @@ class DirAdd extends Component {
                                                      this.onBlur(new_dir.idx)
                                                  }}>
                                     </LittleInput>
-                                </Box>
-                                <Box display={new_dir.focused ? "none" : ""}>
+                                </Box> :
+                                <Box>
                                     <Tag cursor=""
                                          color={curstyle().colors.main_l}>
                                         <Box sx={{
@@ -133,7 +132,6 @@ class DirAdd extends Component {
                                         </Box>
                                     </Tag>
                                 </Box>
-                            </React.Fragment>
                         )
                     })
                 }
