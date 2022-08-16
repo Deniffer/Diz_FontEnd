@@ -9,7 +9,8 @@ import {curstyle} from "@/theme/curtheme";
 import PostViewList from "@/layouts/post_view_list/postview_list";
 import {RouteControl} from "@/store/route_control";
 import {PaStateMan} from "@/utills/pa_state_man";
-import {Course} from "@/store/course_list";
+// @ts-ignore
+import {Course} from '@/store/course_list';
 
 class Index extends Component {
     on_route_change(){

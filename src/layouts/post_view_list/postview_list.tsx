@@ -50,6 +50,7 @@ class PostViewList extends Component<Prop, State> {
                 this.fetchPosts()
             });
             registval(state.course_dir_id_selected, () => {
+                console.log("dir change!!")
                 this.fetchPosts()
             })
         })

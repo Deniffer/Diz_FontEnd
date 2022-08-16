@@ -15,6 +15,7 @@ class PostsPanel extends PureComponent<Prop> {
     componentDidMount() {
         PaStateMan.regist_comp(this, (registval, state) => {
             registval(state.course_cur.course_id,()=>{
+
                 this.fetchPosts()
             });
             registval(state.post_id_selected)//切换文章需要重新渲染
@@ -27,7 +28,7 @@ class PostsPanel extends PureComponent<Prop> {
 
     fetchPosts = () => {
         api_get_posts().then(res => {
-            console.log(res)
+            console.log("fetch posts!!")
             if(res){
                 this.setState({
                     posts: res.posts

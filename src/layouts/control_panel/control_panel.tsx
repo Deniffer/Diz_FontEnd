@@ -2,7 +2,7 @@ import reuse from '@/assets/reuseable.less'
 import cp from './control_panel.less'
 
 import Button from '@mui/joy/Button';
-import {Avatar, Box, Typography} from "@mui/joy";
+import {Box, Typography} from "@mui/joy";
 import {curstyle} from "@/theme/curtheme";
 import {SetBar} from "@/layouts/control_panel/childs/setbar";
 import styled from "styled-components";
@@ -80,7 +80,7 @@ class ControlPanel extends Component {
                             {state_course.getCurCourse().duration == -1 ?
                                 begin_at_desc :
                                 state_course.getCurCourse().week_no > 0 ?
-                                    "第" + state_course.getCurCourse().week_no + "周"+"（共"+state_course.getCurCourse().total_week+"周）" :
+                                    "第" + state_course.getCurCourse().week_no + "周" + "（共" + state_course.getCurCourse().total_week + "周）" :
                                     begin_at_desc + " (已结束）"
                             }
                         </Typography>

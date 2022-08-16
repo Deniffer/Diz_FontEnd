@@ -15,6 +15,10 @@ import {baseUrl} from "@/store/apis/baseurl";
 export class CourceStoreProxy {
     async fetchCourceDetailAndSetCur(course: Course,pushroute:boolean=true) {
         console.log("fetchCourceDetailAndSetCur", course.course_id)
+        if (this.state.course_cur.course_id!=course.course_id){
+            this.state.course_dir_id_selected = -1
+        }
+
         await axios.post(baseUrl + "/get_course_detail?mock_login=123", {
             "course_id": course.course_id
         }).then(res => {
@@ -25,11 +29,11 @@ export class CourceStoreProxy {
             this.state.course_cur = cur_course
             // if(!compare_one_layer( this.state.course_cur,cur_course)){
             // console.log("curcourse_change",this.state.course_cur,cur_course)
-            if(this.state.course_cur.course_id!=cur_course.course_id){
-
-                //需要复位选择栏为全部
-                this.state.course_dir_id_selected=-1
-            }
+            // if(this.state.course_cur.course_id!=cur_course.course_id){
+            //     console.log("reset dir_id")
+            //     //需要复位选择栏为全部
+            //     this.state.course_dir_id_selected = -1
+            // }
             if(pushroute){
                 RouteControl.push_cid_inroute(cur_course.course_id)
             }
