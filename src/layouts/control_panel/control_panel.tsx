@@ -20,6 +20,7 @@ const MemberWidContain = styled.div`
   padding-left: ${curstyle().gap.common};
 `;
 
+
 class ControlPanel extends Component {
     state = {}
 
@@ -40,16 +41,18 @@ class ControlPanel extends Component {
         const dirs = state_course.getCurCourse().directories
         // @ts-ignore
         const members = state_course.getCurCourse().members
+
+        const begin_at_desc = "开始时间: " + state_course.getCurCourse().begin_at
         return (
             <div className={reuse.col_flex2side_container + " "
             + cp.cpcont
             }>
                 <Box
                     sx={{
-                        height:"calc(100% - 42px)",
+                        height: "calc(100% - 42px)",
                         display: 'flex',
                         flexDirection: 'column',
-                        overflowY:'scroll'
+                        overflowY: 'scroll'
                         // height: "100%"
                     }}
                 >
@@ -74,11 +77,16 @@ class ControlPanel extends Component {
                                         color: curstyle().colors.font_second
                                     }}
                         >
-                            开始时间: {state_course.getCurCourse().begin_at}
+                            {state_course.getCurCourse().duration == -1 ?
+                                begin_at_desc :
+                                state_course.getCurCourse().week_no > 0 ?
+                                    "第" + state_course.getCurCourse().week_no + "周"+"（共"+state_course.getCurCourse().total_week+"周）" :
+                                    begin_at_desc + " (已结束）"
+                            }
                         </Typography>
                     </Box>
                     <Button onClick={e => {
-                        RouteControl.push_createpost( state_course.getCurCourse().course_id)
+                        RouteControl.push_createpost(state_course.getCurCourse().course_id)
                         // history.push("/create_post/" + state_course.getCurCourse().course_id);
                     }
                         // (window.location.href = "/create_post/" + this.props.cur_course.course_id)
@@ -97,7 +105,7 @@ class ControlPanel extends Component {
                         全部
                     </SetBar>
                     {
-                        dirs ? dirs.map((dir:DirectoryVo) => {
+                        dirs ? dirs.map((dir: DirectoryVo) => {
                             return (
                                 <SetBar key={dir.directory_id} dirid={dir.directory_id}>
                                     {dir.name}
