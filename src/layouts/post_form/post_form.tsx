@@ -86,34 +86,34 @@ class PostForm extends Component {
         const marginLeft = "20px"
         return (
             <React.Fragment>
-                <Box sx={{
-                    top: "205px",
-                    width: this.props.width,
-                }}
-                     className={$course_id_styles.gray_outline
-                     }>
-                </Box>
-                <Box className={reuse.row_flex2side_container}
-                     sx={{
-                         marginTop: "40px",
-                         marginLeft: marginLeft,
-                     }}
-                >
-                    <RadioGroup
-                        defaultValue="post"
-                        name="controlled-radio-buttons-group"
-                    >
-                        <List row={true} sx={{
-                            gap: 5
-                        }}>
-                            <Radio onChange={this.handleTypeOnChange} variant="soft" color="success" value="post"
-                                   label="帖子"/>
-                            <Radio onChange={this.handleTypeOnChange} variant="soft" color="success"
-                                   value="question"
-                                   label="提问"/>
-                        </List>
-                    </RadioGroup>
-                </Box>
+                {/*<Box sx={{*/}
+                {/*    top: "205px",*/}
+                {/*    width: this.props.width,*/}
+                {/*}}*/}
+                {/*     className={$course_id_styles.gray_outline*/}
+                {/*     }>*/}
+                {/*</Box>*/}
+                {/*<Box className={reuse.row_flex2side_container}*/}
+                {/*     sx={{*/}
+                {/*         marginTop: "40px",*/}
+                {/*         marginLeft: marginLeft,*/}
+                {/*     }}*/}
+                {/*>*/}
+                {/*    <RadioGroup*/}
+                {/*        defaultValue="post"*/}
+                {/*        name="controlled-radio-buttons-group"*/}
+                {/*    >*/}
+                {/*        <List row={true} sx={{*/}
+                {/*            gap: 5*/}
+                {/*        }}>*/}
+                {/*            <Radio onChange={this.handleTypeOnChange} variant="soft" color="success" value="post"*/}
+                {/*                   label="帖子"/>*/}
+                {/*            <Radio onChange={this.handleTypeOnChange} variant="soft" color="success"*/}
+                {/*                   value="question"*/}
+                {/*                   label="提问"/>*/}
+                {/*        </List>*/}
+                {/*    </RadioGroup>*/}
+                {/*</Box>*/}
 
                 <Box sx={{
                     width: '100%',

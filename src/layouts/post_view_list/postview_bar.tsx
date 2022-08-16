@@ -53,7 +53,9 @@ export class PostViewBar extends Component<Prop> {
             // @ts-ignore
             tags.push(
                 <TagWrap key={i}>
-                    <Tag cursor="pointer" color={get_dir_color(i)}>
+                    <Tag
+                        cursor=""
+                        color={get_dir_color(i)}>
                         {dirs[i].name}
                     </Tag>
                 </TagWrap>
@@ -78,7 +80,7 @@ export class PostViewBar extends Component<Prop> {
                     </Typography>
 
                     <Box onClick={this.view_post}
-                        dangerouslySetInnerHTML={{__html: this.props.post.abstract}}
+                         dangerouslySetInnerHTML={{__html: this.props.post.abstract}}
                     >
                     </Box>
                 </Box>
@@ -106,7 +108,6 @@ export class PostViewBar extends Component<Prop> {
                             最新 {this.props.post.updated_at}
                         </Box>
                     </Box>
-
                 </Box>
             </Fragment>
         )

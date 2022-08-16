@@ -48,6 +48,7 @@ class CourseList extends Component {
                         const color_s = curstyle().colors[colors[ci] + "_s"];
                         color_index++;
                         color_index %= colors.length;
+                        const cur_course = PaStateMan.getstate().courseProxy().getCurCourse()
                         return (
                             <Box key={course.course_id}
                                  sx={{
@@ -58,7 +59,10 @@ class CourseList extends Component {
                                  }}
                                  onClick={() => this.handleCourseClick(course)}
                             >
-                                <Box data-tip={course.name}>
+                                <Box sx={{
+                                    "boarder": "3px solid #44B75E",
+                                    "border-radius": "8px"
+                                }} data-tip={course.name}>
                                     <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <rect width="60" height="60" rx="8" fill={color_l} fillOpacity="0.2"/>
@@ -73,19 +77,19 @@ class CourseList extends Component {
                         );
                     }
                 )}
-                <Box sx={{
-                    "textAlign": "center",
-                    "cursor": "pointer",
-                    "marginTop": curstyle().gap.common,
-                    "marginLeft": curstyle().gap.common,
-                    "marginRight": curstyle().gap.common,
-                }}>
-                    {/* 创建课程的button */}
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="60" height="60" rx="8" fill="#F6F6F9"/>
-                        <path d="M37 29H31V23H29V29H23V31H29V37H31V31H37V29Z" fill="#96979C"/>
-                    </svg>
-                </Box>
+                {/*<Box sx={{*/}
+                {/*    "textAlign": "center",*/}
+                {/*    "cursor": "pointer",*/}
+                {/*    "marginTop": curstyle().gap.common,*/}
+                {/*    "marginLeft": curstyle().gap.common,*/}
+                {/*    "marginRight": curstyle().gap.common,*/}
+                {/*}}>*/}
+                {/*    /!* 创建课程的button *!/*/}
+                {/*    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+                {/*        <rect width="60" height="60" rx="8" fill="#F6F6F9"/>*/}
+                {/*        <path d="M37 29H31V23H29V29H23V31H29V37H31V31H37V29Z" fill="#96979C"/>*/}
+                {/*    </svg>*/}
+                {/*</Box>*/}
             </React.Fragment>
         );
     }

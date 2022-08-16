@@ -68,7 +68,7 @@ export default class Headline extends PureComponent<Prop> {
                     {postpagetitle}
                 </Box>
 
-                <div>user</div>
+                {/*<div>user</div>*/}
             </div>
         );
     }

@@ -13,12 +13,13 @@ export class GetPostsRes {
     }
 }
 
-export function api_get_posts(): Promise<undefined | GetPostsRes> {
+export function api_get_posts(offset: Number): Promise<undefined | GetPostsRes> {
     const dir_id = PaStateMan.getstate().course_dir_id_selected_get() < 0 ? null : PaStateMan.getstate().course_dir_id_selected_get()
     return axios.post(baseUrl + "/get_posts?mock_login=123", {
         course_id: PaStateMan.getstate().courseProxy().getCurCourse().course_id,
         limit: 20,
-        directory_id: dir_id
+        directory_id: dir_id,
+        offset: offset ? offset : 0
     }).then(res => {
         console.log(res)
         if (res.status == 200) {

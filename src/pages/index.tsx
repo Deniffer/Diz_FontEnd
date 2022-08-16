@@ -57,17 +57,8 @@ class Index extends Component {
                     <div className={index_styles.control_panel}>
                         <ControlPanel/>
                     </div>
-                    <Box className={
-                        reuse_styles.fillleft_flex
-                    }
-                         sx={{
-                             height: "100%",
-                             overflowY: "scroll",
-                         }}
-                    >
-                       <PostViewList>
-                       </PostViewList>
-                    </Box>
+                    <PostViewList>
+                    </PostViewList>
                 </Box>
             </div>
         );

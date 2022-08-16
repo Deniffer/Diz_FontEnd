@@ -107,32 +107,32 @@ class ControlPanel extends Component {
                     }
                     <SetBarAdd/>
                 </Box>
-                <MemberWidContain
-                    className={reuse.row_flex2side_container}
-                >
-                    <Box className={reuse.row_flexcontainer}
-                    >
-                        {members ? members.map((member) => {
-                            return (
-                                    <Avatar
-                                        key={member.user_id}
-
-                                        src={member.avatar}
-                                            sx={{
-                                                width: curstyle().avatorsize.little,
-                                                height: curstyle().avatorsize.little,
-                                                cursor: "pointer",
-                                                borderRadius: "50%",
-                                                marginRight: "-10px"
-                                            }}
-                                    />
-                            )
-                        }) : null}
-                    </Box>
-                    <Button>
-                        邀请成员
-                    </Button>
-                </MemberWidContain>
+                {/* 邀请成员放到下期 */}
+                {/*<MemberWidContain*/}
+                {/*    className={reuse.row_flex2side_container}*/}
+                {/*>*/}
+                {/*    <Box className={reuse.row_flexcontainer}*/}
+                {/*    >*/}
+                {/*        {members ? members.map((member) => {*/}
+                {/*            return (*/}
+                {/*                    <Avatar*/}
+                {/*                        key={member.user_id}*/}
+                {/*                        src={member.avatar}*/}
+                {/*                            sx={{*/}
+                {/*                                width: curstyle().avatorsize.little,*/}
+                {/*                                height: curstyle().avatorsize.little,*/}
+                {/*                                cursor: "pointer",*/}
+                {/*                                borderRadius: "50%",*/}
+                {/*                                marginRight: "-10px"*/}
+                {/*                            }}*/}
+                {/*                    />*/}
+                {/*            )*/}
+                {/*        }) : null}*/}
+                {/*    </Box>*/}
+                {/*    <Button>*/}
+                {/*        邀请成员*/}
+                {/*    </Button>*/}
+                {/*</MemberWidContain>*/}
             </div>
         );
     }
