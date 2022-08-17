@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {Input1} from "@/layouts/reuseable_comps/input";
 import {Box} from "@mui/joy";
-import {api_dirs_create} from "@/store/apis/dirs_create";
+import {api_dirs_create} from "@/store/apis/dirs";
 import {DirectoryVo} from "@/store/models/directory";
 import {message} from "antd";
 

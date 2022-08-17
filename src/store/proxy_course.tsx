@@ -4,7 +4,7 @@ import {PaState} from "@/store/pastate";
 import {RouteControl} from "@/store/route_control";
 import {Member} from "@/store/models/member";
 import {DirectoryVo} from "@/store/models/directory";
-import {api_dirs_create} from "@/store/apis/dirs_create";
+import {api_dirs_create} from "@/store/apis/dirs";
 import {Course} from "@/store/models/course";
 import {baseUrl} from "@/store/apis/baseurl";
 

@@ -5,7 +5,7 @@ import DirAdd from "@/layouts/dir_select/dir_add";
 import DirBtnEdit from "@/layouts/dir_select/dir_btn_edit";
 import axios from "axios";
 import {baseUrl} from "@/store/apis/baseurl";
-import {api_dirs_create} from "@/store/apis/dirs_create";
+import {api_dirs_create} from "@/store/apis/dirs";
 import DirAddSvg from "@/layouts/dir_select/dir_add_svg";
 
 class DirUpdate extends Component {
