@@ -10,6 +10,7 @@ import axios from "axios";
 import {api_post_create} from "@/store/apis/post_create";
 import {RouteControl} from "@/store/route_control";
 import {baseUrl} from "@/store/apis/baseurl";
+import {api_dirs_create} from "@/store/apis/dirs";
 
 class $CourseId extends Component {
     state = {
@@ -34,14 +35,40 @@ class $CourseId extends Component {
     }
 
     handlePublishPostClick = () => {
+        let create_post = (post: any) => {
+            api_post_create(post).then((res) => {
+                if (res) {
+                    alert(res.meta.msg)
+                    RouteControl.back()
+                }
+            })
+        }
+
         const post = this.refs.post_form.state.new_post
+        const new_dirs = this.refs.post_form.state.new_dirs
         post.course_id = this.state.course_id
-        api_post_create(post).then((res) => {
-            if (res) {
-                alert(res.meta.msg)
-                RouteControl.back()
-            }
-        })
+        for (let i = 0; i < new_dirs.length; i++) {
+            new_dirs[i].course_id = this.state.course_id
+        }
+
+        if (new_dirs.length > 0) {
+            api_dirs_create(new_dirs).then(res => {
+                if (res?.meta.code === 0) {
+                    let new_dirs = res.directories
+                    if (new_dirs) {
+                        for (let i = 0; i < new_dirs.length; i++) {
+                            post.directory_ids.push(new_dirs[i].directory_id)
+                        }
+                    }
+                    create_post(post)
+                } else {
+                    alert(res?.meta.msg)
+                    return
+                }
+            })
+        } else {
+            create_post(post)
+        }
     }
 
     render() {

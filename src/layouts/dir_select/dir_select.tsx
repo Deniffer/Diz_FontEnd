@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Box, Typography} from "@mui/joy";
 import DirectoryButton from "@/layouts/dir_select/directory_button";
 import 'antd/dist/antd.css';
-import DirUpdate from "@/layouts/dir_select/dir_update";
+import DirAdd from "@/layouts/dir_select/dir_add";
 
 class DirSelect extends Component {
     render() {
@@ -25,7 +25,7 @@ class DirSelect extends Component {
                         dirs ? dirs.map(dir => {
                             let clicked = false
                             return (
-                                <Box key={dir.directory_id} >
+                                <Box key={dir.directory_id}>
                                     <DirectoryButton handleOnChange={this.props.handleDirOnChange} name={dir.name}
                                                      clicked={clicked} dir_id={dir.directory_id}>
                                     </DirectoryButton>
@@ -33,11 +33,7 @@ class DirSelect extends Component {
                             )
                         }) : null
                     }
-                    <DirUpdate fetchCurCourse={this.props.fetchCurCourse}
-                               course_id={this.props.cur_course.course_id}
-                               gap={gap}
-                               dirs={dirs}>
-                    </DirUpdate>
+                    <DirAdd handleOnChange={this.props.handleNewDirsOnChange}/>
                 </Box>
             </React.Fragment>
         );

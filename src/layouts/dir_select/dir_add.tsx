@@ -34,7 +34,7 @@ class DirAdd extends Component {
             focused: true
         })
         this.setState({
-            new_dirs: this.state.new_dirs
+            new_dirs: new_dirs
         })
     }
 
@@ -48,6 +48,7 @@ class DirAdd extends Component {
         this.setState({
             new_dirs: dirs
         })
+        this.props.handleOnChange(dirs)
     }
 
     handleDirNameOnChange = (value, idx) => {
@@ -60,6 +61,7 @@ class DirAdd extends Component {
         this.setState({
             new_dirs: dirs
         })
+        this.props.handleOnChange(dirs)
     }
 
     onBlur = (idx: Number) => {
@@ -78,6 +80,7 @@ class DirAdd extends Component {
         this.setState({
             new_dirs: new_dirs
         })
+        this.props.handleOnChange(this.state.new_dirs)
     }
     onFocus = (idx: Number) => {
         let dirs = this.state.new_dirs
@@ -89,6 +92,7 @@ class DirAdd extends Component {
         this.setState({
             new_dirs: dirs
         })
+        this.props.handleOnChange(this.state.new_dirs)
     }
 
     render() {

@@ -12,6 +12,7 @@ import BraftEditorCustom from "@/layouts/braft_editor_custom/braft_editor_custom
 
 class PostForm extends Component {
     state = {
+        // new_post和new_dirs的状态会直接被上层调用
         new_post: new CreatePostRequest(
             "",
             "",
@@ -20,6 +21,7 @@ class PostForm extends Component {
             0,
             "note"
         ),
+        new_dirs: [],
         placeholder: "请输入正文..."
     }
 
@@ -79,6 +81,12 @@ class PostForm extends Component {
         this.state.new_post.directory_ids = dir_ids
         this.setState({
             new_post: this.state.new_post
+        })
+    }
+
+    handleNewDirsOnChange = (new_dirs) => {
+        this.setState({
+            new_dirs: new_dirs
         })
     }
 
@@ -146,7 +154,9 @@ class PostForm extends Component {
                             <DirSelect
                                 fetchCurCourse={this.props.fetchCurCourse}
                                 cur_course={this.props.cur_course}
-                                handleDirOnChange={this.handleDirOnChange}/>
+                                handleDirOnChange={this.handleDirOnChange}
+                                handleNewDirsOnChange={this.handleNewDirsOnChange}
+                            />
                         </Box>
                         <Box sx={{
                             width: this.props.width,

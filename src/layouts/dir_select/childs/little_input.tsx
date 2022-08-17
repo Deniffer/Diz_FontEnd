@@ -11,6 +11,10 @@ class LittleInput extends Component {
         return (
             <Box sx={{
                 display: this.props.display
+            }} onKeyDown={(e) => {
+                if (e.code === 'Enter') {
+                    this.props.onBlur()
+                }
             }}>
                 <input className={li.little_input} placeholder={this.props.placeholder}
                        onChange={this.props.onChange} value={this.props.value}
