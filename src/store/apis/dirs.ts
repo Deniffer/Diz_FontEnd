@@ -22,7 +22,7 @@ export function api_dirs_create(dirs: DirectoryVo[]): Promise<undefined | Respon
     })
 }
 
-export function api_dir_delete(dirid: Number, doFunc) {
+export function api_dir_delete(dirid: Number, dealFail) {
     axios.delete(baseUrl + "/course/directory?mock_login=123", {
         data: {
             directory_id: dirid
@@ -32,7 +32,19 @@ export function api_dir_delete(dirid: Number, doFunc) {
             console.log(res.data.meta.msg)
             alert("删除分组失败！")
         } else {
-            doFunc()
+            dealFail()
+        }
+    })
+}
+
+export function api_dir_update(dirid: Number, name: string, doFunc) {
+    axios.patch(baseUrl + "/course/directory?mock_login=123", {
+        directory_id: dirid,
+        name: name
+    }).then(res => {
+        if (res.data.meta.code === 0) {
+            alert('更新成功，将重新刷新页面！')
+            window.location.reload()
         }
     })
 }
