@@ -18,7 +18,14 @@ class Index extends Component {
         if(cid!=undefined){
             PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(
                 {course_id:cid} as Course,false
-            )
+            ).then(()=>{
+                //加载完成后同步dirid
+                const did=RouteControl.get_dirid_in_route()
+                if(did){
+                    console.log("did in page")
+                    PaStateMan.getstate().course_dir_select(did)
+                }
+            })
         }
     }
     componentDidMount() {

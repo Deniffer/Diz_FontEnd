@@ -14,9 +14,12 @@ import {PaStateMan} from "@/utills/pa_state_man";
 
 
 export class CourceStoreProxy {
+
+    //情况1.切换课程，
+    //情况2.刷新页面
     async fetchCourceDetailAndSetCur(course: Course,pushroute:boolean=true) {
         console.log("fetchCourceDetailAndSetCur", course.course_id)
-        if (this.state.course_cur.course_id!=course.course_id){
+        if (RouteControl.get_curcouseid_in_route()!=course.course_id){
             PaStateMan.getstate().course_dir_select(-1);
         }
 
