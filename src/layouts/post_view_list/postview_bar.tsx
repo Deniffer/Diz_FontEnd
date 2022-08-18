@@ -105,7 +105,7 @@ export class PostViewBar extends Component<Prop> {
                                 color: curstyle().colors.font_second
                             }}
                         >
-                            最新 {this.props.post.updated_at}
+                            最新编辑: {this.props.post.updated_at}
                         </Box>
                     </Box>
                 </Box>
