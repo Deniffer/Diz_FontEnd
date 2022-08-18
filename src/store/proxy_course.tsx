@@ -7,6 +7,7 @@ import {DirectoryVo} from "@/store/models/directory";
 import {api_dirs_create} from "@/store/apis/dirs";
 import {Course} from "@/store/models/course";
 import {baseUrl} from "@/store/apis/baseurl";
+import {PaStateMan} from "@/utills/pa_state_man";
 
 
 
@@ -16,7 +17,7 @@ export class CourceStoreProxy {
     async fetchCourceDetailAndSetCur(course: Course,pushroute:boolean=true) {
         console.log("fetchCourceDetailAndSetCur", course.course_id)
         if (this.state.course_cur.course_id!=course.course_id){
-            this.state.course_dir_id_selected = -1
+            PaStateMan.getstate().course_dir_select(-1);
         }
 
         await axios.post(baseUrl + "/get_course_detail?mock_login=123", {

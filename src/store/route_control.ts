@@ -70,7 +70,7 @@ export namespace RouteControl{
     export function push_cid_inroute(courseid:number){
         const p=getUrlParams(window.location.search)
         p.cid=courseid
-        p.did=-1
+        // p.did=-1
         // console.log("push before",window.location)
         history.push({
             pathname:window.location.pathname+ UrlParams2Suffix(p),
