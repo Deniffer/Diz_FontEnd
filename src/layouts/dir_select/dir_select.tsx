@@ -7,6 +7,7 @@ import DirAdd from "@/layouts/dir_select/dir_add";
 class DirSelect extends Component {
     render() {
         let dirs = this.props.cur_course.directories
+        console.log(dirs)
         dirs = dirs ? dirs : []
         const gap = 1
         return (

@@ -145,6 +145,7 @@ class PostView extends Component {
                                 dirs.map(dir => {
                                     let idx = color_idx
                                     color_idx++
+                                    console.log("key:", dir.directory_id)
                                     return (
                                         <Tag cursor="pointer"
                                              key={dir.directory_id}
@@ -158,8 +159,7 @@ class PostView extends Component {
                             <Box sx={{
                                 cursor: "pointer"
                             }}>
-                                <DirUpdate fetchCurCourse={this.props.fetchCurCourse}
-                                           course_id={this.props.course_id}
+                                <DirUpdate post_id={post.post_id}
                                            gap={1}
                                            dirs={dirs}>
                                 </DirUpdate>
