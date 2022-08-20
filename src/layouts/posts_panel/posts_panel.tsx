@@ -52,8 +52,6 @@ class PostsPanel extends PureComponent<Prop> {
 
           user-select: none;
           font-size: 1em;
-          margin-right: ${curstyle().gap.common};
-          margin-left: ${curstyle().gap.common};
           text-align: left;
           padding: ${curstyle().gap.m};
           //margin: 1em;
@@ -71,8 +69,6 @@ class PostsPanel extends PureComponent<Prop> {
 
           user-select: none;
           font-size: 1em;
-          margin-right: ${curstyle().gap.common};
-          margin-left: ${curstyle().gap.common};
           text-align: left;
           padding: ${curstyle().gap.m};
           color:${curstyle().colors.main_s};
@@ -84,7 +80,7 @@ class PostsPanel extends PureComponent<Prop> {
         return (
             <Box sx={{
                 // height:"100%",
-                padding:curstyle().gap.common,
+                padding:curstyle().gap.xxl,
             }}>
                 {this.state.posts.map((v)=>{
                     const selected=v.post_id==gstate.postid_selected_get();
