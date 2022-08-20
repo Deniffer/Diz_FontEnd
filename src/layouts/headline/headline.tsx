@@ -31,9 +31,16 @@ export default class Headline extends PureComponent<Prop> {
         const gstate = PaStateMan.getstate()
         const curcoursep=Course.make_proxy( gstate.courseProxy().getCurCourse())
         const dir=curcoursep.find_dir(gstate.course_dir_id_selected_get())
-        const postpagetitle = this.props.is_post ? <Box>{
+        const postpagetitle = this.props.is_post ? <Box
+            className={reuse.row_flexcontainer+" "+reuse.hand_mouse}
+            sx={{
+                alignItems:"center"
+            }}
+        ><span onClick={()=>{
+            RouteControl.back2index();
+        }}>{
            curcoursep.inside.name
-        }/{dir?dir.name:"全部"}</Box> : undefined
+        }</span> / {dir?dir.name:"全部"}</Box> : undefined
         this.rendercnt++;
         return (
             <div className={reuse.row_flex2side_container}>
