@@ -134,12 +134,13 @@ class PostView extends Component {
                         direction: "row",
                         justifyContent: "space-between",
                         marginTop: "30px",
+                        flexWrap: "warp",
                     }}>
                         <Box sx={{
                             display: "flex",
                             direction: "row",
                             gap: 1,
-
+                            flexWrap: "warp",
                         }}>
                             {
                                 dirs.map(dir => {

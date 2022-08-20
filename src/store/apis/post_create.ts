@@ -38,8 +38,8 @@ export function api_post_create(req: CreatePostRequest): Promise<undefined> | Pr
     })
 }
 
-export function api_post_dir_rel_create(req: UpdatePostRequest) {
-    return axios.post(baseUrl + "/post_directory_relation?mock_login=123", req).then(
+export function api_post_dir_rel_update(req: UpdatePostRequest) {
+    return axios.patch(baseUrl + "/post_directory_relation?mock_login=123", req).then(
         res => {
             return res.data
         }

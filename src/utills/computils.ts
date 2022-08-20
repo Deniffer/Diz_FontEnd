@@ -8,6 +8,6 @@ export function attch_prop2fakecomp<CompT>(comp: CompT, prop: any) {
 
 export function get_dir_color(idx: Number): string {
     const colors = ['_1', '_2', '_3', '_4', '_5', '_6', 'main']
-    return curstyle().colors[colors[idx] + "_l"]
+    return curstyle().colors[colors[idx % colors.length] + "_l"]
 }
 

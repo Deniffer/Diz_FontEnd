@@ -7,7 +7,7 @@ import DirAddSvg from "@/layouts/dir_select/dir_add_svg";
 import {PaStateMan} from "@/utills/pa_state_man";
 import DirectoryButton from "@/layouts/dir_select/directory_button";
 import {Course} from "@/store/models/course";
-import {api_post_create, api_post_dir_rel_create} from "@/store/apis/post_create";
+import {api_post_create, api_post_dir_rel_create, api_post_dir_rel_update} from "@/store/apis/post_create";
 
 class DirUpdate extends Component {
     state = {
@@ -23,6 +23,16 @@ class DirUpdate extends Component {
         })
     }
 
+    clicked_directory_ids() {
+        let directory_ids = []
+        for (let i = 0; i < this.state.dirs.length; i++) {
+            if (this.state.dirs[i].clicked) {
+                directory_ids.push(this.state.dirs[i].directory_id)
+            }
+        }
+        return directory_ids
+    }
+
     handleSubmit() {
         // 创建新的课程分组
         const new_dirs = this.state.new_dirs
@@ -30,7 +40,21 @@ class DirUpdate extends Component {
         for (let i = 0; i < new_dirs.length; i++) {
             new_dirs[i].course_id = course_id
         }
-        console.log(new_dirs)
+        let updateDirectoryIds = (directory_ids) => {
+            let req = {
+                directory_ids: directory_ids,
+                post_id: this.state.post_id,
+                course_id: course_id
+            }
+            api_post_dir_rel_update(req).then(
+                res => {
+                    if (res.meta.code !== 0) {
+                        alert("修改分组与帖子的关系失败了呜呜呜", res.meta.code)
+                    }
+                }
+            )
+            window.location.reload()
+        }
         if (new_dirs.length > 0) {
             api_dirs_create(new_dirs).then(res => {
                 if (res) {
@@ -39,25 +63,16 @@ class DirUpdate extends Component {
                         return
                     }
                     let dirs = res.directories ? res.directories : []
-                    let directory_ids = []
+                    let directory_ids = this.clicked_directory_ids()
                     for (let i = 0; i < dirs.length; i++) {
                         directory_ids.push(dirs[i].directory_id)
                     }
-                    let req = {
-                        directory_ids: directory_ids,
-                        post_id: this.state.post_id,
-                        course_id: course_id
-                    }
-                    api_post_dir_rel_create(req).then(
-                        res => {
-                            if (res.meta.code !== 0) {
-                                alert("创建分组与帖子的关系失败了呜呜呜", res.meta.code)
-                            }
-                        }
-                    )
-                    window.location.reload()
+                    updateDirectoryIds(directory_ids)
                 }
             })
+        } else {
+            let directory_ids = this.clicked_directory_ids()
+            updateDirectoryIds(directory_ids)
         }
     }
 
