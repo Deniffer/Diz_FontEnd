@@ -7,6 +7,7 @@ import {get_dir_color} from "@/utills/computils";
 import DirUpdate from "@/layouts/dir_select/dir_update";
 import BraftEditorCustom from "@/layouts/braft_editor_custom/braft_editor_custom";
 import 'braft-editor/dist/index.css';
+import {curstyle} from "@/theme/curtheme";
 
 function edit_svg() {
     return (
@@ -87,7 +88,6 @@ class PostView extends Component {
 
     render() {
         let post = this.props.post
-        const content = BraftEditor.createEditorState(post.content)
         const dirs = post.directories ? post.directories : []
         let color_idx = 0
         return (
@@ -132,36 +132,49 @@ class PostView extends Component {
                     <Box sx={{
                         display: "flex",
                         direction: "row",
-                        gap: 1,
-                        marginTop: "30px"
+                        justifyContent: "space-between",
+                        marginTop: "30px",
                     }}>
-                        {
-                            dirs.map(dir => {
-                                let idx = color_idx
-                                color_idx++
-                                return (
-                                    <Tag cursor="pointer"
-                                         key={dir.directory_id}
-                                         color={get_dir_color(idx)}
-                                    >
-                                        {dir.name}
-                                    </Tag>
-                                )
-                            })
-                        }
                         <Box sx={{
-                            cursor: "pointer"
+                            display: "flex",
+                            direction: "row",
+                            gap: 1,
+
                         }}>
-                            <DirUpdate fetchCurCourse={this.props.fetchCurCourse}
-                                       course_id={this.props.course_id}
-                                       gap={1}
-                                       dirs={dirs}>
-                            </DirUpdate>
+                            {
+                                dirs.map(dir => {
+                                    let idx = color_idx
+                                    color_idx++
+                                    return (
+                                        <Tag cursor="pointer"
+                                             key={dir.directory_id}
+                                             color={get_dir_color(idx)}
+                                        >
+                                            {dir.name}
+                                        </Tag>
+                                    )
+                                })
+                            }
+                            <Box sx={{
+                                cursor: "pointer"
+                            }}>
+                                <DirUpdate fetchCurCourse={this.props.fetchCurCourse}
+                                           course_id={this.props.course_id}
+                                           gap={1}
+                                           dirs={dirs}>
+                                </DirUpdate>
+                            </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                color: curstyle().colors.font_second,
+                                paddingTop: curstyle().gap.s,
+                            }}
+                        >
+                            {post.updated_at ? "最新编辑: " + post.updated_at : ""}
                         </Box>
                     </Box>
                 </Box>
-
-
             </React.Fragment>
         )
             ;
