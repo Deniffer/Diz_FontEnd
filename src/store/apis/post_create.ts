@@ -23,6 +23,10 @@ export class CreatePostResponse {
     }
 }
 
+export class UpdatePostDirRelRequest {
+
+}
+
 export class UpdatePostRequest {
 
 }
@@ -38,8 +42,18 @@ export function api_post_create(req: CreatePostRequest): Promise<undefined> | Pr
     })
 }
 
-export function api_post_dir_rel_update(req: UpdatePostRequest) {
+export function api_post_dir_rel_update(req: UpdatePostDirRelRequest) {
     return axios.patch(baseUrl + "/post_directory_relation?mock_login=123", req).then(
+        res => {
+            return res.data
+        }
+    ).catch(() => {
+
+    })
+}
+
+export function api_post_update(req: UpdatePostRequest) {
+    return axios.patch(baseUrl + "/post?mock_login=123", req).then(
         res => {
             return res.data
         }

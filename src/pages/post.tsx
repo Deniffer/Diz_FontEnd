@@ -123,7 +123,8 @@ class Post extends Component {
                     </Box>
                     <Box sx={{
                         width: "72vw",
-                        height: content_height
+                        height: content_height,
+                        overflowY: "scroll",
                     }}>
                         <PostView post={this.state.post} course_id={this.course_id}/>
                     </Box>

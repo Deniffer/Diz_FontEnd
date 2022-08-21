@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Box, TextField, Typography} from "@mui/joy";
-import BraftEditor from "braft-editor";
+import {Box, Button, TextField, Typography} from "@mui/joy";
+import BraftEditor, {EditorState} from "braft-editor";
 import 'braft-editor/dist/output.css'
 import {Tag} from "@/layouts/reuseable_comps/tag";
 import {get_dir_color} from "@/utills/computils";
@@ -8,6 +8,7 @@ import DirUpdate from "@/layouts/dir_select/dir_update";
 import BraftEditorCustom from "@/layouts/braft_editor_custom/braft_editor_custom";
 import 'braft-editor/dist/index.css';
 import {curstyle} from "@/theme/curtheme";
+import {api_post_create, api_post_update} from "@/store/apis/post_create";
 
 function edit_svg() {
     return (
@@ -25,7 +26,10 @@ function edit_svg() {
 
 class PostView extends Component {
     state = {
-        editing: false
+        editing: false,
+        content: this.props.post.content,
+        title: this.props.post.title,
+        post_id: this.props.post.post_id
     }
     edit_width = "45vw"
     title_viewing = () => {
@@ -44,14 +48,29 @@ class PostView extends Component {
                 width: this.edit_width,
                 marginLeft: "32px",
             }}>
-                <TextField fullWidth value={this.props.post.title} sz="lg"/>
+                <TextField fullWidth
+                           defaultValue={this.props.post.title}
+                           value={this.state.title}
+                           onChange={this.handleTitleOnChange}
+                           sz="lg"/>
             </Box>
         )
     }
 
+    handleEditorChange = (editorState: EditorState) => {
+        this.setState({
+            content: editorState.toRAW()
+        })
+    }
+
+    handleTitleOnChange = (e) => {
+        this.setState({
+            title: e.target.value
+        })
+    }
+
     content_viewing = () => {
-        let post = this.props.post
-        const content = BraftEditor.createEditorState(post.content)
+        const content = BraftEditor.createEditorState(this.props.post.content)
         return (
             <Box sx={{
                 marginTop: "20px",
@@ -59,6 +78,18 @@ class PostView extends Component {
                  dangerouslySetInnerHTML={{__html: content.toHTML()}}>
             </Box>
         )
+    }
+
+    handleSubmit = () => {
+        api_post_update({
+            post_id: this.props.post.post_id,
+            content: this.state.content,
+            title: this.state.title
+        }).then(res => {
+            if (res.meta.code === 0) {
+                window.location.reload()
+            }
+        })
     }
 
     content_editing = () => {
@@ -79,14 +110,31 @@ class PostView extends Component {
                 </Box>
                 <Box sx={{
                     border: "1px solid rgba(68, 183, 94, 0.2)",
-                    marginBottom: "7vh"
                 }}>
+
                 </Box>
+                <Button sx={{
+                    marginTop: "12px",
+                    marginBottom: "12px",
+                    marginLeft: "calc(45vw - 32px)"
+                }} onClick={() => {
+                    this.handleSubmit()
+                }}>
+                    保存
+                </Button>
             </React.Fragment>
         )
     }
 
     render() {
+        if (this.props.post.post_id !== this.state.post_id) {
+            this.setState({
+                post_id: this.props.post.post_id,
+                content: this.props.post.content,
+                title: this.props.post.title,
+                editing: false
+            })
+        }
         let post = this.props.post
         const dirs = post.directories ? post.directories : []
         let color_idx = 0
@@ -135,6 +183,7 @@ class PostView extends Component {
                         justifyContent: "space-between",
                         marginTop: "30px",
                         flexWrap: "warp",
+                        marginBottom: "30px"
                     }}>
                         <Box sx={{
                             display: "flex",
@@ -178,7 +227,6 @@ class PostView extends Component {
                 </Box>
             </React.Fragment>
         )
-            ;
     }
 }
 
