@@ -12,7 +12,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import {Spin} from "antd";
 import {LoadingOutlined} from '@ant-design/icons';
 
-const antIcon = <LoadingOutlined style={{
+export const antIcon = <LoadingOutlined style={{
     fontSize: 24,
     color: curstyle().colors.main_s
 }} spin/>;

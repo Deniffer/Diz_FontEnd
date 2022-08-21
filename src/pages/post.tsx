@@ -104,7 +104,8 @@ class Post extends Component {
                 <Box sx={{
                     display: "flex",
                     direction: "row",
-                    height: "calc(100vh - 1px - " + curstyle().headlineheight + ")"
+                    height: "calc(100vh - 1px - " + curstyle().headlineheight + ")",
+                    overflowY: "scroll"
                 }}>
                     <Box sx={{
                         width: "38vw",
@@ -112,7 +113,6 @@ class Post extends Component {
                         borderWidth: "0px 1px",
                         borderStyle: "solid",
                         borderColor: curstyle().colors.gray_d,
-                        overflowY:"scroll",
                     }}>
                         <PostsPanel
                             fetchPostDetail={()=>{
