@@ -81,10 +81,12 @@ class PostView extends Component {
     }
 
     handleSubmit = () => {
+        const content = BraftEditor.createEditorState(this.state.content)
         api_post_update({
             post_id: this.props.post.post_id,
             content: this.state.content,
-            title: this.state.title
+            title: this.state.title,
+            abstract: content.toText().substring(0, 300)
         }).then(res => {
             if (res.meta.code === 0) {
                 window.location.reload()
