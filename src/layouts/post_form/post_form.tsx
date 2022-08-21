@@ -28,7 +28,7 @@ class PostForm extends Component {
     handleEditorChange = (editorState: EditorState) => {
         let new_post = this.state.new_post
         new_post.content = editorState.toRAW()
-        new_post.abstract = editorState.toText()
+        new_post.abstract = editorState.toText().substring(0, 300)
         this.setState({
             new_post: new_post
         })
