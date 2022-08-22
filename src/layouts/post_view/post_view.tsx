@@ -178,20 +178,19 @@ class PostView extends Component {
                         }
                     </Box>
 
-                    {/* 帖子分组 */}
+                     {/*帖子分组 */}
                     <Box sx={{
-                        display: "flex",
-                        direction: "row",
                         justifyContent: "space-between",
+                        display: "flex",
+                        flexDirection: "row",
                         marginTop: "30px",
-                        flexWrap: "warp",
                         marginBottom: "30px"
                     }}>
                         <Box sx={{
                             display: "flex",
                             direction: "row",
                             gap: 1,
-                            flexWrap: "warp",
+                            flexWrap: "wrap",
                         }}>
                             {
                                 dirs.map(dir => {

@@ -4,12 +4,12 @@ import reuse from '@/assets/reuseable.less'
 import {Fragment, PureComponent} from "react";
 import styled from "@emotion/styled";
 import {PaStateMan} from "@/utills/pa_state_man";
-import {Box, Button, List, Typography} from "@mui/joy";
-import {Dropdown} from "antd";
+import {Box, Button, List} from "@mui/joy";
 import {Course} from "@/store/models/course";
 import {api_dir_delete, api_dir_update} from "@/store/apis/dirs";
 import {Input1} from "@/layouts/reuseable_comps/input";
 import {Tag} from "@/layouts/reuseable_comps/tag";
+import {Dropdown} from "antd";
 
 interface Prop {
     dirid: number

@@ -1,73 +1,74 @@
 // import { extendTheme } from '@mui/joy/styles';
 
 import {extendTheme} from "@mui/joy";
-import {PaletteRange} from "@mui/joy/styles/types/colorSystem";
-import {GlobalStyles} from "@mui/system";
 import {curstyle} from "@/theme/curtheme";
-export const default_global_style={
-    colors:{
+
+
+export const default_global_style = {
+    colors: {
         //_l light
-        _1_l:"#FCDD96",
-        _2_l:"#B7CBFF",
-        _3_l:"#D2C8F2",
-        _4_l:"#FABEAB",
-        _5_l:"#FBC0D5",
-        _6_l:"#BEEDF3",
-        main_l:"#d9f0de",
-        main_ll:"#effff7",
+        _1_l: "#FCDD96",
+        _2_l: "#B7CBFF",
+        _3_l: "#D2C8F2",
+        _4_l: "#FABEAB",
+        _5_l: "#FBC0D5",
+        _6_l: "#BEEDF3",
+        main_l: "#d9f0de",
+        main_ll: "#effff7",
         //_s solid
-        _1_s:"#ffbe33",
-        _2_s:"#326bff",
-        _3_s:"#5b2dff",
-        _4_s:"#ff6837",
-        _5_s:"#ff2f78",
-        _6_s:"#3ce9ff",
-        main_s:"#44b65e",
-        main_sx:"#2fa44a",
-        main_sxx:"#20993b",
-        gray_common:"#f5f5f8",
-        gray_d:"#e0e0e0",
-        gray_dd:"#BDBDBD",
-        font_second:"#BDBDBD"
+        _1_s: "#ffbe33",
+        _2_s: "#326bff",
+        _3_s: "#5b2dff",
+        _4_s: "#ff6837",
+        _5_s: "#ff2f78",
+        _6_s: "#3ce9ff",
+        main_s: "#44b65e",
+        main_sx: "#2fa44a",
+        main_sxx: "#20993b",
+        gray_common: "#f5f5f8",
+        gray_d: "#e0e0e0",
+        gray_dd: "#BDBDBD",
+        font_second: "#BDBDBD"
     },
-    gap:{
-        common:"12px",
-        l:"16px",
-        xl:"20px",
-        xxl:"24px",
-        m:"8px",
-        s:"4px",
-        ss:"2px",
+    gap: {
+        common: "12px",
+        l: "16px",
+        xl: "20px",
+        xxl: "24px",
+        m: "8px",
+        s: "4px",
+        ss: "2px",
     },
-    radius:{
-        common:"5px"
+    radius: {
+        common: "5px"
     },
-    fontweight:{
-        common:500,
-        bold:550,
+    fontweight: {
+        common: 500,
+        bold: 550,
     },
-    avatorsize:{
-        common:"40px",
-        little:"34px"
+    avatorsize: {
+        common: "40px",
+        little: "34px"
     },
-    headlineheight:"60px",
-    fontsize:{
-        s:"14px",
-        ss:"12px",
+    headlineheight: "60px",
+    fontsize: {
+        s: "14px",
+        ss: "12px",
     }
 }
 export type MyGlobalStyle = typeof default_global_style
 
-export function bind_style_2_window(){
+export function bind_style_2_window() {
     // @ts-ignore
-    window['global_style']=default_global_style
+    window['global_style'] = default_global_style
 }
-export function get_default_theme(){
+
+export function get_default_theme() {
     return extendTheme({
         colorSchemes: {
             light: {
                 palette: {
-                    primary:{
+                    primary: {
                         solidBg: curstyle().colors.main_s,
                         solidHoverBg: curstyle().colors.main_sx,
                         solidActiveBg: curstyle().colors.main_sxx,
@@ -98,7 +99,7 @@ export function get_default_theme(){
         components: {
             JoyButton: {
                 styleOverrides: {
-                    root: ({ ownerState }) => ({
+                    root: ({ownerState}) => ({
                         borderRadius: curstyle().radius.common,
                         boxShadow: '0 1px 0 0 rgba(27, 31, 35, 0.04)',
                         transition: '80ms cubic-bezier(0.33, 1, 0.68, 1)',

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Box, Typography} from "@mui/joy";
 import DirectoryButton from "@/layouts/dir_select/directory_button";
-import 'antd/dist/antd.css';
 import DirAdd from "@/layouts/dir_select/dir_add";
 
 class DirSelect extends Component {

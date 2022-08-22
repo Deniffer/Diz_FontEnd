@@ -11,6 +11,7 @@ import {RouteControl} from "@/store/route_control";
 import {PaStateMan} from "@/utills/pa_state_man";
 // @ts-ignore
 import {Course} from '@/store/course_list';
+import 'antd/dist/antd.css';
 
 class Index extends Component {
     on_route_change(){

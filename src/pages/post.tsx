@@ -6,8 +6,6 @@ import Headline from "@/layouts/headline/headline";
 import PostsPanel from "@/layouts/posts_panel/posts_panel";
 import PostView from "@/layouts/post_view/post_view";
 import axios from "axios";
-import {api_get_posts} from "@/store/apis/get_posts";
-import {Post as PostStruct} from "@/store/models/post";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {RouteControl} from "@/store/route_control";
 import {baseUrl} from "@/store/apis/baseurl";
