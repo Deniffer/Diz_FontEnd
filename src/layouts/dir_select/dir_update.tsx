@@ -128,7 +128,8 @@ class DirUpdate extends Component {
         return (
             <React.Fragment>
                 <Box onClick={this.handleOnClick} sx={{
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    height:"min-content"
                 }}>
                     <DirAddSvg>
                     </DirAddSvg>

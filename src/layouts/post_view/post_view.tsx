@@ -191,6 +191,7 @@ class PostView extends Component {
                             direction: "row",
                             gap: 1,
                             flexWrap: "wrap",
+                            alignItems:"center"
                         }}>
                             {
                                 dirs.map(dir => {
@@ -208,7 +209,8 @@ class PostView extends Component {
                                 })
                             }
                             <Box sx={{
-                                cursor: "pointer"
+                                cursor: "pointer",
+                                height:"34px"
                             }}>
                                 <DirUpdate post_id={post.post_id}
                                            gap={1}
@@ -218,6 +220,7 @@ class PostView extends Component {
                         </Box>
                         <Box
                             sx={{
+                                minWidth:"80px",
                                 color: curstyle().colors.font_second,
                                 paddingTop: curstyle().gap.s,
                             }}
