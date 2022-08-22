@@ -7,12 +7,8 @@ import styled from "@emotion/styled";
 import {curstyle} from "@/theme/curtheme";
 import reuse from "@/assets/reuseable.less"
 import InfiniteScroll from 'react-infinite-scroll-component';
-import {Spin} from "antd";
 import {antIcon} from "@/layouts/post_view_list/postview_list";
-
-interface Prop {
-    fetchPostDetail: () => void
-}
+import {Spin} from "antd";
 
 //post页面 列表
 

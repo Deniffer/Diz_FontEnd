@@ -1,7 +1,7 @@
 // @ts-ignore
 import styled from "styled-components";
 import {curstyle} from "@/theme/curtheme";
-import React, {Component, Fragment} from "react";
+import React, {Component} from "react";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {PostViewBar} from "@/layouts/post_view_list/postview_bar";
 import {api_get_posts} from "@/store/apis/get_posts";

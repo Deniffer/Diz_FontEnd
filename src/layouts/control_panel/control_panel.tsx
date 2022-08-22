@@ -1,24 +1,14 @@
 import reuse from '@/assets/reuseable.less'
 import cp from './control_panel.less'
-
 import Button from '@mui/joy/Button';
 import {Box, Typography} from "@mui/joy";
 import {curstyle} from "@/theme/curtheme";
 import {SetBar} from "@/layouts/control_panel/childs/setbar";
-import styled from "styled-components";
-
 import React, {Component} from 'react';
 import {PaStateMan} from "@/utills/pa_state_man";
 import {RouteControl} from "@/store/route_control";
 import {DirectoryVo} from "@/store/models/directory";
 import {SetBarAdd} from "@/layouts/control_panel/childs/setbar_add";
-
-//底部成员组件
-const MemberWidContain = styled.div`
-  margin: ${curstyle().gap.common};
-  padding-bottom: ${curstyle().gap.m};
-  padding-left: ${curstyle().gap.common};
-`;
 
 
 class ControlPanel extends Component {

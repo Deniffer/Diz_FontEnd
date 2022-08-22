@@ -1,15 +1,11 @@
 // @ts-ignore
 import {curstyle} from "@/theme/curtheme";
 import reuse from '@/assets/reuseable.less'
-import Icon from 'supercons'
-import {render} from "react-dom";
-import {ChangeEvent, Component, DOMElement, HTMLInputTypeAttribute, PureComponent} from "react";
+import {PureComponent} from "react";
 import styled from "@emotion/styled";
 import {PaStateMan} from "@/utills/pa_state_man";
 import {Input1} from "@/layouts/reuseable_comps/input";
 import {Box} from "@mui/joy";
-import {api_dirs_create} from "@/store/apis/dirs";
-import {DirectoryVo} from "@/store/models/directory";
 import {message} from "antd";
 
 interface Prop {
@@ -39,47 +35,49 @@ export class SetBarAdd extends PureComponent<Prop, State> {
     }
     rendercnt = 0;
     newset_content = ""
-    on_key_down(e:KeyboardEvent){
+
+    on_key_down(e: KeyboardEvent) {
         // console.log(e)
-        if(e.code=='Enter'){
+        if (e.code == 'Enter') {
             this.add_new_set()
-        }
-        else if(e.code=='Escape'){
-            this.newset_content="";
+        } else if (e.code == 'Escape') {
+            this.newset_content = "";
             this.add_new_set()
         }
     }
-    add_new_set(){
+
+    add_new_set() {
         if (this.newset_content != "") {
-            const content=this.newset_content;
-            this.newset_content="";
+            const content = this.newset_content;
+            this.newset_content = "";
             PaStateMan.getstate().courseProxy().curcourse_add_new_dirs(
                 [content]
             ).then((res) => {
                 console.log(res)
                 if (res == "exist") {
                     message.warning('该分组已经存在！');
-                }else if(res=="ok"){
+                } else if (res == "ok") {
                     message.success('分组添加成功！');
-                    const p=PaStateMan.getstate().courseProxy()
+                    const p = PaStateMan.getstate().courseProxy()
                     p.fetchCourceDetailAndSetCur(p.getCurCourse())
                 }
                 this.setState({
                     adding: false
-                },()=>{
+                }, () => {
                     window.removeEventListener(
-                        'keydown',this.on_key_down.bind(this))
+                        'keydown', this.on_key_down.bind(this))
                 })
             })
         } else {
             this.setState({
                 adding: false
-            },()=>{
+            }, () => {
                 window.removeEventListener(
-                    'keydown',this.on_key_down.bind(this))
+                    'keydown', this.on_key_down.bind(this))
             })
         }
     }
+
     render() {
         const seldir = PaStateMan.getstate().course_dir_id_selected_get()
         const Button = styled.div`
@@ -141,7 +139,7 @@ export class SetBarAdd extends PureComponent<Prop, State> {
                                 adding: true
                             }, () => {
                                 window.addEventListener(
-                                    'keydown',this.on_key_down.bind(this))
+                                    'keydown', this.on_key_down.bind(this))
                             })
                         }}
                 >

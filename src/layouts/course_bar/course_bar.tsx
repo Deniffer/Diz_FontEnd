@@ -1,7 +1,4 @@
-import React, {Component, PureComponent} from 'react';
-// import {connect} from "react-redux";
-// import {GlobalStoreState} from "@/store/store";
-import {PaStateMan} from "@/utills/pa_state_man";
+import React, {PureComponent} from 'react';
 import {Box, Button, Typography} from "@mui/joy";
 import reuse from "@/assets/reuseable.less";
 import {curstyle} from "@/theme/curtheme";
@@ -9,8 +6,8 @@ import Arrow from "@/layouts/reuseable_comps/arrow";
 import $course_id_styles from "@/pages/create_post/$course_id.less";
 import cp from "@/layouts/control_panel/control_panel.less";
 
-interface Prop{
-    handlePublishPostClick:any
+interface Prop {
+    handlePublishPostClick: any
 }
 
 class CourseBar extends PureComponent<Prop> {

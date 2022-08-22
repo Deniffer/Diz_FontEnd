@@ -8,7 +8,7 @@ import DirUpdate from "@/layouts/dir_select/dir_update";
 import BraftEditorCustom from "@/layouts/braft_editor_custom/braft_editor_custom";
 import 'braft-editor/dist/index.css';
 import {curstyle} from "@/theme/curtheme";
-import {api_post_create, api_post_update} from "@/store/apis/post_create";
+import {api_post_update} from "@/store/apis/post_create";
 
 function edit_svg() {
     return (

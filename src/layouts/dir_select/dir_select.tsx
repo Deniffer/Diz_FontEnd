@@ -7,7 +7,6 @@ import DirAdd from "@/layouts/dir_select/dir_add";
 class DirSelect extends Component {
     render() {
         let dirs = this.props.cur_course.directories
-        console.log(dirs)
         dirs = dirs ? dirs : []
         const gap = 1
         return (
@@ -24,7 +23,13 @@ class DirSelect extends Component {
                 }}>
                     {
                         dirs ? dirs.map(dir => {
+                            console.log(this.props.dirs)
                             let clicked = false
+                            for (let i = 0; i < this.props.dirs.length; i++) {
+                                if (this.props.dirs[i] === dir.directory_id) {
+                                    clicked = true
+                                }
+                            }
                             return (
                                 <Box key={dir.directory_id}>
                                     <DirectoryButton handleOnChange={this.props.handleDirOnChange} name={dir.name}

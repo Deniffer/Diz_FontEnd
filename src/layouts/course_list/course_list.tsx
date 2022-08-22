@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Box} from "@mui/joy";
 import ReactTooltip from 'react-tooltip';
 import {curstyle} from "@/theme/curtheme";
-import {Course} from "@/store/course_list";
 import {PaStateMan} from "@/utills/pa_state_man";
+import {Course} from "@/store/models/course";
 
 class CourseList extends Component {
     state = {

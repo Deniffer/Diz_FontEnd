@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {Box, List, RadioGroup, Sheet, TextField, Typography} from "@mui/joy";
+import {Box, TextField} from "@mui/joy";
 import $course_id_styles from "@/pages/create_post/$course_id.less";
-import reuse from "@/assets/reuseable.less";
-import Radio from '@mui/joy/Radio';
 import {EditorState} from 'braft-editor';
 import 'braft-editor/dist/index.css';
 import DirSelect from "@/layouts/dir_select/dir_select";
@@ -60,13 +58,14 @@ class PostForm extends Component {
         let new_arr = []
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] !== e) {
-                new_arr.push(e)
+                new_arr.push(arr[i])
             }
         }
         return new_arr
     }
 
     handleDirOnChange = (e: any) => {
+        console.log(e)
         let dir_ids = this.state.new_post.directory_ids
         if (e.clicked) {
             if (dir_ids) {
@@ -151,7 +150,7 @@ class PostForm extends Component {
                             paddingTop: "25px",
                             marginBottom: "25px",
                         }}>
-                            <DirSelect
+                            <DirSelect dirs={this.state.new_post.directory_ids}
                                 fetchCurCourse={this.props.fetchCurCourse}
                                 cur_course={this.props.cur_course}
                                 handleDirOnChange={this.handleDirOnChange}
