@@ -4,11 +4,12 @@ import reuse from '@/assets/reuseable.less'
 import {Fragment, PureComponent} from "react";
 import styled from "@emotion/styled";
 import {PaStateMan} from "@/utills/pa_state_man";
-import {Box, Typography} from "@mui/joy";
-import {Dropdown, Menu} from "antd";
+import {Box, Button, List, Typography} from "@mui/joy";
+import {Dropdown} from "antd";
 import {Course} from "@/store/models/course";
 import {api_dir_delete, api_dir_update} from "@/store/apis/dirs";
 import {Input1} from "@/layouts/reuseable_comps/input";
+import {Tag} from "@/layouts/reuseable_comps/tag";
 
 interface Prop {
     dirid: number
@@ -39,44 +40,38 @@ export class SetBar extends PureComponent<Prop> {
 
     menu = () => {
         return (
-            <Menu
-                items={[
-                    {
-                        key: '1',
-                        label: (
-                            <Typography onClick={() => {
-                                this.setState({
-                                    editing: true
-                                }, () => {
-                                    window.addEventListener('keydown', (e) => {
-                                        if (e.code === 'Enter') {
-                                            this.submitChange()
-                                        }
-                                    })
-                                })
-                            }}>
-                                重命名
-                            </Typography>
-                        ),
-                    },
-                    {
-                        key: '2',
-                        label: (
-                            <Typography onClick={() => {
-                                const course_id = PaStateMan.getstate().courseProxy().getCurCourse().course_id
-                                PaStateMan.getstate().course_dir_select(-1)
-                                api_dir_delete(this.props.dirid, () => {
-                                    PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur({
-                                        course_id: course_id
-                                    } as Course)
-                                })
-                            }}>
-                                删除
-                            </Typography>
-                        ),
-                    },
+            <List>
+                {[
+                    <Box onClick={() => {
+                        this.setState({
+                            editing: true
+                        }, () => {
+                            window.addEventListener('keydown', (e) => {
+                                if (e.code === 'Enter') {
+                                    this.submitChange()
+                                }
+                            })
+                        })
+                    }}>
+                        <Tag color={curstyle().colors.gray_common} cursor={"pointer"}>
+                            重命名
+                        </Tag>
+                    </Box>,
+                    <Box onClick={() => {
+                        const course_id = PaStateMan.getstate().courseProxy().getCurCourse().course_id
+                        PaStateMan.getstate().course_dir_select(-1)
+                        api_dir_delete(this.props.dirid, () => {
+                            PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur({
+                                course_id: course_id
+                            } as Course)
+                        })
+                    }}>
+                        <Tag color={curstyle().colors.gray_common} cursor={"pointer"}>
+                            删除
+                        </Tag>
+                    </Box>
                 ]}
-            />
+            </List>
         )
     }
 
@@ -88,6 +83,9 @@ export class SetBar extends PureComponent<Prop> {
                 }
             })
         }
+        this.setState({
+            editing: false
+        })
     }
 
     viewing = () => {
@@ -146,8 +144,6 @@ export class SetBar extends PureComponent<Prop> {
                     left: "calc(100% - " + curstyle().gap.common + "*4)",
                     height: 0,
                     width: 0
-                }} onClick={() => {
-                    console.log("hi")
                 }}
                 >
                     <Dropdown overlay={this.menu()} placement="bottom">
@@ -178,7 +174,6 @@ export class SetBar extends PureComponent<Prop> {
                     placeholder=""
                     onLoad={(v: { focus: () => void }) => {
                         v.focus()
-                        console.log("onload", v)
                     }}
                     onChange={(e: any) => {
                         this.setState({
