@@ -52,13 +52,14 @@ export class PostViewBar extends Component<Prop> {
         for (let i = 0; i < Math.min(dirs.length, 6); i++) {
             // @ts-ignore
             tags.push(
-                <TagWrap key={i}>
+                // <TagWrap key={i}>
                     <Tag
+                        key={i}
                         cursor=""
                         color={get_dir_color(i)}>
                         {dirs[i].name}
                     </Tag>
-                </TagWrap>
+                // </TagWrap>
             )
         }
         return (
@@ -92,6 +93,7 @@ export class PostViewBar extends Component<Prop> {
                     }}
                 >
                     <Box
+                        sx={{gap:curstyle().gap.common}}
                         className={reuse.row_flexcontainer}
                     >
                         {tags}

@@ -102,15 +102,17 @@ class Post extends Component {
                 <Box sx={{
                     display: "flex",
                     direction: "row",
-                    height: "calc(100vh - 1px - " + curstyle().headlineheight + ")",
-                    overflowY: "scroll"
+                    // height: "calc(100vh - 1px - " + curstyle().headlineheight + ")",
+                    // overflowY: "scroll"
                 }}>
                     <Box sx={{
+                        position:"relative",
                         width: "38vw",
-                        height: content_height,
+                        height: "calc(100vh - 1px - " + curstyle().headlineheight + ")",
                         borderWidth: "0px 1px",
                         borderStyle: "solid",
                         borderColor: curstyle().colors.gray_d,
+                        overflowY:"scroll"
                     }}>
                         <PostsPanel
                             fetchPostDetail={()=>{
@@ -121,7 +123,7 @@ class Post extends Component {
                     </Box>
                     <Box sx={{
                         width: "72vw",
-                        height: content_height,
+                        height: "calc(100vh - 1px - " + curstyle().headlineheight + ")",
                         overflowY: "scroll",
                     }}>
                         <PostView post={this.state.post} course_id={this.course_id}/>

@@ -96,7 +96,12 @@ class PostsPanel extends Component {
         return (
             <Box id="posts_panel"
                  sx={{
-                     height: "100%",
+                     position:"absolute",
+                     top:0,
+                     bottom:0,
+                     right:0,
+                     left:0,
+                     // height: "100%",
                      padding: curstyle().gap.xxl,
                      overflowY: "auto"
                  }}>
