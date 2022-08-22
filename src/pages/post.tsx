@@ -112,7 +112,7 @@ class Post extends Component {
                         borderWidth: "0px 1px",
                         borderStyle: "solid",
                         borderColor: curstyle().colors.gray_d,
-                        overflowY:"scroll"
+                        // overflowY:"scroll"
                     }}>
                         <PostsPanel
                             fetchPostDetail={()=>{
