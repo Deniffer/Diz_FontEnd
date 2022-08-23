@@ -2,7 +2,7 @@ import index_styles from './index.less';
 import reuse_styles from '../assets/reuseable.less'
 import Headline from "@/layouts/headline/headline";
 import ControlPanel from "@/layouts/control_panel/control_panel";
-import {Box} from "@mui/joy";
+import {Box, Typography} from "@mui/joy";
 import CourseList from "@/layouts/course_list/course_list";
 import React, {Component} from 'react';
 import {curstyle} from "@/theme/curtheme";
@@ -12,23 +12,25 @@ import {PaStateMan} from "@/utills/pa_state_man";
 // @ts-ignore
 import {Course} from '@/store/course_list';
 import 'antd/dist/antd.less';
+import {is_mobile} from "@/utills/computils";
 
 class Index extends Component {
-    on_route_change(){
-        const cid=RouteControl.get_curcouseid_in_route()
-        if(cid!=undefined){
+    on_route_change() {
+        const cid = RouteControl.get_curcouseid_in_route()
+        if (cid != undefined) {
             PaStateMan.getstate().courseProxy().fetchCourceDetailAndSetCur(
-                {course_id:cid} as Course,false
-            ).then(()=>{
+                {course_id: cid} as Course, false
+            ).then(() => {
                 //加载完成后同步dirid
-                const did=RouteControl.get_dirid_in_route()
-                if(did){
+                const did = RouteControl.get_dirid_in_route()
+                if (did) {
                     console.log("did in page")
                     PaStateMan.getstate().course_dir_select(did)
                 }
             })
         }
     }
+
     componentDidMount() {
 
         //post部分发生路由跳转
@@ -36,6 +38,7 @@ class Index extends Component {
             this.on_route_change.bind(this));
 
     }
+
     componentWillUnmount() {
         //post部分发生路由跳转
         window.addEventListener("popstate",
@@ -53,23 +56,26 @@ class Index extends Component {
         </Box>);
 
         return (
-            <div className={index_styles.whole + " "
-            + reuse_styles.col_flexcontainer}
-            >
-                {head}
-                <Box className={reuse_styles.row_flexcontainer}
-                     sx={{height: "calc(100vh - 1px - " + headheight + ")"}}
+            is_mobile() ? <Typography>
+                    没做适配嘤嘤嘤，请在电脑端进行访问～
+                </Typography> :
+                <div className={index_styles.whole + " "
+                + reuse_styles.col_flexcontainer}
                 >
-                    <div className={index_styles.sidebar}>
-                        <CourseList/>
-                    </div>
-                    <div className={index_styles.control_panel}>
-                        <ControlPanel/>
-                    </div>
-                    <PostViewList>
-                    </PostViewList>
-                </Box>
-            </div>
+                    {head}
+                    <Box className={reuse_styles.row_flexcontainer}
+                         sx={{height: "calc(100vh - 1px - " + headheight + ")"}}
+                    >
+                        <div className={index_styles.sidebar}>
+                            <CourseList/>
+                        </div>
+                        <div className={index_styles.control_panel}>
+                            <ControlPanel/>
+                        </div>
+                        <PostViewList>
+                        </PostViewList>
+                    </Box>
+                </div>
         );
     }
 }
