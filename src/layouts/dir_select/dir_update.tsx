@@ -6,8 +6,8 @@ import {api_dirs_create} from "@/store/apis/dirs";
 import DirAddSvg from "@/layouts/dir_select/dir_add_svg";
 import {PaStateMan} from "@/utills/pa_state_man";
 import DirectoryButton from "@/layouts/dir_select/directory_button";
-import {Course} from "@/store/models/course";
-import {api_post_create, api_post_dir_rel_create, api_post_dir_rel_update} from "@/store/apis/post_create";
+import {api_post_dir_rel_update} from "@/store/apis/post_create";
+import "antd/dist/antd.less";
 
 class DirUpdate extends Component {
     state = {
@@ -129,7 +129,7 @@ class DirUpdate extends Component {
             <React.Fragment>
                 <Box onClick={this.handleOnClick} sx={{
                     cursor: "pointer",
-                    height:"min-content"
+                    height: "min-content"
                 }}>
                     <DirAddSvg>
                     </DirAddSvg>
