@@ -4,7 +4,7 @@ import BraftEditor from "braft-editor";
 class BraftEditorCustom extends Component {
     render() {
         const controls = [
-            'text-color', 'code'
+            'font-size', 'text-color', 'code', 'media', 'link'
         ]
 
         return (

@@ -23,7 +23,8 @@ export class SetBar extends PureComponent<Prop> {
 
     state = {
         editing: false,
-        name: this.props.children
+        name: this.props.children,
+        hovering: false,
     }
 
     componentDidMount() {
@@ -126,26 +127,34 @@ export class SetBar extends PureComponent<Prop> {
 
         return (
             <Fragment>
-                <Button className={
-                    reuse.trans_color_common + " "
-                    + reuse.row_flex2side_container
-                }
-                        onClick={() => {
-                            PaStateMan.getstate().course_dir_select(this.props.dirid)
-                        }}
-                >
-                    {this.props.children}
-                </Button>
-                <div style={{
-                    display: this.props.dirid <= 0 ? "none" : "",
+                <Box onMouseEnter={() => {
+                    this.setState({
+                        hovering: true
+                    })
+                }}
+                     onMouseLeave={() => this.setState({
+                         hovering: false
+                     })}>
+                    <Button className={
+                        reuse.trans_color_common + " "
+                        + reuse.row_flex2side_container
+                    }
+                            onClick={() => {
+                                PaStateMan.getstate().course_dir_select(this.props.dirid)
+                            }}
+                    >
+                        {this.props.children}
+                    </Button>
+                </Box>
+                <Box sx={{
+                    display: this.props.dirid > 0 && this.state.hovering ? "" : "none",
                     position: "relative",
                     top: "-75%",
                     cursor: "pointer",
                     left: "calc(100% - " + curstyle().gap.common + "*4)",
                     height: 0,
-                    width: 0
-                }}
-                >
+                    width: 0,
+                }}>
                     <Dropdown overlay={this.menu()} placement="bottom">
                         <Box sx={{
                             width: "16px",
@@ -159,7 +168,7 @@ export class SetBar extends PureComponent<Prop> {
                             </svg>
                         </Box>
                     </Dropdown>
-                </div>
+                </Box>
             </Fragment>
         )
     }
