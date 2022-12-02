@@ -7,28 +7,28 @@ import {curstyle} from "@/theme/curtheme";
 export const default_global_style = {
     colors: {
         //_l light
-        _1_l: "#e0e0e0", // FCDD96
-        _2_l: "#e0e0e0", // B7CBFF
-        _3_l: "#e0e0e0", // D2C8F2
-        _4_l: "#e0e0e0", // FABEAB
-        _5_l: "#e0e0e0", // FBC0D5
-        _6_l: "#e0e0e0", // BEEDF3
-        main_l: "#e0e0e0",  // d9f0de
-        main_ll: "#e0e0e0", // effff7
+        _1_l: "#FCDD96", // FCDD96
+        _2_l: "#B7CBFF", // B7CBFF
+        _3_l: "#D2C8F2", // D2C8F2
+        _4_l: "#FABEAB", // FABEAB
+        _5_l: "#FBC0D5", // FBC0D5
+        _6_l: "#BEEDF3", // BEEDF3
+        main_l: "#d9f0de",  // d9f0de
+        main_ll: "#effff7", // effff7
         //_s solid
-        _1_s: "#e0e0e0", // ffbe33
-        _2_s: "#e0e0e0", // 326bff
-        _3_s: "#e0e0e0", // 5b2dff
-        _4_s: "#e0e0e0", // ff6837
-        _5_s: "#e0e0e0", // ff2f78
-        _6_s: "#e0e0e0", // 3ce9ff
-        main_s: "#e0e0e0", // 44b65e
-        main_sx: "#e0e0e0", // 2fa44a
-        main_sxx: "#e0e0e0", // 20993b
-        gray_common: "#e0e0e0", // f5f5f8
+        _1_s: "#ffbe33", // ffbe33
+        _2_s: "#326bff", // 326bff
+        _3_s: "#5b2dff", // 5b2dff
+        _4_s: "#ff6837", // ff6837
+        _5_s: "#ff2f78", // ff2f78
+        _6_s: "#3ce9ff", // 3ce9ff
+        main_s: "#44b65e", // 44b65e
+        main_sx: "#2fa44a", // 2fa44a
+        main_sxx: "#20993b", // 20993b
+        gray_common: "#f5f5f8", // f5f5f8
         gray_d: "#e0e0e0", // e0e0e0
-        gray_dd: "#e0e0e0", // BDBDBD
-        font_second: "#e0e0e0" // BDBDBD
+        gray_dd: "#BDBDBD", // BDBDBD
+        font_second: "#BDBDBD" // BDBDBD
     },
     gap: {
         common: "12px",
